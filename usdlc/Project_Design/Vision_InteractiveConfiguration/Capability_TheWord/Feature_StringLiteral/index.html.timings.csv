@@ -1,0 +1,15 @@
+
+20120908,2155,+1000,Given_StringLiteral.gwt,running,9,in 9m 26s
+20120908,2155,+1000,Given_StringLiteral.gwt,succeeded,312,312ms
+20120908,2155,+1000,When_StringLiteral.gwt,running,7,
+20120908,2155,+1000,When_StringLiteral.gwt,succeeded,259,259ms
+20120908,2155,+1000,Then_StringLiteral.gwt,running,3,
+20120908,2155,+1000,Then_StringLiteral.gwt,succeeded,183,183ms
+20120908,2155,+1000,Setup.coffee,running,0,in 9s
+20120908,2155,+1000,Setup.coffee,succeeded,105,105ms
+20120908,2155,+1000,Given_StringLiteral.gwt,running,2,
+20120908,2155,+1000,Given_StringLiteral.gwt,succeeded,56,
+20120908,2155,+1000,When_StringLiteral.gwt,running,2,
+20120908,2155,+1000,When_StringLiteral.gwt,succeeded,69,
+20120908,2155,+1000,Then_StringLiteral.gwt,running,2,
+20120908,2155,+1000,Then_StringLiteral.gwt,succeeded,97,

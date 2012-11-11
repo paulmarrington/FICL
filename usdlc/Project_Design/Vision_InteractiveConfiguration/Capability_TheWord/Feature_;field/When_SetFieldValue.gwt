@@ -1,0 +1,4 @@
+we run the FICL statement ": &compilingWord ;field compilingWord ;ficl ; constant"
+and ": get-compilingWord ;ficl &compilingWord ;get ;"
+and ": set-compilingWord ;ficl &compilingWord ;set ;"
+and "" test word" set-compilingWord get-compilingWord ."

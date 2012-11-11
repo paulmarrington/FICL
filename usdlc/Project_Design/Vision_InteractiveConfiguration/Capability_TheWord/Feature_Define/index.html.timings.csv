@@ -1,0 +1,37 @@
+
+20120908,1458,+1000,Given_DefineANewWord.gwt,running,6,in 6m 33s
+20120908,1458,+1000,Given_DefineANewWord.gwt,succeeded,159,159ms
+20120908,1458,+1000,When_DefineANewWord.gwt,running,2,
+20120908,1458,+1000,When_DefineANewWord.gwt,succeeded,103,103ms
+20120908,1458,+1000,Then_DefineANewWord.gwt,running,2,
+20120908,1458,+1000,Then_DefineANewWord.gwt,succeeded,140,140ms
+20120908,1458,+1000,Setup.coffee,running,0,in 16s
+20120908,1458,+1000,Setup.coffee,succeeded,550,550ms
+20120908,1458,+1000,Given_DefineANewWord.gwt,running,3,
+20120908,1458,+1000,Given_DefineANewWord.gwt,succeeded,47,
+20120908,1458,+1000,When_DefineANewWord.gwt,running,3,
+20120908,1458,+1000,When_DefineANewWord.gwt,failed,51,
+20120908,1459,+1000,Setup.coffee,running,0,in 16s
+20120908,1459,+1000,Setup.coffee,succeeded,79,
+20120908,1459,+1000,Given_DefineANewWord.gwt,running,2,
+20120908,1459,+1000,Given_DefineANewWord.gwt,succeeded,67,
+20120908,1459,+1000,When_DefineANewWord.gwt,running,3,
+20120908,1459,+1000,When_DefineANewWord.gwt,succeeded,132,132ms
+20120908,1459,+1000,Then_DefineANewWord.gwt,running,3,
+20120908,1459,+1000,Then_DefineANewWord.gwt,failed,111,111ms
+20120908,1500,+1000,Setup.coffee,running,0,in 51s
+20120908,1500,+1000,Setup.coffee,succeeded,107,107ms
+20120908,1500,+1000,Given_DefineANewWord.gwt,running,2,
+20120908,1500,+1000,Given_DefineANewWord.gwt,succeeded,131,131ms
+20120908,1500,+1000,When_DefineANewWord.gwt,running,4,
+20120908,1500,+1000,When_DefineANewWord.gwt,succeeded,77,
+20120908,1500,+1000,Then_DefineANewWord.gwt,running,3,
+20120908,1500,+1000,Then_DefineANewWord.gwt,failed,69,
+20120908,1500,+1000,Setup.coffee,running,444,444ms
+20120908,1500,+1000,Setup.coffee,succeeded,0,in 1s
+20120908,1500,+1000,Given_DefineANewWord.gwt,running,21,
+20120908,1500,+1000,Given_DefineANewWord.gwt,succeeded,222,222ms
+20120908,1500,+1000,When_DefineANewWord.gwt,running,3,
+20120908,1500,+1000,When_DefineANewWord.gwt,succeeded,134,134ms
+20120908,1500,+1000,Then_DefineANewWord.gwt,running,3,
+20120908,1500,+1000,Then_DefineANewWord.gwt,succeeded,177,177ms

@@ -1,0 +1,6 @@
+When_ClassReference.gwt,succeeded
+Given_ClassReference.gwt,succeeded
+Then_ClassReference.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+gwtDSL.coffee,succeeded

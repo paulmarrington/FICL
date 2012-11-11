@@ -1,0 +1,56 @@
+<div id="pageTitle" class="editable" uuid="9643b1d7-d41f-4e59-bf44-60c5a5e953dc"><h1>
+	;call</h1>
+<h2>
+	&nbsp;</h2>
+</div> 
+<div id="s5" class="editable section Guide"><div class="sectionType">
+	Guide</div>
+<p>
+	<strong><em>( push word -- return )</em></strong></p>
+<p>
+	Call a pre-defined word that has been pushed on the stack. Used when the word to be called needs to be a variable based on other factors.</p>
+<p>
+	&nbsp;</p>
+<p style="margin-left: 40px; ">
+	<code>param-1...param-n push word&nbsp;<strong><span style="background-color: rgb(255, 160, 122); ">;call</span></strong></code></p>
+<p>
+	<strong><em>( instance method -- return )</em></strong></p>
+<p style="margin-left: 40px; ">
+	<code>param-1...param-n instance method <strong><span style="background-color:#ffa07a;">;call</span></strong>&nbsp;</code><span style="color:#a9a9a9;">\ same as instance.method(param1,...,param-n)</span></p>
+<p>
+	Call a native method (as reference with ;method) in a specific instance of the owning object and a list of pre-defined parmeters.</p>
+</div><div id="s1" class="editable section"><div class="pageType">
+	Feature</div>
+<h2>
+	;call&nbsp;<strong><em>( instance method -- return )</em></strong></h2>
+<div>
+	Call a predefined method on a given instance. It will only push a value on the stack if the method has one.</div>
+<div>
+	&nbsp;</div>
+<div style="margin-left: 40px; ">
+	<code>: debug-on ;ficl ;method debugOn ;ficl ; <strong><span style="background-color:#ffa07a;">;call</span></strong> ; immediate</code></div>
+<p>
+	&nbsp;</p>
+<p>
+	This word retrieves a method from FICL and then immediately calls it. When you are likely to call a native method frequently, it is better to save the method reference:</p>
+<p>
+	&nbsp;</p>
+<div style="margin-left: 40px; ">
+	<code>: &amp;" ;method stringLiteral ;ficl ; ; constant</code></div>
+<div style="margin-left: 40px; ">
+	<code>: " ( -- s1 | string literal ) ;ficl &amp;" <strong><span style="background-color:#ffa07a;">;call</span></strong> ; immediate</code></div>
+<p>
+	&nbsp;</p>
+<p>
+	By making the method identifier( &amp;") a constant it is only calculated one, no matter how many times " is used.</p>
+</div><div id="s6" class="editable section synopsis Scenario"><div class="sectionType">Scenario</div><h2><span>Call word<span class="givenWhenThen"> &nbsp;(<a href="Given_CallWord.gwt" action="runnable" id="s6a0g" class="usdlc">G</a><a href="When_CallWord.gwt" action="runnable" id="s6a0w" class="usdlc">W</a><a href="Then_CallWord.gwt" action="runnable" id="s6a0t" class="usdlc">T</a>)</span></span></h2></div> 
+<div id="s4" class="editable section synopsis Scenario"><div class="sectionType">
+	Scenario</div>
+<h2>
+	<span>Call FICL method<span class="givenWhenThen"> &nbsp;(<a class="usdlc sourceLink" href="Given_CallFICLMethod.gwt" id="s4a0g" action="runnable">G</a><a class="usdlc sourceLink" href="When_CallFICLMethod.gwt" id="s4a0w" action="runnable">W</a><a class="usdlc sourceLink" href="Then_CallFICLMethod.gwt" id="s4a0t" action="runnable">T</a>)</span></span></h2>
+<p>
+	This is a convoluted manufactured way to print a number. First we push that number on the stack, then find the print method. At run-time <strong><span style="background-color:#ffa07a;">;call</span></strong>&nbsp;will pull the instance (;ficl), then the method reference and finally the items to print from the stack to produce a result.</p>
+</div> 
+<div id="s2" class="editable section footer synopsis"><div>
+	<a class="usdlc" href=".." id="s2a3" action="page"> Parent</a> - <a class="usdlc sourceLink" href="Setup.coffee" id="s2a9" action="runnable">Setup</a> - <a class="usdlc sourceLink changed" href="Instrument.coffee" id="s2a10" action="runnable">Instrument</a> - <a href="javascript:usdlc.moreFooter()" id="s2a7">more...</a></div>
+</div>

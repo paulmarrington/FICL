@@ -1,0 +1,15 @@
+When_StringEquality.gwt,succeeded
+Then_StringEquality.gwt,succeeded
+Given_StringEquality.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+Given_StringInequality.gwt,succeeded
+When_StringInequality.gwt,succeeded
+Then_StringInequality.gwt,succeeded
+Given_NumericEquality.gwt,succeeded
+When_NumericEquality.gwt,succeeded
+Then_NumericEquality.gwt,succeeded
+When_NumericalInequality.gwt,succeeded
+Given_NumericalInequality.gwt,succeeded
+Then_NumericalInequality.gwt,succeeded
+gwtDSL.coffee,succeeded

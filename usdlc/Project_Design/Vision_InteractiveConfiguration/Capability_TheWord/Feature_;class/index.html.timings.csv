@@ -1,0 +1,29 @@
+
+20120908,1839,+1000,Given_ClassReference.gwt,running,9,in 9m 0s
+20120908,1839,+1000,Given_ClassReference.gwt,succeeded,131,131ms
+20120908,1839,+1000,When_ClassReference.gwt,running,2,
+20120908,1839,+1000,When_ClassReference.gwt,succeeded,104,104ms
+20120908,1839,+1000,Then_ClassReference.gwt,running,6,
+20120908,1839,+1000,Then_ClassReference.gwt,succeeded,122,122ms
+20120908,1839,+1000,Setup.coffee,running,0,in 11s
+20120908,1839,+1000,Setup.coffee,succeeded,145,145ms
+20120908,1839,+1000,Given_ClassReference.gwt,running,3,
+20120908,1839,+1000,Given_ClassReference.gwt,succeeded,82,
+20120908,1839,+1000,When_ClassReference.gwt,running,3,
+20120908,1839,+1000,When_ClassReference.gwt,failed,179,179ms
+20120908,1841,+1000,Setup.coffee,running,1,in 1m 45s
+20120908,1841,+1000,Setup.coffee,succeeded,77,
+20120908,1841,+1000,Given_ClassReference.gwt,running,4,
+20120908,1841,+1000,Given_ClassReference.gwt,succeeded,51,
+20120908,1841,+1000,When_ClassReference.gwt,running,10,
+20120908,1841,+1000,When_ClassReference.gwt,succeeded,140,140ms
+20120908,1841,+1000,Then_ClassReference.gwt,running,2,
+20120908,1841,+1000,Then_ClassReference.gwt,failed,109,109ms
+20120908,1841,+1000,Setup.coffee,running,0,in 32s
+20120908,1841,+1000,Setup.coffee,succeeded,69,
+20120908,1841,+1000,Given_ClassReference.gwt,running,2,
+20120908,1841,+1000,Given_ClassReference.gwt,succeeded,45,
+20120908,1841,+1000,When_ClassReference.gwt,running,2,
+20120908,1841,+1000,When_ClassReference.gwt,succeeded,46,
+20120908,1841,+1000,Then_ClassReference.gwt,running,2,
+20120908,1841,+1000,Then_ClassReference.gwt,succeeded,96,

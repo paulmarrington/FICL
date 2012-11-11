@@ -1,0 +1,51 @@
+
+20120909,0803,+1000,Given_StringFormat.gwt,running,607,in 10h 7m 52s
+20120909,0803,+1000,Given_StringFormat.gwt,succeeded,145,145ms
+20120909,0803,+1000,When_StringFormat.gwt,running,2,
+20120909,0803,+1000,When_StringFormat.gwt,succeeded,124,124ms
+20120909,0803,+1000,Then_StringFormat.gwt,running,3,
+20120909,0803,+1000,Then_StringFormat.gwt,succeeded,103,103ms
+20120909,0803,+1000,Setup.coffee,running,0,in 13s
+20120909,0803,+1000,Setup.coffee,succeeded,125,125ms
+20120909,0803,+1000,Given_StringFormat.gwt,running,3,
+20120909,0803,+1000,Given_StringFormat.gwt,succeeded,45,
+20120909,0803,+1000,When_StringFormat.gwt,running,2,
+20120909,0803,+1000,When_StringFormat.gwt,failed,63,
+20120909,0803,+1000,Setup.coffee,running,0,in 39s
+20120909,0803,+1000,Setup.coffee,succeeded,64,
+20120909,0803,+1000,Given_StringFormat.gwt,running,4,
+20120909,0803,+1000,Given_StringFormat.gwt,succeeded,41,
+20120909,0803,+1000,When_StringFormat.gwt,running,2,
+20120909,0803,+1000,When_StringFormat.gwt,succeeded,73,
+20120909,0803,+1000,Then_StringFormat.gwt,running,2,
+20120909,0803,+1000,Then_StringFormat.gwt,failed,51,
+20120909,0804,+1000,Setup.coffee,running,0,in 37s
+20120909,0804,+1000,Setup.coffee,succeeded,75,
+20120909,0804,+1000,Given_StringFormat.gwt,running,6,
+20120909,0804,+1000,Given_StringFormat.gwt,succeeded,51,
+20120909,0804,+1000,When_StringFormat.gwt,running,2,
+20120909,0804,+1000,When_StringFormat.gwt,succeeded,83,
+20120909,0804,+1000,Then_StringFormat.gwt,running,2,
+20120909,0804,+1000,Then_StringFormat.gwt,failed,47,
+20120909,0826,+1000,Setup.coffee,running,473,473ms
+20120909,0826,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,0826,+1000,Given_StringFormat.gwt,running,20,
+20120909,0826,+1000,Given_StringFormat.gwt,succeeded,188,188ms
+20120909,0826,+1000,When_StringFormat.gwt,running,9,
+20120909,0826,+1000,When_StringFormat.gwt,failed,228,228ms
+20120909,0827,+1000,Setup.coffee,running,1,in 1m 3s
+20120909,0827,+1000,Setup.coffee,succeeded,116,116ms
+20120909,0827,+1000,Given_StringFormat.gwt,running,5,
+20120909,0827,+1000,Given_StringFormat.gwt,succeeded,86,
+20120909,0827,+1000,When_StringFormat.gwt,running,4,
+20120909,0827,+1000,When_StringFormat.gwt,succeeded,595,595ms
+20120909,0827,+1000,Then_StringFormat.gwt,running,3,
+20120909,0827,+1000,Then_StringFormat.gwt,failed,256,256ms
+20120909,0828,+1000,Setup.coffee,running,0,in 16s
+20120909,0828,+1000,Setup.coffee,succeeded,103,103ms
+20120909,0828,+1000,Given_StringFormat.gwt,running,12,
+20120909,0828,+1000,Given_StringFormat.gwt,succeeded,92,
+20120909,0828,+1000,When_StringFormat.gwt,running,8,
+20120909,0828,+1000,When_StringFormat.gwt,succeeded,69,
+20120909,0828,+1000,Then_StringFormat.gwt,running,3,
+20120909,0828,+1000,Then_StringFormat.gwt,succeeded,105,105ms

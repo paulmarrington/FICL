@@ -1,0 +1,3 @@
+an initialised instance of FICL
+and ": var 1 ; variable"
+and ": print var . ;"

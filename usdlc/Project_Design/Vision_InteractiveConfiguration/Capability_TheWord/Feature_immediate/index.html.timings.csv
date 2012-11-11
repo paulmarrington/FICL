@@ -1,0 +1,163 @@
+
+20120908,1653,+1000,Given_CompileTime.gwt,running,113,in 1h 53m 11s
+20120908,1653,+1000,Given_CompileTime.gwt,succeeded,352,352ms
+20120908,1653,+1000,When_CompileTime.gwt,running,8,
+20120908,1653,+1000,When_CompileTime.gwt,succeeded,348,348ms
+20120908,1653,+1000,Then_CompileTime.gwt,running,3,
+20120908,1653,+1000,Then_CompileTime.gwt,succeeded,260,260ms
+20120908,1703,+1000,Setup.coffee,running,10,in 10m 10s
+20120908,1703,+1000,Setup.coffee,failed,250,250ms
+20120908,1705,+1000,Setup.coffee,running,1,in 1m 43s
+20120908,1705,+1000,Setup.coffee,failed,115,115ms
+20120908,1706,+1000,Setup.coffee,running,1,in 1m 6s
+20120908,1706,+1000,Setup.coffee,succeeded,600,600ms
+20120908,1706,+1000,Given_CompileTime.gwt,running,2,
+20120908,1706,+1000,Given_CompileTime.gwt,succeeded,47,
+20120908,1706,+1000,When_CompileTime.gwt,running,2,
+20120908,1706,+1000,When_CompileTime.gwt,failed,119,119ms
+20120908,1720,+1000,Setup.coffee,running,13,in 13m 38s
+20120908,1720,+1000,Setup.coffee,succeeded,254,254ms
+20120908,1720,+1000,Given_CompileTime.gwt,running,3,
+20120908,1720,+1000,Given_CompileTime.gwt,succeeded,59,
+20120908,1720,+1000,When_CompileTime.gwt,running,3,
+20120908,1720,+1000,When_CompileTime.gwt,failed,98,
+20120908,1720,+1000,Setup.coffee,running,0,in 23s
+20120908,1720,+1000,Setup.coffee,succeeded,147,147ms
+20120908,1720,+1000,Given_CompileTime.gwt,running,7,
+20120908,1720,+1000,Given_CompileTime.gwt,succeeded,128,128ms
+20120908,1720,+1000,When_CompileTime.gwt,running,2,
+20120908,1720,+1000,When_CompileTime.gwt,failed,161,161ms
+20120908,1721,+1000,Setup.coffee,running,461,461ms
+20120908,1721,+1000,Setup.coffee,succeeded,0,in 1s
+20120908,1721,+1000,Given_CompileTime.gwt,running,30,
+20120908,1721,+1000,Given_CompileTime.gwt,succeeded,228,228ms
+20120908,1721,+1000,When_CompileTime.gwt,running,6,
+20120908,1721,+1000,When_CompileTime.gwt,failed,217,217ms
+20120908,1725,+1000,Setup.coffee,running,3,in 3m 39s
+20120908,1725,+1000,Setup.coffee,succeeded,124,124ms
+20120908,1725,+1000,Given_CompileTime.gwt,running,4,
+20120908,1725,+1000,Given_CompileTime.gwt,succeeded,59,
+20120908,1725,+1000,When_CompileTime.gwt,running,8,
+20120908,1725,+1000,When_CompileTime.gwt,failed,54,
+20120908,1725,+1000,Setup.coffee,running,0,in 5s
+20120908,1725,+1000,Setup.coffee,succeeded,96,
+20120908,1725,+1000,Given_CompileTime.gwt,running,3,
+20120908,1725,+1000,Given_CompileTime.gwt,succeeded,75,
+20120908,1725,+1000,When_CompileTime.gwt,running,19,
+20120908,1725,+1000,When_CompileTime.gwt,failed,78,
+20120908,1725,+1000,Setup.coffee,running,0,in 27s
+20120908,1725,+1000,Setup.coffee,succeeded,90,
+20120908,1725,+1000,Given_CompileTime.gwt,running,6,
+20120908,1725,+1000,Given_CompileTime.gwt,succeeded,55,
+20120908,1725,+1000,When_CompileTime.gwt,running,3,
+20120908,1725,+1000,When_CompileTime.gwt,failed,59,
+20120908,1726,+1000,Setup.coffee,running,0,in 24s
+20120908,1726,+1000,Setup.coffee,succeeded,110,110ms
+20120908,1726,+1000,Given_CompileTime.gwt,running,8,
+20120908,1726,+1000,Given_CompileTime.gwt,succeeded,57,
+20120908,1726,+1000,When_CompileTime.gwt,running,3,
+20120908,1726,+1000,When_CompileTime.gwt,failed,723,723ms
+20120908,1730,+1000,Setup.coffee,running,424,424ms
+20120908,1730,+1000,Setup.coffee,succeeded,0,in 1s
+20120908,1730,+1000,Given_CompileTime.gwt,running,33,
+20120908,1730,+1000,Given_CompileTime.gwt,succeeded,203,203ms
+20120908,1730,+1000,When_CompileTime.gwt,running,3,
+20120908,1730,+1000,When_CompileTime.gwt,failed,722,722ms
+20120908,1734,+1000,Setup.coffee,running,491,491ms
+20120908,1734,+1000,Setup.coffee,succeeded,0,in 1s
+20120908,1734,+1000,Given_CompileTime.gwt,running,23,
+20120908,1734,+1000,Given_CompileTime.gwt,succeeded,223,223ms
+20120908,1734,+1000,When_CompileTime.gwt,running,4,
+20120908,1734,+1000,When_CompileTime.gwt,failed,804,804ms
+20120908,1741,+1000,Setup.coffee,running,0,in 27s
+20120908,1741,+1000,Setup.coffee,succeeded,0,in 26s
+20120908,1741,+1000,Given_CompileTime.gwt,running,9,
+20120908,1741,+1000,Given_CompileTime.gwt,succeeded,201,201ms
+20120908,1741,+1000,When_CompileTime.gwt,running,9,
+20120908,1741,+1000,When_CompileTime.gwt,failed,0,in 4s
+20120908,1742,+1000,Setup.coffee,running,1,in 1m 15s
+20120908,1742,+1000,Setup.coffee,succeeded,0,in 4s
+20120908,1742,+1000,Given_CompileTime.gwt,running,5,
+20120908,1742,+1000,Given_CompileTime.gwt,succeeded,68,
+20120908,1742,+1000,When_CompileTime.gwt,running,3,
+20120908,1742,+1000,When_CompileTime.gwt,failed,91,
+20120908,1743,+1000,Setup.coffee,running,0,in 33s
+20120908,1743,+1000,Setup.coffee,succeeded,0,in 16s
+20120908,1743,+1000,Given_CompileTime.gwt,running,5,
+20120908,1743,+1000,Given_CompileTime.gwt,succeeded,69,
+20120908,1743,+1000,When_CompileTime.gwt,running,7,
+20120908,1743,+1000,When_CompileTime.gwt,failed,0,in 2s
+20120908,1744,+1000,Setup.coffee,running,0,in 41s
+20120908,1744,+1000,Setup.coffee,succeeded,0,in 26s
+20120908,1744,+1000,Given_CompileTime.gwt,running,6,
+20120908,1744,+1000,Given_CompileTime.gwt,succeeded,124,124ms
+20120908,1744,+1000,When_CompileTime.gwt,running,10,
+20120908,1745,+1000,When_CompileTime.gwt,failed,0,in 15s
+20120908,1745,+1000,Setup.coffee,running,0,in 22s
+20120908,1750,+1000,
+20120908,1750,+1000,Setup.coffee,running,591,591msSetup.coffee,running,591,591ms
+20120908,1750,+1000,Setup.coffee,failed,0,in 1s
+20120908,1750,+1000,Setup.coffee,failed,0,in 1s
+20120908,1751,+1000,Setup.coffee,running,1,in 1m 37s
+20120908,1751,+1000,Setup.coffee,failed,301,301ms
+20120908,1751,+1000,Setup.coffee,running,0,in 1s
+20120908,1751,+1000,Setup.coffee,failed,124,124ms
+20120908,1753,+1000,Setup.coffee,running,1,in 1m 29s
+20120908,1756,+1000,Setup.coffee,running,547,547ms
+20120908,1756,+1000,Setup.coffee,failed,0,in 22s
+20120908,1756,+1000,Setup.coffee,running,0,in 17s
+20120908,1757,+1000,Setup.coffee,failed,0,in 59s
+20120908,1758,+1000,Setup.coffee,running,0,in 49s
+20120908,1758,+1000,Setup.coffee,failed,0,in 24s
+20120908,1807,+1000,Setup.coffee,running,456,456ms
+20120908,1807,+1000,Setup.coffee,succeeded,0,in 1s
+20120908,1807,+1000,Given_CompileTime.gwt,running,29,
+20120908,1807,+1000,Given_CompileTime.gwt,succeeded,174,174ms
+20120908,1807,+1000,When_CompileTime.gwt,running,10,
+20120908,1807,+1000,When_CompileTime.gwt,failed,815,815ms
+20120908,1808,+1000,Setup.coffee,running,1,in 1m 47s
+20120908,1808,+1000,Setup.coffee,succeeded,231,231ms
+20120908,1808,+1000,Given_CompileTime.gwt,running,4,
+20120908,1809,+1000,Given_CompileTime.gwt,succeeded,94,
+20120908,1809,+1000,When_CompileTime.gwt,running,5,
+20120908,1809,+1000,When_CompileTime.gwt,failed,120,120ms
+20120908,1809,+1000,Setup.coffee,running,737,737ms
+20120908,1809,+1000,Setup.coffee,succeeded,0,in 1s
+20120908,1809,+1000,Given_CompileTime.gwt,running,43,
+20120908,1809,+1000,Given_CompileTime.gwt,succeeded,288,288ms
+20120908,1809,+1000,When_CompileTime.gwt,running,15,
+20120908,1809,+1000,When_CompileTime.gwt,succeeded,206,206ms
+20120908,1809,+1000,Then_CompileTime.gwt,running,18,
+20120908,1809,+1000,Then_CompileTime.gwt,failed,288,288ms
+20120908,1810,+1000,Setup.coffee,running,1,in 1m 17s
+20120908,1810,+1000,Setup.coffee,succeeded,251,251ms
+20120908,1810,+1000,Given_CompileTime.gwt,running,11,
+20120908,1810,+1000,Given_CompileTime.gwt,succeeded,115,115ms
+20120908,1810,+1000,When_CompileTime.gwt,running,3,
+20120908,1810,+1000,When_CompileTime.gwt,succeeded,52,
+20120908,1810,+1000,Then_CompileTime.gwt,running,4,
+20120908,1810,+1000,Then_CompileTime.gwt,succeeded,248,248ms
+20120908,2128,+1000,Setup.coffee,running,133,in 2h 13m 29s
+20120908,2128,+1000,Setup.coffee,succeeded,254,254ms
+20120908,2128,+1000,Given_CompileTime.gwt,running,5,
+20120908,2128,+1000,Given_CompileTime.gwt,succeeded,71,
+20120908,2128,+1000,When_CompileTime.gwt,running,3,
+20120908,2128,+1000,When_CompileTime.gwt,succeeded,85,
+20120908,2128,+1000,Then_CompileTime.gwt,running,9,
+20120908,2128,+1000,Then_CompileTime.gwt,succeeded,120,120ms
+20120912,2054,+1000,Setup.coffee,running,0,in 56s
+20120912,2054,+1000,Setup.coffee,succeeded,33,
+20120912,2054,+1000,Given_CompileTime.gwt,running,2,
+20120912,2054,+1000,Given_CompileTime.gwt,succeeded,23,
+20120912,2054,+1000,When_CompileTime.gwt,running,1,
+20120912,2054,+1000,When_CompileTime.gwt,succeeded,22,
+20120912,2054,+1000,Then_CompileTime.gwt,running,1,
+20120912,2054,+1000,Then_CompileTime.gwt,succeeded,23,
+20120912,2055,+1000,Setup.coffee,running,1,in 1m 34s
+20120912,2055,+1000,Setup.coffee,succeeded,32,
+20120912,2055,+1000,Given_CompileTime.gwt,running,1,
+20120912,2055,+1000,Given_CompileTime.gwt,succeeded,20,
+20120912,2055,+1000,When_CompileTime.gwt,running,1,
+20120912,2055,+1000,When_CompileTime.gwt,succeeded,17,
+20120912,2055,+1000,Then_CompileTime.gwt,running,1,
+20120912,2055,+1000,Then_CompileTime.gwt,succeeded,21,

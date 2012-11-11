@@ -1,0 +1,3 @@
+an initialised instance of FICL
+and ": &testBooleanCall ;method testBooleanCall ;ficl boolean ; ;"
+and ": testBooleanCall ;ficl &testBooleanCall ;call ;"

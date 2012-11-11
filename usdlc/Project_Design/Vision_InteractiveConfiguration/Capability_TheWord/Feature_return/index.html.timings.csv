@@ -1,0 +1,43 @@
+
+20120909,2002,+1000,Given_return.gwt,running,6,in 6m 6s
+20120909,2002,+1000,Given_return.gwt,succeeded,302,302ms
+20120909,2002,+1000,When_return.gwt,running,3,
+20120909,2002,+1000,When_return.gwt,succeeded,170,170ms
+20120909,2002,+1000,Then_return.gwt,running,2,
+20120909,2002,+1000,Then_return.gwt,succeeded,223,223ms
+20120909,2002,+1000,Setup.coffee,running,0,in 7s
+20120909,2002,+1000,Setup.coffee,succeeded,419,419ms
+20120909,2002,+1000,Given_return.gwt,running,3,
+20120909,2002,+1000,Given_return.gwt,succeeded,97,
+20120909,2002,+1000,When_return.gwt,running,4,
+20120909,2002,+1000,When_return.gwt,failed,132,132ms
+20120909,2003,+1000,Setup.coffee,running,441,441ms
+20120909,2003,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,2003,+1000,Given_return.gwt,running,18,
+20120909,2003,+1000,Given_return.gwt,succeeded,185,185ms
+20120909,2003,+1000,When_return.gwt,running,3,
+20120909,2003,+1000,When_return.gwt,succeeded,143,143ms
+20120909,2003,+1000,Then_return.gwt,running,15,
+20120909,2003,+1000,Then_return.gwt,failed,301,301ms
+20120909,2003,+1000,Setup.coffee,running,0,in 11s
+20120909,2003,+1000,Setup.coffee,succeeded,120,120ms
+20120909,2003,+1000,Given_return.gwt,running,5,
+20120909,2003,+1000,Given_return.gwt,succeeded,79,
+20120909,2003,+1000,When_return.gwt,running,5,
+20120909,2003,+1000,When_return.gwt,succeeded,290,290ms
+20120909,2003,+1000,Then_return.gwt,running,6,
+20120909,2003,+1000,Then_return.gwt,succeeded,133,133ms
+20120910,1137,+1000,Setup.coffee,running,0,in 6s
+20120910,1137,+1000,Setup.coffee,succeeded,59,
+20120910,1137,+1000,Given_return.gwt,running,2,
+20120910,1137,+1000,Given_return.gwt,succeeded,47,
+20120910,1137,+1000,When_return.gwt,running,2,
+20120910,1137,+1000,When_return.gwt,failed,41,
+20120910,1139,+1000,Setup.coffee,running,516,516ms
+20120910,1139,+1000,Setup.coffee,succeeded,0,in 1s
+20120910,1139,+1000,Given_return.gwt,running,18,
+20120910,1139,+1000,Given_return.gwt,succeeded,274,274ms
+20120910,1139,+1000,When_return.gwt,running,4,
+20120910,1139,+1000,When_return.gwt,succeeded,177,177ms
+20120910,1139,+1000,Then_return.gwt,running,9,
+20120910,1139,+1000,Then_return.gwt,succeeded,303,303ms

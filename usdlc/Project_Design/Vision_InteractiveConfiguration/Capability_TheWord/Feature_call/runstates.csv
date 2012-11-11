@@ -1,0 +1,9 @@
+Given_CallFICLMethod.gwt,succeeded
+When_CallFICLMethod.gwt,succeeded
+Then_CallFICLMethod.gwt,succeeded
+Setup.coffee,succeeded
+Instrument.coffee,succeeded
+Given_CallWord.gwt,succeeded
+When_CallWord.gwt,succeeded
+Then_CallWord.gwt,succeeded
+gwtDSL.coffee,succeeded

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ficl" default="all">
+
+
+  <property file="ficl.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <property name="skip.tests" value="true"/>
+
+  <!-- Compiler options -->
+
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.orig/**"/>
+    <exclude name="**/*.o/**"/>
+    <exclude name="**/*.obj/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.ftl"/>
+  </patternset>
+
+  <!-- JDK definitions -->
+
+  <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
+  <path id="jdk.classpath.1.6">
+    <fileset dir="${jdk.home.1.6}">
+      <include name="lib/deploy.jar"/>
+      <include name="lib/dt.jar"/>
+      <include name="lib/javaws.jar"/>
+      <include name="lib/jce.jar"/>
+      <include name="lib/jconsole.jar"/>
+      <include name="lib/management-agent.jar"/>
+      <include name="lib/plugin.jar"/>
+      <include name="lib/sa-jdi.jar"/>
+      <include name="../Classes/alt-rt.jar"/>
+      <include name="../Classes/alt-string.jar"/>
+      <include name="../Classes/charsets.jar"/>
+      <include name="../Classes/classes.jar"/>
+      <include name="../Classes/jsse.jar"/>
+      <include name="../Classes/ui.jar"/>
+      <include name="lib/ext/apple_provider.jar"/>
+      <include name="lib/ext/dnsns.jar"/>
+      <include name="lib/ext/localedata.jar"/>
+      <include name="lib/ext/sunjce_provider.jar"/>
+      <include name="lib/ext/sunpkcs11.jar"/>
+    </fileset>
+  </path>
+
+  <property name="project.jdk.home" value="${jdk.home.1.6}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
+
+
+  <!-- Global Libraries -->
+
+
+  <!-- Application Server Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm.jar"/>
+    <pathelement location="${javac2.home}/asm-commons.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+
+  <!-- Modules -->
+
+
+  <!-- Module FICL -->
+
+  <dirname property="module.ficl.basedir" file="${ant.file}"/>
+
+
+  <property name="module.jdk.home.ficl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.ficl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.ficl" value="${project.jdk.classpath}"/>
+
+  <property name="compiler.args.ficl" value="${compiler.args}"/>
+
+  <property name="ficl.output.dir" value="${module.ficl.basedir}/out/production/FICL"/>
+  <property name="ficl.testoutput.dir" value="${module.ficl.basedir}/out/test/FICL"/>
+
+  <path id="ficl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+
+  <path id="ficl.module.production.classpath">
+    <path refid="${module.jdk.classpath.ficl}"/>
+  </path>
+
+  <path id="ficl.runtime.production.module.classpath">
+    <pathelement location="${ficl.output.dir}"/>
+  </path>
+
+  <path id="ficl.module.classpath">
+    <path refid="${module.jdk.classpath.ficl}"/>
+    <pathelement location="${ficl.output.dir}"/>
+  </path>
+
+  <path id="ficl.runtime.module.classpath">
+    <pathelement location="${ficl.testoutput.dir}"/>
+    <pathelement location="${ficl.output.dir}"/>
+  </path>
+
+
+  <patternset id="excluded.from.module.ficl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+
+  <patternset id="excluded.from.compilation.ficl">
+    <patternset refid="excluded.from.module.ficl"/>
+  </patternset>
+
+  <path id="ficl.module.sourcepath">
+    <dirset dir="${module.ficl.basedir}">
+      <include name="java"/>
+    </dirset>
+  </path>
+
+
+  <target name="compile.module.ficl" depends="compile.module.ficl.production,compile.module.ficl.tests" description="Compile module FICL"/>
+
+  <target name="compile.module.ficl.production" depends="register.custom.compilers" description="Compile module FICL; production classes">
+    <mkdir dir="${ficl.output.dir}"/>
+    <javac2 destdir="${ficl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.ficl}/javac">
+      <compilerarg line="${compiler.args.ficl}"/>
+      <bootclasspath refid="ficl.module.bootclasspath"/>
+      <classpath refid="ficl.module.production.classpath"/>
+      <src refid="ficl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.ficl"/>
+    </javac2>
+
+    <copy todir="${ficl.output.dir}">
+      <fileset dir="${module.ficl.basedir}/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.module.ficl.tests" depends="register.custom.compilers,compile.module.ficl.production" description="compile module FICL; test classes" unless="skip.tests"/>
+
+  <target name="clean.module.ficl" description="cleanup module">
+    <delete dir="${ficl.output.dir}"/>
+    <delete dir="${ficl.testoutput.dir}"/>
+  </target>
+
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+
+  <target name="clean" depends="clean.module.ficl" description="cleanup all"/>
+
+  <target name="build.modules" depends="init, clean, compile.module.ficl" description="build all modules"/>
+
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.ficl:jar" value="${basedir}/../uSDLC/usdlc/lib/jars"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.FICL.jar" value="${artifacts.temp.dir}/FICL.jar"/>
+  </target>
+
+  <target name="artifact.ficl:jar" depends="init.artifacts, compile.module.ficl" description="Build &#39;FICL:jar&#39; artifact">
+    <property name="artifact.temp.output.ficl:jar" value="${artifacts.temp.dir}/FICL_jar"/>
+    <mkdir dir="${artifact.temp.output.ficl:jar}"/>
+    <jar destfile="${temp.jar.path.FICL.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${ficl.output.dir}"/>
+      <zipfileset file="${basedir}/java/META-INF/MANIFEST.MF" prefix="META-INF"/>
+    </jar>
+    <copy file="${temp.jar.path.FICL.jar}" tofile="${artifact.temp.output.ficl:jar}/FICL.jar"/>
+  </target>
+
+  <target name="build.all.artifacts" depends="artifact.ficl:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.ficl:jar}"/>
+    <copy todir="${artifact.output.ficl:jar}">
+      <fileset dir="${artifact.temp.output.ficl:jar}"/>
+    </copy>
+
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

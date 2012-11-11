@@ -1,0 +1,6 @@
+When_debug.gwt,succeeded
+Then_debug.gwt,succeeded
+Given_debug.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+gwtDSL.coffee,succeeded

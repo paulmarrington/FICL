@@ -1,0 +1,39 @@
+
+20120908,2136,+1000,Given_getWord.gwt,running,7,in 7m 38s
+20120908,2136,+1000,Given_getWord.gwt,succeeded,140,140ms
+20120908,2136,+1000,When_getWord.gwt,running,3,
+20120908,2136,+1000,When_getWord.gwt,succeeded,103,103ms
+20120908,2136,+1000,Then_getWord.gwt,running,2,
+20120908,2136,+1000,Then_getWord.gwt,succeeded,87,
+20120908,2136,+1000,Setup.coffee,running,0,in 14s
+20120908,2136,+1000,Setup.coffee,succeeded,93,
+20120908,2136,+1000,Given_getWord.gwt,running,4,
+20120908,2136,+1000,Given_getWord.gwt,succeeded,43,
+20120908,2136,+1000,When_getWord.gwt,running,2,
+20120908,2136,+1000,When_getWord.gwt,succeeded,45,
+20120908,2136,+1000,Then_getWord.gwt,running,3,
+20120908,2136,+1000,Then_getWord.gwt,succeeded,43,
+20120910,1137,+1000,Setup.coffee,running,0,in 20s
+20120910,1137,+1000,Setup.coffee,succeeded,86,
+20120910,1137,+1000,Given_getWord.gwt,running,2,
+20120910,1137,+1000,Given_getWord.gwt,succeeded,87,
+20120910,1137,+1000,When_getWord.gwt,running,9,
+20120910,1137,+1000,When_getWord.gwt,succeeded,52,
+20120910,1137,+1000,Then_getWord.gwt,running,2,
+20120910,1137,+1000,Then_getWord.gwt,succeeded,76,
+20120912,2052,+1000,Setup.coffee,running,0,in 23s
+20120912,2052,+1000,Setup.coffee,succeeded,34,
+20120912,2052,+1000,Given_getWord.gwt,running,1,
+20120912,2052,+1000,Given_getWord.gwt,succeeded,19,
+20120912,2052,+1000,When_getWord.gwt,running,1,
+20120912,2052,+1000,When_getWord.gwt,succeeded,19,
+20120912,2052,+1000,Then_getWord.gwt,running,2,
+20120912,2052,+1000,Then_getWord.gwt,succeeded,22,
+20120912,2053,+1000,Setup.coffee,running,0,in 21s
+20120912,2053,+1000,Setup.coffee,succeeded,29,
+20120912,2053,+1000,Given_getWord.gwt,running,1,
+20120912,2053,+1000,Given_getWord.gwt,succeeded,23,
+20120912,2053,+1000,When_getWord.gwt,running,2,
+20120912,2053,+1000,When_getWord.gwt,succeeded,22,
+20120912,2053,+1000,Then_getWord.gwt,running,1,
+20120912,2053,+1000,Then_getWord.gwt,succeeded,21,

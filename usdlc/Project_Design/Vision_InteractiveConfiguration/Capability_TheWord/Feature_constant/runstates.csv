@@ -1,0 +1,9 @@
+When_nonConstant.gwt,succeeded
+Given_nonConstant.gwt,succeeded
+Then_nonConstant.gwt,succeeded
+Setup.coffee,succeeded
+Given_constant.gwt,succeeded
+When_constant.gwt,succeeded
+Then_constant.gwt,succeeded
+Instrument.coffee,succeeded
+gwtDSL.coffee,succeeded

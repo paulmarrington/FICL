@@ -1,0 +1,9 @@
+When_StaticDefinitions.gwt,succeeded
+Then_StaticDefinitions.gwt,succeeded
+Given_StaticDefinitions.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+Given_VariableDefinitions.gwt,succeeded
+When_VariableDefinitions.gwt,succeeded
+Then_VariableDefinitions.gwt,succeeded
+gwtDSL.coffee,succeeded

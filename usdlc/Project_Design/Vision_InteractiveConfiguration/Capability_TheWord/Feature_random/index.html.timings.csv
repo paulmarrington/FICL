@@ -1,0 +1,15 @@
+
+20120909,1447,+1000,Given_random.gwt,running,7,in 7m 5s
+20120909,1447,+1000,Given_random.gwt,succeeded,351,351ms
+20120909,1447,+1000,When_random.gwt,running,5,
+20120909,1447,+1000,When_random.gwt,succeeded,300,300ms
+20120909,1447,+1000,Then_random.gwt,running,2,
+20120909,1447,+1000,Then_random.gwt,succeeded,285,285ms
+20120909,1447,+1000,Setup.coffee,running,0,in 11s
+20120909,1447,+1000,Setup.coffee,succeeded,172,172ms
+20120909,1447,+1000,Given_random.gwt,running,3,
+20120909,1447,+1000,Given_random.gwt,succeeded,52,
+20120909,1447,+1000,When_random.gwt,running,2,
+20120909,1447,+1000,When_random.gwt,succeeded,70,
+20120909,1447,+1000,Then_random.gwt,running,11,
+20120909,1447,+1000,Then_random.gwt,succeeded,49,

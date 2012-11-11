@@ -1,0 +1,3 @@
+an initialised instance of FICL
+and ": stat 1 ;"
+and ": print stat . ;"

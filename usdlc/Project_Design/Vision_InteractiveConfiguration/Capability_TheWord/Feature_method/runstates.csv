@@ -1,0 +1,9 @@
+When_TheFICLPrintMethod.gwt,succeeded
+Given_TheFICLPrintMethod.gwt,succeeded
+Then_TheFICLPrintMethod.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+When_BooleanConversion.gwt,succeeded
+Then_BooleanConversion.gwt,succeeded
+Given_BooleanConversion.gwt,succeeded
+gwtDSL.coffee,succeeded

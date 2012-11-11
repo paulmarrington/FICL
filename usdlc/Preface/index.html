@@ -1,0 +1,89 @@
+<div id="pageTitle" class="editable" uuid="7750a357-3e21-44f8-b4c5-a088dab4e7aa"> 
+ <h1>Preface</h1> 
+ <h2></h2> 
+</div> 
+<div id="s1" class="editable section"><p>
+	Before <em><strong>uSDLC</strong></em> can help us with the design we need to have a high level concept on how our project will look. Without this our design process lacks direction. There is a process of consideration of different options and decisions that need to be made first. If we document the process here they provide a starting point for the design and a perspective on the decisions made for a clearer understanding of the project.</p>
+<p style="text-align: center; ">
+	<em style="text-align: center; "><strong><span style="font-size: 18px; ">Reason - Result - User Interface - Language - Frameworks - Deployment</span></strong></em></p>
+</div><div id="s4" class="editable section"><h2>
+	<span>Reason<span style="font-size:14px;"> - notes of why this project is needed</span></span></h2>
+<p>
+	When developing an Android application I had the need for user's to be able to configure the operation of the application based on a diverse set of criteria and information. It was impossible for me to document all needed cases as the users of the resulting system do not know themselves - until they start using the final product. Iterative/agile development relieves this sort of problem, but a traditional software approach would leave my clients with a system 'set in stone'.</p>
+<p>
+	To provide the flexibility I wanted I needed to be able to send templates from the server to the phone to make workflow decisions.</p>
+</div><div id="s10" class="editable section"><h2>
+	<span>Investigation<span style="font-size:14px;"> - the path to a decision</span></span></h2>
+<p>
+	I decided that the most flexible solution would be a scripting language that could be sent from the server and refer to application data to set other data elements - such as turning gps tracking on or off.</p>
+<p>
+	Android is Java based. There are quite a few scripting languages that run on the JVM - including Groovy, Jython, jRuby, Javascript and Coffeescript. The problem is that they are all big. They make your application huge and are all known to run slowly, if at all, on Android. To be fair, they are not designed for configuration and workflow - they are intended as general computer languages.</p>
+<p>
+	Another consideration was operating environment. This application, in common with most, will have an iPhone clone. I needed a scripting language that would run on both.</p>
+<p>
+	BASIC and it's ilk are relatively lightweight. I could not find a consistent dialect that ran on Java and Objective-C.</p>
+</div><div id="s5" class="editable section"><h2>
+	<span>Result<span style="font-size:14px;"> - a high level description of what the finished project will look like</span></span></h2>
+<p>
+	I decided to write one. By making a FORTH-like stack machine it would be much smaller than even BASIC, easier to develop, faster and more extensible.</p>
+<p>
+	Most existing FORTH implementations are for embedded systems, typically including a built-in assembler for fast native code. My requirement was application support where the application code can do all the heavy lifting with the control language acting as glue.</p>
+<p>
+	I called if FICL (<strong>F</strong>ast <strong>I</strong>nteractive <strong>C</strong>onfiguration <strong>L</strong>anguage) to clearly show that it is not a general programming language. It sacrifices readability for speed and size. It is up to a server based driving system to create the commands based on templates and simplified user input.</p>
+<p>
+	By keeping the core simple, I plan to create a C version using the Java version as a template. I can then write wrappers in Objective-C and C# so that the same code supports iPhone, iPad and Windows Phone.</p>
+</div><div id="s6" class="editable section"><h2>
+	<span>User Interface<span style="font-size:14px;"> - technology, look and feel, user experience</span></span></h2>
+<p>
+	<strong>FICL</strong> is designed to be an application to application facility, so the user is directly another computer and indirectly a script writer who creates the templates.</p>
+<p>
+	For my application I will be using push technology to send workflow changes on demand from a web server.</p>
+</div><div id="s7" class="editable section"><h2>
+	<span>Language<span style="font-size:14px;"> - computer languages and libraries decided upon</span></span></h2>
+<p>
+	Android uses Java as the primary application development language. By writing FICL in Java, it will be available to the plethoria of other JVM based language as needed.</p>
+<p>
+	Android applications support C code. The problem is that any pure java application would have to move do a mixed application to make use of C. So added complexity in development and deployment outweighs any slight performance hit using the Dalvik JVM.</p>
+<p>
+	No such choice exists for iOS devices. Here we have C, C++ and Objective C. Since C++ is an orphan in this environment, I decided to develop the core in C and add an Objective C wrapper so that <strong>FICL</strong> can access object methods and fields. The downside is that C does not natively support dynamic size arrays or strings, dictionaries, ARC or reflection to call native code.</p>
+<p>
+	The choice to write it in C rather than Objective C is more fickle than <strong>FICL</strong>. A C version can be used almost anywhere a Java version cannot - Cocoa on iOS and OS X, .NET on Windows Phone, Windows desktop and Windows Server, as a native library for Python and on embedded devices that have a C cross-compiler.</p>
+</div><div id="s8" class="editable section"><h2>
+	<span>Frameworks<span style="font-size:14px;"> - hardware and software frameworks anticipated</span></span></h2>
+<ul>
+	<li>
+		J2SE applications (command line, GUI, Webstart, applet)</li>
+	<li>
+		J2EE servers (Tomcat, Websphere, ...)</li>
+	<li>
+		Groovy applications</li>
+	<li>
+		Grails servers</li>
+	<li>
+		Iphone and iPad</li>
+	<li>
+		Windows Mobile</li>
+	<li>
+		Android</li>
+	<li>
+		embedded devices with C cross-compilers</li>
+</ul>
+</div><div id="s9" class="editable section"><h2>
+	<span>Deployment<span style="font-size:14px;"> - envisioned deployment environment</span></span></h2>
+<ul>
+	<li>
+		JVM: A single jar with 1 class and 2 resource files.</li>
+	<li>
+		iOS: Dynalib</li>
+	<li>
+		OS X: Dynalib</li>
+	<li>
+		.NET: DLL</li>
+</ul>
+</div> 
+<div id="s2" class="editable section footer synopsis"> 
+ <div> 
+  <a class="usdlc" href=".." id="s2a3" action="page"> Parent</a> - 
+  <a href="javascript:usdlc.moreFooter()" id="s2a7">more...</a> 
+ </div> 
+</div>

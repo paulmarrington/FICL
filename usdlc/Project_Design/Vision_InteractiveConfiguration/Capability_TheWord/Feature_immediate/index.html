@@ -1,0 +1,57 @@
+<div id="pageTitle" class="editable" uuid="bfb9713f-2ca8-4527-abee-53ec14b0c492"> 
+ <h1>immediate</h1> 
+ <h2></h2> 
+</div> 
+<div id="s1" class="editable section">
+ <div class="pageType">
+   Feature
+ </div> 
+ <div>
+   Use immediate after defining a word to make it act during the compile phase.
+ </div> 
+ <div>
+   &nbsp;
+ </div> 
+ <div> 
+  <code>: " ( -- s1 | string literal ) ;ficl &amp;" ;call ; <strong><span style="background-color:#ffa07a;">immediate</span></strong></code>
+ </div> 
+ <p> &nbsp;</p> 
+ <p> The native code will retrieve all text from the imput stream until another double-quote is found and push the resulting string on the stack as a literal. Many immediates act on both compile and run phases. This string literal collects the string in compile phase and pushes a reference to it in a run phase.</p> 
+</div>
+<div id="s4" class="editable section synopsis Scenario"><div class="sectionType">
+	Scenario</div>
+<h2>
+	<span>Compile-time<span class="givenWhenThen"> &nbsp;(<a class="usdlc sourceLink" href="Given_CompileTime.gwt" id="s4a0g" action="runnable">G</a><a class="usdlc sourceLink changed" href="When_CompileTime.gwt" id="s4a0w" action="runnable">W</a><a class="usdlc sourceLink changed" href="Then_CompileTime.gwt" id="s4a0t" action="runnable">T</a>)</span></span></h2>
+<p>
+	Here we create a new immediate word called <em><strong>debug</strong></em> that retrieves the next word from the compile input stream and sets the flag accordingly. The second line tests this by running words with and without debugging enabled.</p>
+</div><div id="s5" class="editable section Scenario"><h2 class="sectionType">
+	Run-time</h2>
+<p>
+	Immediate words often have a run-time component as well. Typically the compile-time will get something and the run-time will push it on the stack. Take <em><strong>push</strong></em> for example.</p>
+<p>
+	&nbsp;</p>
+<pre>immediate("push", new Runnable() {
+    public void run() {
+        final CompiledWord code = dictionary.get(getWord());
+        compileWord(new Runnable() { public void run() {
+            stack.push(code); }
+        });
+    }
+});</pre>
+<div>
+	&nbsp;</div>
+<div>
+	At compile time <em><strong>push</strong></em> retrieves the value of a <strong>FICL</strong> word. Ar run-time it is placed on the stack so it can be executed with <em><strong>;call</strong></em>.</div>
+<div>
+	&nbsp;</div>
+<div>
+	At this point in time, run-time behaviour requires methods in the native language.</div>
+</div> 
+<div id="s2" class="editable section footer synopsis"> 
+ <div> 
+  <a class="usdlc" href=".." id="s2a3" action="page"> Parent</a> - 
+  <a class="usdlc" ,="" action="runnable" href="Setup.coffee">Setup</a> - 
+  <a class="usdlc changed" ,="" action="runnable" href="Instrument.coffee">Instrument</a> - 
+  <a href="javascript:usdlc.moreFooter()" id="s2a7">more...</a> 
+ </div> 
+</div>

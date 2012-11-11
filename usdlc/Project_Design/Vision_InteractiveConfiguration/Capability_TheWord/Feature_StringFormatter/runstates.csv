@@ -1,0 +1,6 @@
+When_StringFormat.gwt,succeeded
+Given_StringFormat.gwt,succeeded
+Then_StringFormat.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+gwtDSL.coffee,succeeded

@@ -1,0 +1,6 @@
+When_getWord.gwt,succeeded
+Given_getWord.gwt,succeeded
+Then_getWord.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+gwtDSL.coffee,succeeded

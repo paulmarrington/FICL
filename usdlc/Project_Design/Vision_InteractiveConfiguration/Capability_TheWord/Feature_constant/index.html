@@ -1,0 +1,42 @@
+<div id="pageTitle" class="editable" uuid="3a670905-b457-43cb-839d-175e7daaa0b2"> 
+ <h1>constant</h1> 
+ <h2></h2> 
+</div> 
+<div id="s1" class="editable section"><div class="pageType">
+	Feature</div>
+<div>
+	<em><b class="blue">( -- )</b></em></div>
+<div>
+	&nbsp;</div>
+<div>
+	An immediate word that replaces the last definition with it's result. This allows definitions that don't change to only be evaluated once.</div>
+<div>
+	&nbsp;</div>
+<div style="margin-left: 40px; ">
+	<code>: name words ; <strong><span style="background-color:#ffa07a;">constant</span></strong></code></div>
+<div>
+	&nbsp;</div>
+<div>
+	Immediate words constant and variable can be both used for the same word since they have a different meaning.</div>
+</div>
+<div id="s4" class="editable section synopsis Scenario"><div class="sectionType">
+	Scenario</div>
+<h2>
+	<span>non-constant<span class="givenWhenThen"> &nbsp;(<a class="usdlc sourceLink changed" href="Given_nonConstant.gwt" id="s4a0g" action="runnable">G</a><a class="usdlc sourceLink changed" href="When_nonConstant.gwt" id="s4a0w" action="runnable">W</a><a class="usdlc sourceLink" href="Then_nonConstant.gwt" id="s4a0t" action="runnable">T</a>)</span></span></h2>
+<p>
+	Create a word that returns a random number. Run it 3 times and make sure it does not return the same number.</p>
+</div><div id="s5" class="editable section synopsis Scenario"><div class="sectionType">
+	Scenario</div>
+<h2>
+	<span>constant<span class="givenWhenThen"> &nbsp;(<a class="usdlc sourceLink" href="Given_constant.gwt" id="s5a0g" action="runnable">G</a><a class="usdlc sourceLink" href="When_constant.gwt" id="s5a0w" action="runnable">W</a><a class="usdlc sourceLink" href="Then_constant.gwt" id="s5a0t" action="runnable">T</a>)</span></span></h2>
+<p>
+	Repeat the experiment after making the word constant. This time all the results should be equal because the word was only evaluated once.</p>
+</div> 
+<div id="s2" class="editable section footer synopsis"> 
+ <div> 
+  <a class="usdlc" href=".." id="s2a3" action="page"> Parent</a> - 
+  <a class="usdlc" ,="" action="runnable" href="Setup.coffee">Setup</a> - 
+  <a class="usdlc changed" ,="" action="runnable" href="Instrument.coffee">Instrument</a> - 
+  <a href="javascript:usdlc.moreFooter()" id="s2a7">more...</a> 
+ </div> 
+</div>

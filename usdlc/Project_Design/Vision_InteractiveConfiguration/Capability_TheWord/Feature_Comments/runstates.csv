@@ -1,0 +1,9 @@
+When_InLineComments.gwt,succeeded
+Given_InLineComments.gwt,succeeded
+Then_InLineComments.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+When_CommentToEndOfLine.gwt,succeeded
+Given_CommentToEndOfLine.gwt,succeeded
+Then_CommentToEndOfLine.gwt,succeeded
+gwtDSL.coffee,succeeded

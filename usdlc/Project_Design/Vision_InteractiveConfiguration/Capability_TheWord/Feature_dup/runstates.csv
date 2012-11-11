@@ -1,0 +1,6 @@
+When_dup.gwt,succeeded
+Then_dup.gwt,succeeded
+Given_dup.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+gwtDSL.coffee,succeeded

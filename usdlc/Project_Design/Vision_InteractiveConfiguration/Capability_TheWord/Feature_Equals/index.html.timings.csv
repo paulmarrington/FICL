@@ -1,0 +1,59 @@
+
+20120909,1031,+1000,Given_StringEquality.gwt,running,80,in 1h 20m 54s
+20120909,1031,+1000,Given_StringEquality.gwt,succeeded,114,114ms
+20120909,1031,+1000,When_StringEquality.gwt,running,3,
+20120909,1031,+1000,When_StringEquality.gwt,succeeded,57,
+20120909,1031,+1000,Then_StringEquality.gwt,running,1,
+20120909,1031,+1000,Then_StringEquality.gwt,succeeded,58,
+20120909,1032,+1000,Setup.coffee,running,0,in 28s
+20120909,1032,+1000,Setup.coffee,failed,114,114ms
+20120909,1032,+1000,Setup.coffee,running,0,in 46s
+20120909,1032,+1000,Setup.coffee,failed,100,
+20120909,1033,+1000,Setup.coffee,running,0,in 35s
+20120909,1033,+1000,Setup.coffee,succeeded,152,152ms
+20120909,1033,+1000,Given_StringEquality.gwt,running,5,
+20120909,1033,+1000,Given_StringEquality.gwt,succeeded,115,115ms
+20120909,1033,+1000,When_StringEquality.gwt,running,4,
+20120909,1033,+1000,When_StringEquality.gwt,failed,114,114ms
+20120909,1033,+1000,Setup.coffee,running,0,in 9s
+20120909,1033,+1000,Setup.coffee,failed,80,
+20120909,1034,+1000,Setup.coffee,running,1,in 1m 2s
+20120909,1034,+1000,Setup.coffee,succeeded,92,
+20120909,1034,+1000,Given_StringEquality.gwt,running,2,
+20120909,1034,+1000,Given_StringEquality.gwt,succeeded,60,
+20120909,1034,+1000,When_StringEquality.gwt,running,2,
+20120909,1034,+1000,When_StringEquality.gwt,succeeded,40,
+20120909,1034,+1000,Then_StringEquality.gwt,running,2,
+20120909,1034,+1000,Then_StringEquality.gwt,succeeded,69,
+20120909,1035,+1000,Setup.coffee,running,0,in 42s
+20120909,1035,+1000,Setup.coffee,succeeded,78,
+20120909,1035,+1000,Given_StringInequality.gwt,running,2,
+20120909,1035,+1000,Given_StringInequality.gwt,succeeded,69,
+20120909,1035,+1000,When_StringInequality.gwt,running,3,
+20120909,1035,+1000,When_StringInequality.gwt,succeeded,65,
+20120909,1035,+1000,Then_StringInequality.gwt,running,2,
+20120909,1035,+1000,Then_StringInequality.gwt,succeeded,73,
+20120909,1036,+1000,Setup.coffee,running,1,in 1m 0s
+20120909,1036,+1000,Setup.coffee,succeeded,140,140ms
+20120909,1036,+1000,Given_NumericEquality.gwt,running,21,
+20120909,1036,+1000,Given_NumericEquality.gwt,succeeded,100,
+20120909,1036,+1000,When_NumericEquality.gwt,running,2,
+20120909,1036,+1000,When_NumericEquality.gwt,succeeded,99,
+20120909,1036,+1000,Then_NumericEquality.gwt,running,2,
+20120909,1036,+1000,Then_NumericEquality.gwt,succeeded,110,110ms
+20120909,1036,+1000,Setup.coffee,running,0,in 8s
+20120909,1036,+1000,Setup.coffee,succeeded,72,
+20120909,1036,+1000,Given_NumericEquality.gwt,running,2,
+20120909,1036,+1000,Given_NumericEquality.gwt,succeeded,40,
+20120909,1036,+1000,When_NumericEquality.gwt,running,2,
+20120909,1036,+1000,When_NumericEquality.gwt,succeeded,55,
+20120909,1036,+1000,Then_NumericEquality.gwt,running,2,
+20120909,1036,+1000,Then_NumericEquality.gwt,succeeded,43,
+20120909,1037,+1000,Setup.coffee,running,0,in 40s
+20120909,1037,+1000,Setup.coffee,succeeded,54,
+20120909,1037,+1000,Given_NumericalInequality.gwt,running,3,
+20120909,1037,+1000,Given_NumericalInequality.gwt,succeeded,61,
+20120909,1037,+1000,When_NumericalInequality.gwt,running,2,
+20120909,1037,+1000,When_NumericalInequality.gwt,succeeded,57,
+20120909,1037,+1000,Then_NumericalInequality.gwt,running,2,
+20120909,1037,+1000,Then_NumericalInequality.gwt,succeeded,74,

@@ -1,0 +1,24 @@
+Given_dec.gwt,succeeded
+When_dec.gwt,succeeded
+Then_dec.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+Given_inc.gwt,succeeded
+When_inc.gwt,succeeded
+Then_inc.gwt,succeeded
+Given_plus (+).gwt,succeeded
+When_plus (+).gwt,succeeded
+Then_plus (+).gwt,succeeded
+Given_minus (-).gwt,succeeded
+When_minus (-).gwt,succeeded
+Then_minus (-).gwt,succeeded
+Given_Multiply (*).gwt,succeeded
+When_Multiply (*).gwt,succeeded
+Then_Multiply (*).gwt,succeeded
+Given_Divide (/).gwt,succeeded
+When_Divide (/).gwt,succeeded
+Then_Divide (/).gwt,succeeded
+Given_Divide.gwt,succeeded
+When_Divide.gwt,succeeded
+Then_Divide.gwt,succeeded
+gwtDSL.coffee,succeeded

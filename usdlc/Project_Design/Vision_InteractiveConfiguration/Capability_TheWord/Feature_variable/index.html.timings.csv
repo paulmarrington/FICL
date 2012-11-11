@@ -1,0 +1,370 @@
+
+20120909,1454,+1000,Given_StaticDefinitions.gwt,running,6,in 6m 55s
+20120909,1454,+1000,Given_StaticDefinitions.gwt,succeeded,136,136ms
+20120909,1454,+1000,When_StaticDefinitions.gwt,running,3,
+20120909,1454,+1000,When_StaticDefinitions.gwt,succeeded,68,
+20120909,1454,+1000,Then_StaticDefinitions.gwt,running,2,
+20120909,1454,+1000,Then_StaticDefinitions.gwt,succeeded,80,
+20120909,1454,+1000,Setup.coffee,running,0,in 9s
+20120909,1454,+1000,Setup.coffee,succeeded,97,
+20120909,1454,+1000,Given_StaticDefinitions.gwt,running,3,
+20120909,1454,+1000,Given_StaticDefinitions.gwt,succeeded,46,
+20120909,1454,+1000,When_StaticDefinitions.gwt,running,7,
+20120909,1454,+1000,When_StaticDefinitions.gwt,succeeded,47,
+20120909,1454,+1000,Then_StaticDefinitions.gwt,running,2,
+20120909,1454,+1000,Then_StaticDefinitions.gwt,succeeded,63,
+20120909,1455,+1000,Setup.coffee,running,0,in 44s
+20120909,1455,+1000,Setup.coffee,succeeded,93,
+20120909,1455,+1000,Given_VariableDefinitions.gwt,running,3,
+20120909,1455,+1000,Given_VariableDefinitions.gwt,succeeded,110,110ms
+20120909,1455,+1000,When_VariableDefinitions.gwt,running,2,
+20120909,1455,+1000,When_VariableDefinitions.gwt,succeeded,79,
+20120909,1455,+1000,Then_VariableDefinitions.gwt,running,2,
+20120909,1455,+1000,Then_VariableDefinitions.gwt,failed,101,101ms
+20120909,1455,+1000,Setup.coffee,running,0,in 17s
+20120909,1455,+1000,Setup.coffee,succeeded,68,
+20120909,1455,+1000,Given_VariableDefinitions.gwt,running,2,
+20120909,1455,+1000,Given_VariableDefinitions.gwt,succeeded,98,
+20120909,1455,+1000,When_VariableDefinitions.gwt,running,2,
+20120909,1455,+1000,When_VariableDefinitions.gwt,succeeded,51,
+20120909,1455,+1000,Then_VariableDefinitions.gwt,running,5,
+20120909,1455,+1000,Then_VariableDefinitions.gwt,failed,60,
+20120909,1457,+1000,Setup.coffee,running,2,in 2m 5s
+20120909,1457,+1000,Setup.coffee,succeeded,87,
+20120909,1457,+1000,Given_StaticDefinitions.gwt,running,2,
+20120909,1457,+1000,Given_StaticDefinitions.gwt,succeeded,60,
+20120909,1457,+1000,When_StaticDefinitions.gwt,running,2,
+20120909,1457,+1000,When_StaticDefinitions.gwt,succeeded,48,
+20120909,1457,+1000,Then_StaticDefinitions.gwt,running,2,
+20120909,1457,+1000,Then_StaticDefinitions.gwt,succeeded,49,
+20120909,1458,+1000,Setup.coffee,running,1,in 1m 24s
+20120909,1458,+1000,Setup.coffee,succeeded,67,
+20120909,1458,+1000,Given_VariableDefinitions.gwt,running,3,
+20120909,1458,+1000,Given_VariableDefinitions.gwt,succeeded,91,
+20120909,1458,+1000,When_VariableDefinitions.gwt,running,2,
+20120909,1458,+1000,When_VariableDefinitions.gwt,succeeded,44,
+20120909,1458,+1000,Then_VariableDefinitions.gwt,running,10,
+20120909,1458,+1000,Then_VariableDefinitions.gwt,failed,68,
+20120909,1459,+1000,Setup.coffee,running,0,in 13s
+20120909,1459,+1000,Setup.coffee,succeeded,95,
+20120909,1459,+1000,Given_VariableDefinitions.gwt,running,7,
+20120909,1459,+1000,Given_VariableDefinitions.gwt,succeeded,117,117ms
+20120909,1459,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1459,+1000,When_VariableDefinitions.gwt,succeeded,45,
+20120909,1459,+1000,Then_VariableDefinitions.gwt,running,3,
+20120909,1459,+1000,Then_VariableDefinitions.gwt,failed,71,
+20120909,1541,+1000,Setup.coffee,running,627,627ms
+20120909,1541,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1541,+1000,Given_VariableDefinitions.gwt,running,20,
+20120909,1541,+1000,Given_VariableDefinitions.gwt,succeeded,259,259ms
+20120909,1541,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1541,+1000,When_VariableDefinitions.gwt,failed,249,249ms
+20120909,1542,+1000,Setup.coffee,running,1,in 1m 1s
+20120909,1542,+1000,Setup.coffee,succeeded,207,207ms
+20120909,1542,+1000,Given_VariableDefinitions.gwt,running,5,
+20120909,1542,+1000,Given_VariableDefinitions.gwt,succeeded,104,104ms
+20120909,1542,+1000,When_VariableDefinitions.gwt,running,4,
+20120909,1543,+1000,When_VariableDefinitions.gwt,failed,0,in 40s
+20120909,1544,+1000,Setup.coffee,running,476,476ms
+20120909,1544,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1544,+1000,Given_VariableDefinitions.gwt,running,21,
+20120909,1544,+1000,Given_VariableDefinitions.gwt,succeeded,187,187ms
+20120909,1544,+1000,When_VariableDefinitions.gwt,running,20,
+20120909,1544,+1000,When_VariableDefinitions.gwt,failed,215,215ms
+20120909,1545,+1000,Setup.coffee,running,0,in 48s
+20120909,1545,+1000,Setup.coffee,succeeded,107,107ms
+20120909,1545,+1000,Given_VariableDefinitions.gwt,running,5,
+20120909,1545,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 8s
+20120909,1545,+1000,When_VariableDefinitions.gwt,running,5,
+20120909,1545,+1000,When_VariableDefinitions.gwt,failed,86,
+20120909,1546,+1000,Setup.coffee,running,0,in 21s
+20120909,1546,+1000,Setup.coffee,succeeded,85,
+20120909,1546,+1000,Given_VariableDefinitions.gwt,running,6,
+20120909,1547,+1000,Given_VariableDefinitions.gwt,succeeded,1,in 1m 31s
+20120909,1547,+1000,When_VariableDefinitions.gwt,running,8,
+20120909,1547,+1000,When_VariableDefinitions.gwt,failed,63,
+20120909,1547,+1000,Setup.coffee,running,0,in 6s
+20120909,1547,+1000,Setup.coffee,succeeded,73,
+20120909,1547,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1548,+1000,Given_VariableDefinitions.gwt,succeeded,1,in 1m 16s
+20120909,1548,+1000,When_VariableDefinitions.gwt,running,5,
+20120909,1549,+1000,When_VariableDefinitions.gwt,failed,0,in 12s
+20120909,1549,+1000,Setup.coffee,running,0,in 20s
+20120909,1549,+1000,Setup.coffee,succeeded,90,
+20120909,1549,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1550,+1000,Given_VariableDefinitions.gwt,succeeded,1,in 1m 18s
+20120909,1550,+1000,When_VariableDefinitions.gwt,running,5,
+20120909,1550,+1000,When_VariableDefinitions.gwt,failed,0,in 1s
+20120909,1550,+1000,Setup.coffee,running,0,in 4s
+20120909,1550,+1000,Setup.coffee,succeeded,75,
+20120909,1550,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1552,+1000,Setup.coffee,running,441,441ms
+20120909,1552,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1552,+1000,Given_VariableDefinitions.gwt,running,36,
+20120909,1552,+1000,Given_VariableDefinitions.gwt,succeeded,202,202ms
+20120909,1552,+1000,When_VariableDefinitions.gwt,running,5,
+20120909,1552,+1000,When_VariableDefinitions.gwt,failed,287,287ms
+20120909,1553,+1000,Setup.coffee,running,0,in 57s
+20120909,1553,+1000,Setup.coffee,succeeded,110,110ms
+20120909,1553,+1000,Given_VariableDefinitions.gwt,running,5,
+20120909,1553,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 10s
+20120909,1553,+1000,When_VariableDefinitions.gwt,running,10,
+20120909,1554,+1000,When_VariableDefinitions.gwt,failed,0,in 43s
+20120909,1555,+1000,Setup.coffee,running,0,in 58s
+20120909,1555,+1000,Setup.coffee,succeeded,80,
+20120909,1555,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1555,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 4s
+20120909,1555,+1000,When_VariableDefinitions.gwt,running,7,
+20120909,1556,+1000,When_VariableDefinitions.gwt,failed,1,in 1m 17s
+20120909,1557,+1000,Setup.coffee,running,0,in 46s
+20120909,1557,+1000,Setup.coffee,succeeded,80,
+20120909,1557,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1601,+1000,Given_VariableDefinitions.gwt,succeeded,3,in 3m 29s
+20120909,1601,+1000,When_VariableDefinitions.gwt,running,5,
+20120909,1602,+1000,When_VariableDefinitions.gwt,failed,1,in 1m 19s
+20120909,1603,+1000,Setup.coffee,running,0,in 56s
+20120909,1603,+1000,Setup.coffee,succeeded,77,
+20120909,1603,+1000,Given_VariableDefinitions.gwt,running,3,
+20120909,1603,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 2s
+20120909,1603,+1000,When_VariableDefinitions.gwt,running,4,
+20120909,1603,+1000,When_VariableDefinitions.gwt,failed,361,361ms
+20120909,1609,+1000,Setup.coffee,running,620,620ms
+20120909,1609,+1000,Setup.coffee,succeeded,0,in 2s
+20120909,1609,+1000,Given_VariableDefinitions.gwt,running,24,
+20120909,1609,+1000,Given_VariableDefinitions.gwt,succeeded,246,246ms
+20120909,1609,+1000,When_VariableDefinitions.gwt,running,10,
+20120909,1609,+1000,When_VariableDefinitions.gwt,failed,993,993ms
+20120909,1611,+1000,Setup.coffee,running,2,in 2m 2s
+20120909,1611,+1000,Setup.coffee,succeeded,101,101ms
+20120909,1611,+1000,Given_VariableDefinitions.gwt,running,5,
+20120909,1611,+1000,Given_VariableDefinitions.gwt,succeeded,83,
+20120909,1611,+1000,When_VariableDefinitions.gwt,running,6,
+20120909,1612,+1000,When_VariableDefinitions.gwt,failed,0,in 43s
+20120909,1614,+1000,Setup.coffee,running,482,482ms
+20120909,1614,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1614,+1000,Given_VariableDefinitions.gwt,running,21,
+20120909,1614,+1000,Given_VariableDefinitions.gwt,succeeded,212,212ms
+20120909,1614,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1614,+1000,When_VariableDefinitions.gwt,failed,253,253ms
+20120909,1615,+1000,Setup.coffee,running,1,in 1m 1s
+20120909,1615,+1000,Setup.coffee,succeeded,125,125ms
+20120909,1615,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1615,+1000,Given_VariableDefinitions.gwt,succeeded,69,
+20120909,1615,+1000,When_VariableDefinitions.gwt,running,5,
+20120909,1617,+1000,When_VariableDefinitions.gwt,failed,1,in 1m 8s
+20120909,1628,+1000,Setup.coffee,running,435,435ms
+20120909,1628,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1628,+1000,Given_VariableDefinitions.gwt,running,25,
+20120909,1628,+1000,Given_VariableDefinitions.gwt,succeeded,196,196ms
+20120909,1628,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1628,+1000,When_VariableDefinitions.gwt,failed,212,212ms
+20120909,1628,+1000,Setup.coffee,running,0,in 13s
+20120909,1628,+1000,Setup.coffee,succeeded,85,
+20120909,1628,+1000,Given_StaticDefinitions.gwt,running,3,
+20120909,1628,+1000,Given_StaticDefinitions.gwt,succeeded,60,
+20120909,1628,+1000,When_StaticDefinitions.gwt,running,4,
+20120909,1628,+1000,When_StaticDefinitions.gwt,succeeded,64,
+20120909,1628,+1000,Then_StaticDefinitions.gwt,running,3,
+20120909,1628,+1000,Then_StaticDefinitions.gwt,succeeded,65,
+20120909,1628,+1000,Setup.coffee,running,0,in 9s
+20120909,1628,+1000,Setup.coffee,succeeded,95,
+20120909,1628,+1000,Given_VariableDefinitions.gwt,running,9,
+20120909,1628,+1000,Given_VariableDefinitions.gwt,succeeded,65,
+20120909,1628,+1000,When_VariableDefinitions.gwt,running,4,
+20120909,1628,+1000,When_VariableDefinitions.gwt,failed,60,
+20120909,1629,+1000,Setup.coffee,running,0,in 41s
+20120909,1629,+1000,Setup.coffee,succeeded,92,
+20120909,1629,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1629,+1000,Given_VariableDefinitions.gwt,succeeded,75,
+20120909,1629,+1000,When_VariableDefinitions.gwt,running,4,
+20120909,1629,+1000,When_VariableDefinitions.gwt,failed,48,
+20120909,1629,+1000,Setup.coffee,running,0,in 1s
+20120909,1629,+1000,Setup.coffee,succeeded,63,
+20120909,1629,+1000,Given_VariableDefinitions.gwt,running,5,
+20120909,1629,+1000,Given_VariableDefinitions.gwt,succeeded,80,
+20120909,1629,+1000,When_VariableDefinitions.gwt,running,6,
+20120909,1629,+1000,When_VariableDefinitions.gwt,failed,64,
+20120909,1630,+1000,Setup.coffee,running,0,in 50s
+20120909,1630,+1000,Setup.coffee,succeeded,72,
+20120909,1630,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1630,+1000,Given_VariableDefinitions.gwt,succeeded,57,
+20120909,1630,+1000,When_VariableDefinitions.gwt,running,8,
+20120909,1630,+1000,When_VariableDefinitions.gwt,failed,53,
+20120909,1630,+1000,Setup.coffee,running,0,in 10s
+20120909,1630,+1000,Setup.coffee,succeeded,151,151ms
+20120909,1630,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1630,+1000,Given_VariableDefinitions.gwt,succeeded,86,
+20120909,1630,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1630,+1000,When_VariableDefinitions.gwt,failed,91,
+20120909,1630,+1000,Setup.coffee,running,492,492ms
+20120909,1630,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1630,+1000,Given_VariableDefinitions.gwt,running,20,
+20120909,1630,+1000,Given_VariableDefinitions.gwt,succeeded,200,200ms
+20120909,1630,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1630,+1000,When_VariableDefinitions.gwt,failed,249,249ms
+20120909,1631,+1000,Setup.coffee,running,0,in 18s
+20120909,1631,+1000,Setup.coffee,succeeded,96,
+20120909,1631,+1000,Given_VariableDefinitions.gwt,running,3,
+20120909,1631,+1000,Given_VariableDefinitions.gwt,succeeded,61,
+20120909,1631,+1000,When_VariableDefinitions.gwt,running,6,
+20120909,1631,+1000,When_VariableDefinitions.gwt,failed,65,
+20120909,1631,+1000,Setup.coffee,running,0,in 25s
+20120909,1631,+1000,Setup.coffee,succeeded,80,
+20120909,1631,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1631,+1000,Given_VariableDefinitions.gwt,succeeded,58,
+20120909,1631,+1000,When_VariableDefinitions.gwt,running,8,
+20120909,1631,+1000,When_VariableDefinitions.gwt,failed,70,
+20120909,1632,+1000,Setup.coffee,running,0,in 30s
+20120909,1632,+1000,Setup.coffee,succeeded,87,
+20120909,1632,+1000,Given_VariableDefinitions.gwt,running,12,
+20120909,1632,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 47s
+20120909,1632,+1000,When_VariableDefinitions.gwt,running,5,
+20120909,1633,+1000,When_VariableDefinitions.gwt,failed,0,in 37s
+20120909,1633,+1000,Setup.coffee,running,0,in 24s
+20120909,1633,+1000,Setup.coffee,succeeded,83,
+20120909,1633,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1636,+1000,Setup.coffee,running,623,623ms
+20120909,1636,+1000,Setup.coffee,succeeded,0,in 2s
+20120909,1636,+1000,Given_VariableDefinitions.gwt,running,23,
+20120909,1636,+1000,Given_VariableDefinitions.gwt,succeeded,331,331ms
+20120909,1636,+1000,When_VariableDefinitions.gwt,running,10,
+20120909,1636,+1000,When_VariableDefinitions.gwt,failed,301,301ms
+20120909,1637,+1000,Setup.coffee,running,0,in 25s
+20120909,1637,+1000,Setup.coffee,succeeded,100,
+20120909,1637,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1638,+1000,Given_VariableDefinitions.gwt,succeeded,1,in 1m 30s
+20120909,1638,+1000,When_VariableDefinitions.gwt,running,7,
+20120909,1639,+1000,When_VariableDefinitions.gwt,succeeded,0,in 42s
+20120909,1639,+1000,Then_VariableDefinitions.gwt,running,4,
+20120909,1639,+1000,Then_VariableDefinitions.gwt,succeeded,110,110ms
+20120909,1640,+1000,Setup.coffee,running,503,503ms
+20120909,1640,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1640,+1000,Given_VariableDefinitions.gwt,running,26,
+20120909,1640,+1000,Given_VariableDefinitions.gwt,succeeded,219,219ms
+20120909,1640,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1640,+1000,When_VariableDefinitions.gwt,failed,219,219ms
+20120909,1640,+1000,Setup.coffee,running,0,in 6s
+20120909,1640,+1000,Setup.coffee,succeeded,106,106ms
+20120909,1640,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1640,+1000,Given_VariableDefinitions.gwt,succeeded,54,
+20120909,1640,+1000,When_VariableDefinitions.gwt,running,4,
+20120909,1640,+1000,When_VariableDefinitions.gwt,succeeded,74,
+20120909,1640,+1000,Then_VariableDefinitions.gwt,running,3,
+20120909,1640,+1000,Then_VariableDefinitions.gwt,succeeded,115,115ms
+20120909,1641,+1000,Setup.coffee,running,469,469ms
+20120909,1641,+1000,Setup.coffee,succeeded,0,in 2s
+20120909,1641,+1000,Given_VariableDefinitions.gwt,running,23,
+20120909,1641,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 19s
+20120909,1641,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1641,+1000,When_VariableDefinitions.gwt,failed,0,in 7s
+20120909,1642,+1000,Setup.coffee,running,527,527ms
+20120909,1642,+1000,Setup.coffee,succeeded,0,in 2s
+20120909,1642,+1000,Given_VariableDefinitions.gwt,running,22,
+20120909,1642,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 25s
+20120909,1642,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1643,+1000,When_VariableDefinitions.gwt,failed,0,in 37s
+20120909,1646,+1000,Setup.coffee,running,459,459ms
+20120909,1646,+1000,Setup.coffee,succeeded,0,in 2s
+20120909,1646,+1000,Given_VariableDefinitions.gwt,running,20,
+20120909,1646,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 11s
+20120909,1646,+1000,When_VariableDefinitions.gwt,running,4,
+20120909,1646,+1000,When_VariableDefinitions.gwt,succeeded,0,in 4s
+20120909,1646,+1000,Then_VariableDefinitions.gwt,running,4,
+20120909,1646,+1000,Then_VariableDefinitions.gwt,succeeded,107,107ms
+20120909,1653,+1000,Setup.coffee,running,467,467ms
+20120909,1653,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1653,+1000,Given_VariableDefinitions.gwt,running,17,
+20120909,1653,+1000,Given_VariableDefinitions.gwt,succeeded,199,199ms
+20120909,1653,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1653,+1000,When_VariableDefinitions.gwt,failed,191,191ms
+20120909,1940,+1000,Setup.coffee,running,167,in 2h 47m 23s
+20120909,1940,+1000,Setup.coffee,succeeded,126,126ms
+20120909,1940,+1000,Given_VariableDefinitions.gwt,running,7,
+20120909,1940,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 22s
+20120909,1940,+1000,When_VariableDefinitions.gwt,running,8,
+20120909,1941,+1000,When_VariableDefinitions.gwt,succeeded,1,in 1m 2s
+20120909,1941,+1000,Then_VariableDefinitions.gwt,running,4,
+20120909,1941,+1000,Then_VariableDefinitions.gwt,succeeded,55,
+20120909,1942,+1000,Setup.coffee,running,450,450ms
+20120909,1942,+1000,Setup.coffee,succeeded,0,in 2s
+20120909,1942,+1000,Given_VariableDefinitions.gwt,running,20,
+20120909,1942,+1000,Given_VariableDefinitions.gwt,succeeded,285,285ms
+20120909,1942,+1000,When_VariableDefinitions.gwt,running,8,
+20120909,1942,+1000,When_VariableDefinitions.gwt,failed,0,in 15s
+20120909,1942,+1000,Setup.coffee,running,0,in 12s
+20120909,1942,+1000,Setup.coffee,succeeded,80,
+20120909,1942,+1000,Given_VariableDefinitions.gwt,running,3,
+20120909,1942,+1000,Given_VariableDefinitions.gwt,succeeded,0,in 4s
+20120909,1942,+1000,When_VariableDefinitions.gwt,running,5,
+20120909,1942,+1000,When_VariableDefinitions.gwt,succeeded,0,in 1s
+20120909,1942,+1000,Then_VariableDefinitions.gwt,running,4,
+20120909,1942,+1000,Then_VariableDefinitions.gwt,succeeded,59,
+20120909,1946,+1000,Setup.coffee,running,529,529ms
+20120909,1946,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1946,+1000,Given_VariableDefinitions.gwt,running,22,
+20120909,1946,+1000,Given_VariableDefinitions.gwt,succeeded,318,318ms
+20120909,1946,+1000,When_VariableDefinitions.gwt,running,4,
+20120909,1949,+1000,Setup.coffee,running,548,548ms
+20120909,1949,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1949,+1000,Given_VariableDefinitions.gwt,running,28,
+20120909,1949,+1000,Given_VariableDefinitions.gwt,succeeded,243,243ms
+20120909,1949,+1000,When_VariableDefinitions.gwt,running,6,
+20120909,1949,+1000,Setup.coffee,running,0,in 7s
+20120909,1949,+1000,Setup.coffee,succeeded,103,103ms
+20120909,1949,+1000,Given_VariableDefinitions.gwt,running,3,
+20120909,1949,+1000,Given_VariableDefinitions.gwt,succeeded,79,
+20120909,1949,+1000,When_VariableDefinitions.gwt,running,10,
+20120909,1949,+1000,When_VariableDefinitions.gwt,succeeded,118,118ms
+20120909,1949,+1000,Then_VariableDefinitions.gwt,running,3,
+20120909,1949,+1000,Then_VariableDefinitions.gwt,succeeded,113,113ms
+20120909,1949,+1000,Setup.coffee,running,0,in 2s
+20120909,1949,+1000,Setup.coffee,succeeded,102,102ms
+20120909,1949,+1000,Given_VariableDefinitions.gwt,running,6,
+20120909,1949,+1000,Given_VariableDefinitions.gwt,succeeded,99,
+20120909,1949,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1949,+1000,When_VariableDefinitions.gwt,succeeded,54,
+20120909,1949,+1000,Then_VariableDefinitions.gwt,running,3,
+20120909,1949,+1000,Then_VariableDefinitions.gwt,succeeded,60,
+20120909,1950,+1000,Setup.coffee,running,443,443ms
+20120909,1950,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1950,+1000,Given_VariableDefinitions.gwt,running,25,
+20120909,1950,+1000,Given_VariableDefinitions.gwt,succeeded,225,225ms
+20120909,1950,+1000,When_VariableDefinitions.gwt,running,4,
+20120909,1954,+1000,Setup.coffee,running,433,433ms
+20120909,1954,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1954,+1000,Given_VariableDefinitions.gwt,running,20,
+20120909,1954,+1000,Given_VariableDefinitions.gwt,succeeded,243,243ms
+20120909,1954,+1000,When_VariableDefinitions.gwt,running,6,
+20120909,1954,+1000,When_VariableDefinitions.gwt,failed,217,217ms
+20120909,1955,+1000,Setup.coffee,running,598,598ms
+20120909,1955,+1000,Setup.coffee,succeeded,0,in 1s
+20120909,1955,+1000,Given_VariableDefinitions.gwt,running,20,
+20120909,1955,+1000,Given_VariableDefinitions.gwt,succeeded,202,202ms
+20120909,1955,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1955,+1000,When_VariableDefinitions.gwt,succeeded,132,132ms
+20120909,1955,+1000,Then_VariableDefinitions.gwt,running,5,
+20120909,1955,+1000,Then_VariableDefinitions.gwt,succeeded,206,206ms
+20120909,1955,+1000,Setup.coffee,running,0,in 4s
+20120909,1955,+1000,Setup.coffee,succeeded,136,136ms
+20120909,1955,+1000,Given_VariableDefinitions.gwt,running,4,
+20120909,1955,+1000,Given_VariableDefinitions.gwt,succeeded,157,157ms
+20120909,1955,+1000,When_VariableDefinitions.gwt,running,3,
+20120909,1955,+1000,When_VariableDefinitions.gwt,succeeded,117,117ms
+20120909,1955,+1000,Then_VariableDefinitions.gwt,running,23,
+20120909,1955,+1000,Then_VariableDefinitions.gwt,succeeded,166,166ms
+20120909,1956,+1000,Setup.coffee,running,0,in 24s
+20120909,1956,+1000,Setup.coffee,succeeded,99,
+20120909,1956,+1000,Given_StaticDefinitions.gwt,running,7,
+20120909,1956,+1000,Given_StaticDefinitions.gwt,succeeded,85,
+20120909,1956,+1000,When_StaticDefinitions.gwt,running,6,
+20120909,1956,+1000,When_StaticDefinitions.gwt,succeeded,98,
+20120909,1956,+1000,Then_StaticDefinitions.gwt,running,17,
+20120909,1956,+1000,Then_StaticDefinitions.gwt,succeeded,110,110ms
+20120909,1956,+1000,Setup.coffee,running,0,in 5s
+20120909,1956,+1000,Setup.coffee,succeeded,74,
+20120909,1956,+1000,Given_VariableDefinitions.gwt,running,2,
+20120909,1956,+1000,Given_VariableDefinitions.gwt,succeeded,56,
+20120909,1956,+1000,When_VariableDefinitions.gwt,running,2,
+20120909,1956,+1000,When_VariableDefinitions.gwt,succeeded,50,
+20120909,1956,+1000,Then_VariableDefinitions.gwt,running,4,
+20120909,1956,+1000,Then_VariableDefinitions.gwt,succeeded,92,

@@ -1,0 +1,68 @@
+<div id="pageTitle" class="editable" uuid="27d949db-3dfa-4037-b734-6994f3e940e9">
+ <h1> ;method</h1> 
+ <h2> &nbsp;</h2> 
+</div> 
+<div id="s1" class="editable section"><div class="pageType">
+	Feature</div>
+<div>
+	<em><strong>( -- | method class )</strong></em></div>
+<div>
+	&nbsp;</div>
+<div>
+	An immediate word that pulls the names of the method and class from the input stream and uses reflection to create a reference pointer. In run mode the pointer is placed in the stack to be executed with ;call.</div>
+<div>
+	&nbsp;</div>
+<div style="margin-left: 40px; ">
+	<code>;method methodName classNameOrReferenceOrInstance param-0 ... param-n ;</code></div>
+<div>
+	&nbsp;</div>
+<div>
+	<strong>methodName</strong>: as it is used in the native code-base.</div>
+<div>
+	<strong>classNameOrReferenceOrInstance</strong>: A fully qualified class name string or a reference to either the class or an instance of the class.</div>
+<div>
+	<strong>param-x</strong>: The parameter type for code-bases that require it. FICL defines&nbsp;<em>Object, Code, String, Number, Integer </em>and <em> Long</em>.</div>
+</div>
+<div id="s4" class="editable section Guide">
+ <div class="sectionType">
+   Guide
+ </div> 
+ <h2> <span>;method ( -- | method class )</span></h2> 
+ <p> &nbsp;</p> 
+ <div>
+   Push a reference to a method of a specified class onto the stack. Use ;call to call the method on an instance of the object.
+ </div> 
+ <div>
+   &nbsp;
+ </div> 
+ <div style="margin-left: 40px; "> 
+  <code>: &amp;.&nbsp;<strong><span style="background-color: rgb(255, 160, 122); ">;method</span></strong>&nbsp;print ;ficl ; ; constant</code>
+ </div> 
+ <div>
+   &nbsp;
+ </div> 
+ <div>
+   defines a word that pushes a reference to FICL.print() into the stack.
+ </div> 
+</div>
+<div id="s5" class="editable section synopsis Scenario"><div class="sectionType">
+	Scenario</div>
+<h2>
+	<span>The FICL print method<span class="givenWhenThen"> &nbsp;(<a class="usdlc sourceLink" href="Given_TheFICLPrintMethod.gwt" id="s5a0g" action="runnable">G</a><a class="usdlc sourceLink" href="When_TheFICLPrintMethod.gwt" id="s5a0w" action="runnable">W</a><a class="usdlc sourceLink" href="Then_TheFICLPrintMethod.gwt" id="s5a0t" action="runnable">T</a>)</span></span></h2>
+<p>
+	Specifying parameters is useful for calling native methods that do not know of the FICL stack.</p>
+</div><div id="s6" class="editable section synopsis Scenario"><div class="sectionType">
+	Scenario</div>
+<h2>
+	<span>Boolean conversion<span class="givenWhenThen"> &nbsp;(<a class="usdlc sourceLink" href="Given_BooleanConversion.gwt" id="s6a0g" action="runnable">G</a><a class="usdlc sourceLink" href="When_BooleanConversion.gwt" id="s6a0w" action="runnable">W</a><a class="usdlc sourceLink" href="Then_BooleanConversion.gwt" id="s6a0t" action="runnable">T</a>)</span></span></h2>
+<p>
+	Note the lower case <em>boolean</em>. This provides for unwrapping from Boolean to boolean in the parameter.</p>
+</div> 
+<div id="s2" class="editable section footer synopsis"> 
+ <div> 
+  <a class="usdlc" href=".." id="s2a3" action="page"> Parent</a> - 
+  <a class="usdlc" ,="" action="runnable" href="Setup.coffee">Setup</a> - 
+  <a class="usdlc changed" ,="" action="runnable" href="Instrument.coffee">Instrument</a> - 
+  <a href="javascript:usdlc.moreFooter()" id="s2a7">more...</a> 
+ </div> 
+</div>

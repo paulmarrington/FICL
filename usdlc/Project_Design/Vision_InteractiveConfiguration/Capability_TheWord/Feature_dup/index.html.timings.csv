@@ -1,0 +1,23 @@
+
+20120909,0910,+1000,Given_dup.gwt,running,10,in 10m 30s
+20120909,0910,+1000,Given_dup.gwt,succeeded,93,
+20120909,0910,+1000,When_dup.gwt,running,7,
+20120909,0910,+1000,When_dup.gwt,succeeded,80,
+20120909,0910,+1000,Then_dup.gwt,running,2,
+20120909,0910,+1000,Then_dup.gwt,succeeded,62,
+20120909,0910,+1000,Setup.coffee,running,0,in 13s
+20120909,0910,+1000,Setup.coffee,succeeded,207,207ms
+20120909,0910,+1000,Given_dup.gwt,running,2,
+20120909,0910,+1000,Given_dup.gwt,succeeded,84,
+20120909,0910,+1000,When_dup.gwt,running,2,
+20120909,0910,+1000,When_dup.gwt,succeeded,152,152ms
+20120909,0910,+1000,Then_dup.gwt,running,2,
+20120909,0910,+1000,Then_dup.gwt,failed,85,
+20120909,0910,+1000,Setup.coffee,running,0,in 13s
+20120909,0910,+1000,Setup.coffee,succeeded,61,
+20120909,0910,+1000,Given_dup.gwt,running,2,
+20120909,0910,+1000,Given_dup.gwt,succeeded,38,
+20120909,0910,+1000,When_dup.gwt,running,3,
+20120909,0910,+1000,When_dup.gwt,succeeded,38,
+20120909,0910,+1000,Then_dup.gwt,running,3,
+20120909,0910,+1000,Then_dup.gwt,succeeded,100,

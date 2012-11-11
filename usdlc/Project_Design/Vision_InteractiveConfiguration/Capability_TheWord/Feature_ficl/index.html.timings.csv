@@ -1,0 +1,82 @@
+
+20120829,2340,+1000,Given_CheckFICLAbortStatus.gwt,running,1458,in 24h 18m 35s
+20120829,2340,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,128,128ms
+20120829,2340,+1000,When_CheckFICLAbortStatus.gwt,running,2,
+20120829,2340,+1000,When_CheckFICLAbortStatus.gwt,succeeded,68,
+20120829,2340,+1000,Then_CheckFICLAbortStatus.gwt,running,3,
+20120829,2340,+1000,Then_CheckFICLAbortStatus.gwt,succeeded,56,
+20120829,2340,+1000,Setup.coffee,running,0,in 34s
+20120829,2340,+1000,Setup.coffee,succeeded,78,
+20120829,2340,+1000,Given_CheckFICLAbortStatus.gwt,running,3,
+20120829,2340,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,42,
+20120829,2340,+1000,When_CheckFICLAbortStatus.gwt,running,3,
+20120829,2340,+1000,When_CheckFICLAbortStatus.gwt,succeeded,40,
+20120829,2340,+1000,Then_CheckFICLAbortStatus.gwt,running,2,
+20120829,2340,+1000,Then_CheckFICLAbortStatus.gwt,failed,47,
+20120829,2342,+1000,Setup.coffee,running,2,in 2m 9s
+20120829,2342,+1000,Setup.coffee,succeeded,74,
+20120829,2342,+1000,Given_CheckFICLAbortStatus.gwt,running,3,
+20120829,2342,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,40,
+20120829,2342,+1000,When_CheckFICLAbortStatus.gwt,running,3,
+20120829,2342,+1000,When_CheckFICLAbortStatus.gwt,succeeded,64,
+20120829,2342,+1000,Then_CheckFICLAbortStatus.gwt,running,4,
+20120829,2342,+1000,Then_CheckFICLAbortStatus.gwt,failed,84,
+20120830,2335,+1000,Setup.coffee,running,1432,in 23h 52m 21s
+20120830,2335,+1000,Setup.coffee,succeeded,72,
+20120830,2335,+1000,Given_CheckFICLAbortStatus.gwt,running,3,
+20120830,2335,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,52,
+20120830,2335,+1000,When_CheckFICLAbortStatus.gwt,running,2,
+20120830,2336,+1000,When_CheckFICLAbortStatus.gwt,succeeded,1,in 1m 5s
+20120830,2336,+1000,Then_CheckFICLAbortStatus.gwt,running,3,
+20120830,2336,+1000,Then_CheckFICLAbortStatus.gwt,failed,50,
+20120830,2336,+1000,Setup.coffee,running,0,in 30s
+20120830,2336,+1000,Setup.coffee,succeeded,54,
+20120830,2336,+1000,Given_CheckFICLAbortStatus.gwt,running,2,
+20120830,2336,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,32,
+20120830,2336,+1000,When_CheckFICLAbortStatus.gwt,running,3,
+20120830,2336,+1000,When_CheckFICLAbortStatus.gwt,succeeded,33,
+20120830,2336,+1000,Then_CheckFICLAbortStatus.gwt,running,2,
+20120830,2336,+1000,Then_CheckFICLAbortStatus.gwt,failed,36,
+20120830,2336,+1000,Setup.coffee,running,0,in 12s
+20120830,2336,+1000,Setup.coffee,succeeded,55,
+20120830,2336,+1000,Given_CheckFICLAbortStatus.gwt,running,2,
+20120830,2336,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,32,
+20120830,2336,+1000,When_CheckFICLAbortStatus.gwt,running,2,
+20120830,2340,+1000,Setup.coffee,running,56,
+20120830,2340,+1000,Setup.coffee,succeeded,0,in 1s
+20120830,2340,+1000,Given_CheckFICLAbortStatus.gwt,running,25,
+20120830,2340,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,144,144ms
+20120830,2340,+1000,When_CheckFICLAbortStatus.gwt,running,3,
+20120830,2340,+1000,When_CheckFICLAbortStatus.gwt,failed,147,147ms
+20120830,2341,+1000,Setup.coffee,running,492,492ms
+20120830,2341,+1000,Setup.coffee,succeeded,0,in 1s
+20120830,2341,+1000,Given_CheckFICLAbortStatus.gwt,running,23,
+20120830,2341,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,135,135ms
+20120830,2341,+1000,When_CheckFICLAbortStatus.gwt,running,4,
+20120830,2341,+1000,When_CheckFICLAbortStatus.gwt,succeeded,119,119ms
+20120830,2341,+1000,Then_CheckFICLAbortStatus.gwt,running,4,
+20120830,2341,+1000,Then_CheckFICLAbortStatus.gwt,failed,231,231ms
+20120830,2344,+1000,Setup.coffee,running,0,in 12s
+20120830,2344,+1000,Setup.coffee,succeeded,75,
+20120830,2344,+1000,Given_CheckFICLAbortStatus.gwt,running,2,
+20120830,2344,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,36,
+20120830,2344,+1000,When_CheckFICLAbortStatus.gwt,running,3,
+20120830,2344,+1000,When_CheckFICLAbortStatus.gwt,succeeded,77,
+20120830,2344,+1000,Then_CheckFICLAbortStatus.gwt,running,3,
+20120830,2344,+1000,Then_CheckFICLAbortStatus.gwt,failed,87,
+20120830,2344,+1000,Setup.coffee,running,0,in 13s
+20120830,2344,+1000,Setup.coffee,succeeded,72,
+20120830,2344,+1000,Given_CheckFICLAbortStatus.gwt,running,4,
+20120830,2344,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,39,
+20120830,2344,+1000,When_CheckFICLAbortStatus.gwt,running,2,
+20120830,2344,+1000,When_CheckFICLAbortStatus.gwt,succeeded,36,
+20120830,2344,+1000,Then_CheckFICLAbortStatus.gwt,running,2,
+20120830,2344,+1000,Then_CheckFICLAbortStatus.gwt,succeeded,56,
+20120831,0022,+1000,Setup.coffee,running,38,in 38m 16s
+20120831,0022,+1000,Setup.coffee,succeeded,119,119ms
+20120831,0022,+1000,Given_CheckFICLAbortStatus.gwt,running,3,
+20120831,0022,+1000,Given_CheckFICLAbortStatus.gwt,succeeded,118,118ms
+20120831,0022,+1000,When_CheckFICLAbortStatus.gwt,running,52,
+20120831,0022,+1000,When_CheckFICLAbortStatus.gwt,succeeded,62,
+20120831,0022,+1000,Then_CheckFICLAbortStatus.gwt,running,2,
+20120831,0022,+1000,Then_CheckFICLAbortStatus.gwt,succeeded,86,

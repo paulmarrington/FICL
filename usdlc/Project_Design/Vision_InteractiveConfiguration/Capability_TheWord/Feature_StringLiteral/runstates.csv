@@ -1,0 +1,6 @@
+When_StringLiteral.gwt,succeeded
+Then_StringLiteral.gwt,succeeded
+Given_StringLiteral.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+gwtDSL.coffee,succeeded

@@ -1,0 +1,6 @@
+Then_DefineANewWord.gwt,succeeded
+When_DefineANewWord.gwt,succeeded
+Given_DefineANewWord.gwt,succeeded
+Instrument.coffee,succeeded
+Setup.coffee,succeeded
+gwtDSL.coffee,succeeded
