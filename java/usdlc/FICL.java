@@ -1,12 +1,7 @@
 package usdlc;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.nio.CharBuffer;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.ArrayList;
@@ -15,7 +10,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 @SuppressWarnings({"NonStaticInnerClassInSecureContext",
-	"PackageVisibleField","rawtypes","AutoUnboxing","UnusedDeclaration"})
+	"PackageVisibleField","rawtypes","AutoUnboxing"})
 public class FICL {
 	private static final int RUNNING_WORD_STACK_DEPTH = 32;
 	private static final int COMPILING_STACK_DEPTH = 16;
@@ -30,28 +25,9 @@ public class FICL {
 
 	public FICL() { init(); }
 
-	public boolean load(String resource) {
-		InputStream stream = getClass().getResourceAsStream(resource);
-		if (stream == null) {
-			abort("No resource,"+resource);
-			return false;
-		}
-		try {
-			BufferedReader reader =
-				new BufferedReader(new InputStreamReader(stream));
-			CharBuffer buffer = CharBuffer.allocate(1024);
-			reader.read(buffer);
-			run(buffer.toString());
-		} catch (IOException e) {
-			abort(resource, e);
-		}
-		return abort;
-	}
-
 	/**
 	 * Compile FORTH code. No execution, but a call to run afterwards will
-	 * run the
-	 * code just compiled.
+	 * run the code just compiled.
 	 */
 	public boolean compile(String sourceToCompile) {
 		isCompileMode = true;
@@ -161,33 +137,6 @@ public class FICL {
 		return true;
 	}
 
-	private Object fetchWordContents(String name) {
-		if (!dictionary.containsKey(name)) return null;
-		// call runtime to retrieve contents
-		run(name, dictionary.get(name).actor);
-		return stack.pop();
-	}
-
-	/**
-	 * Look for a word that returns a class or instance. If not,
-	 * use name to look
-	 * up class directly using reflection.
-	 */
-	private Class fetchClass(String name) {
-		Object javaClass = fetchWordContents(name);
-		if (javaClass == null) {
-			try {
-				javaClass = Class.forName(name);
-			} catch (ClassNotFoundException e) {
-				abort("fetchClass," + name, e); return null;
-			}
-		}
-		if (!(javaClass instanceof Class)) {
-			javaClass = javaClass.getClass();
-		}
-		return (Class) javaClass;
-	}
-
 	public class Stack {
 		@SuppressWarnings("InnerClassFieldHidesOuterClassField")
 		Object[] stack;
@@ -224,8 +173,6 @@ public class FICL {
 			return 0;
 		}
 
-		public boolean  popBoolean() { return popInt() != 0; }
-
 		Object[] popObjectArray(int items) {
 			Object[] argv = new Object[items];
 			if (items > 0)
@@ -235,8 +182,6 @@ public class FICL {
 				} catch (Exception e) { abort("pop parameters", e); }
 			return argv;
 		}
-
-		public void pushInt(int value) { push(value); }
 	}
 
 	private void compileWord(CompiledWord word) { compiling.add(word); }
@@ -255,7 +200,6 @@ public class FICL {
 		public String name, source = "";
 		public Runnable actor;
 		public boolean immediate = false, variable = false;
-		public int order = FICL.order++;
 
 		CompiledWord(String name, Runnable actor) {
 			this.name = this.source = name;
@@ -266,7 +210,6 @@ public class FICL {
 			catch (Exception e) {abort("run", e);}
 		}
 	}
-	public static int order = 0;
 
 	private class ImmediateWord extends CompiledWord {
 		ImmediateWord(String name, Runnable actor) {
@@ -285,7 +228,6 @@ public class FICL {
 	}
 
 	private class WordOfWords implements Runnable {
-		public final String name = compilingWord;
 		private CompiledWord[] words = compiling
 			.toArray(new CompiledWord[compiling.size()]);
 
@@ -302,43 +244,6 @@ public class FICL {
 				if (jumpTo != 0) runPointer = jumpTo;
 				jumpTo = 0;
 			}
-		}
-	}
-
-	private class Method extends ImmediateWord {
-		java.lang.reflect.Method method = null;
-		boolean isVoidReturn = true;
-		Class[] parameters = null;
-
-		public Method() {
-			super(null, null);
-			try {
-				String methodName = getWord();
-				String className = getWord();
-				name = className + '.' + methodName;
-
-				Class javaClass = fetchClass(className);
-				ArrayList<Class> pcal = new ArrayList<Class>(8);
-				while (true) {
-					String parameterClass = getWord();
-					if (parameterClass.equals(";")) break;
-					pcal.add(fetchClass(parameterClass));
-				}
-				parameters = pcal.toArray(new Class[pcal.size()]);
-				method = javaClass.getMethod(methodName, parameters);
-				isVoidReturn = method.getReturnType().equals(Void.TYPE);
-				actor = new Runnable() {
-					public void run() {
-						try {
-							Object instance = stack.pop();
-							int argc = parameters.length;
-							Object[] pms = stack.popObjectArray(argc);
-							Object result = method.invoke(instance, pms);
-							if (!isVoidReturn) stack.push(result);
-						} catch (Exception e) { abort("Method,run," + name, e); }
-					}
-				};
-			} catch (Exception e) { abort("Method,compile," + name, e); }
 		}
 	}
 
@@ -644,8 +549,4 @@ public class FICL {
 		return count;
 	}
 	private Random random = new Random();
-
-	public boolean testBooleanCall(boolean value) {
-		return value;
-	}
 }

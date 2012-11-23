@@ -188,3 +188,11 @@
 20121124,0907,+1100,When_dec.gwt,succeeded,36,
 20121124,0907,+1100,Then_dec.gwt,running,2,
 20121124,0907,+1100,Then_dec.gwt,succeeded,47,
+20121124,0936,+1100,Setup.coffee,running,29,in 29m 2s
+20121124,0936,+1100,Setup.coffee,succeeded,42,
+20121124,0936,+1100,Given_plus (+).gwt,running,1,
+20121124,0936,+1100,Given_plus (+).gwt,succeeded,31,
+20121124,0936,+1100,When_plus (+).gwt,running,2,
+20121124,0936,+1100,When_plus (+).gwt,succeeded,42,
+20121124,0936,+1100,Then_plus (+).gwt,running,2,
+20121124,0936,+1100,Then_plus (+).gwt,succeeded,32,
