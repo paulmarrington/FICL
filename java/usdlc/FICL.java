@@ -442,70 +442,6 @@ public class FICL {
 				dictionary.put(lastDefinition, compiledWord);
 			}
 		});
-		extend(";call", new Runnable() {
-			public void run() {
-				Object compiledWord = stack.pop();
-				((CompiledWord) compiledWord).run();
-			}
-		});
-		immediate(";class", new Runnable() {
-			public void run() {
-				String name = getWord();
-				try {
-					compilePushWord(name, Class.forName(name));
-				} catch (Exception e) {
-					abort(";class," + name, e);
-				}
-			}
-		});
-		immediate(";field", new Runnable() {
-			public void run() {
-				final String fieldName = getWord();
-				final String className = getWord();
-				String name = className + '.' + fieldName;
-				try {
-					Class javaClass = fetchClass(className);
-					final Field field = javaClass.getField(fieldName);
-					compilePushWord(name, field);
-				} catch (Exception e) {
-					abort(";field," + name, e);
-				}
-			}
-		});
-		extend(";get", new Runnable() {
-			public void run() {
-				try {
-					Field field = (Field) stack.pop();
-					Object instance = stack.pop();
-					stack.push(field.get(instance));
-				} catch (Exception e) { abort(";get", e); }
-			}
-		});
-		extend(";set", new Runnable() {
-			public void run() {
-				Field field = (Field) stack.pop();
-				Object instance = stack.pop();
-				Object to = stack.pop();
-				try { field.set(instance, to); } catch (Exception e) {
-					abort(";set," + field.toString() + ',' + to, e);
-				}
-			}
-		});
-		immediate(";method", new Runnable() {
-			public void run() {
-				compilePushWord(";method", new Method());
-			}
-		});
-		immediate(";get-word", new Runnable() {
-			public void run() {
-				// gets it when an immediate word runs
-				compileWord(";get-word", new Runnable() {
-					public void run() {
-						stack.push(getWord());
-					}
-				});
-			}
-		});
 		immediate("(", new Runnable() {
 			public void run() {
 				sourcePointer = source.indexOf(')', sourcePointer) + 1;
@@ -701,12 +637,6 @@ public class FICL {
 				}
 			}
 		});
-		pushExtend("Code", CompiledWord.class);
-		pushExtend("Integer", Integer.class);
-		pushExtend("Long", Long.class);
-		pushExtend("Number", Number.class);
-		pushExtend("boolean", boolean.class);
-		pushExtend("Object", Object.class);
 	}
 
 	private String getQuotedString() {

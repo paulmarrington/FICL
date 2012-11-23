@@ -1,5 +1,0 @@
-: Object ( -- c1 ) ;class java.lang.Object ; constant
-: Number ( -- c1 ) ;class java.lang.Number ; constant
-: Long ( -- c1 ) ;class java.lang.Long ; constant
-: Integer ( -- c1 ) ;class java.lang.Integer ; constant
-: Code ( -- c1 ) ;class usdlc.FICL$CompiledWord ; constant
