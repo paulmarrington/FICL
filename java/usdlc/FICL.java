@@ -6,17 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.lang.reflect.Field;
 import java.nio.CharBuffer;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 import java.util.Random;
-import java.util.regex.Pattern;
 
 @SuppressWarnings({"NonStaticInnerClassInSecureContext",
 	"PackageVisibleField","rawtypes","AutoUnboxing","UnusedDeclaration"})
@@ -219,7 +215,7 @@ public class FICL {
 			try {
 				int value = 0;
 				if (object instanceof Boolean) {
-					value = ((Boolean)object).booleanValue() ? 1 : 0;
+					if ((Boolean) object) value = 1;
 				} else {
 					value = ((Number) object).intValue();
 				}
@@ -346,17 +342,6 @@ public class FICL {
 		}
 	}
 
-	/**
-	 * Make sure further code cannot access other native instances by reflection.
-	 */
-	public void sandbox() {
-		Iterator iterator = dictionary.entrySet().iterator();
-		while (iterator.hasNext()) {
-			String key = ((Entry) iterator.next()).getKey().toString();
-			if ((key.length() > 1) && (key.charAt(0) == ';')) iterator.remove();
-		}
-	}
-
 	private int jumpTo = 0;
 
 	private final NumberFormat numberParser = NumberFormat.getInstance();
@@ -400,9 +385,6 @@ public class FICL {
 	public void extend(String name, Runnable actor) {
 		dictionary.put(name, new CompiledWord(name, actor));
 	}
-	public void pushExtend(String name, final Object value) {
-		dictionary.put(name, compiledPushWord(name, value));
-	}
 	public CompiledWord compiledPushWord(String name, final Object value) {
 		return new CompiledWord(name, new Runnable() {
 			public void run() {
@@ -418,7 +400,6 @@ public class FICL {
 	}
 	////////////////////////////////////////////////////////
 	private void init() {
-		pushExtend(";ficl", FICL.this);
 		immediate(":", new Runnable() {
 			public void run() {
 				secondStack.push(compilingWord);
@@ -436,6 +417,7 @@ public class FICL {
 				compiledWord.source =
 					source.substring(start, sourcePointer);
 
+				//noinspection unchecked
 				compiling = (Collection<CompiledWord>) compilingStack.pop();
 				lastDefinition = compilingWord;
 				compilingWord = (String) secondStack.pop();
