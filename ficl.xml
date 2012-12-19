@@ -113,7 +113,7 @@
     <target name="compile.module.ficl.production" description="Compile module FICL; production classes">
         <mkdir dir="${ficl.output.dir}"/>
         <javac destdir="${ficl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
-               memorymaximumsize="${compiler.max.memory}" fork="true">
+               memorymaximumsize="${compiler.max.memory}" fork="true" target="1.3" source="1.3">
             <compilerarg line="${compiler.args.ficl}"/>
             <bootclasspath refid="ficl.module.bootclasspath"/>
             <classpath refid="ficl.module.production.classpath"/>
