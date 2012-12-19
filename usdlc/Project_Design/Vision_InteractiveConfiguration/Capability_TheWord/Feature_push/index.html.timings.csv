@@ -99,3 +99,11 @@
 20120909,1439,+1000,When_push.gwt,succeeded,54,
 20120909,1439,+1000,Then_push.gwt,running,3,
 20120909,1439,+1000,Then_push.gwt,succeeded,178,178ms
+20121219,1911,+1000,Setup.coffee,running,0,in 5s
+20121219,1911,+1000,Setup.coffee,succeeded,83,
+20121219,1911,+1000,Given_push.gwt,running,2,
+20121219,1911,+1000,Given_push.gwt,succeeded,68,
+20121219,1911,+1000,When_push.gwt,running,2,
+20121219,1911,+1000,When_push.gwt,succeeded,51,
+20121219,1911,+1000,Then_push.gwt,running,2,
+20121219,1911,+1000,Then_push.gwt,failed,69,

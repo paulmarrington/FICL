@@ -19,3 +19,4 @@ Given_NumericNotFalse.gwt,succeeded
 When_NumericNotFalse.gwt,succeeded
 Then_NumericNotFalse.gwt,succeeded
 gwtDSL.coffee,succeeded
+,succeeded

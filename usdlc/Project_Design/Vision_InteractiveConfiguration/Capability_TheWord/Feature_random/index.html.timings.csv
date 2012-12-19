@@ -13,3 +13,11 @@
 20120909,1447,+1000,When_random.gwt,succeeded,70,
 20120909,1447,+1000,Then_random.gwt,running,11,
 20120909,1447,+1000,Then_random.gwt,succeeded,49,
+20121219,1913,+1000,Setup.coffee,running,2,in 2m 26s
+20121219,1913,+1000,Setup.coffee,succeeded,83,
+20121219,1913,+1000,Given_random.gwt,running,2,
+20121219,1913,+1000,Given_random.gwt,succeeded,53,
+20121219,1913,+1000,When_random.gwt,running,2,
+20121219,1913,+1000,When_random.gwt,succeeded,52,
+20121219,1913,+1000,Then_random.gwt,running,2,
+20121219,1913,+1000,Then_random.gwt,succeeded,64,

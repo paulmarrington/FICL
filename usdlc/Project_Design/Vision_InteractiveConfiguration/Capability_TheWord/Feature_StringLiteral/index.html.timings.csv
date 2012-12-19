@@ -13,3 +13,11 @@
 20120908,2155,+1000,When_StringLiteral.gwt,succeeded,69,
 20120908,2155,+1000,Then_StringLiteral.gwt,running,2,
 20120908,2155,+1000,Then_StringLiteral.gwt,succeeded,97,
+20121219,1914,+1000,Setup.coffee,running,0,in 5s
+20121219,1914,+1000,Setup.coffee,succeeded,71,
+20121219,1914,+1000,Given_StringLiteral.gwt,running,2,
+20121219,1914,+1000,Given_StringLiteral.gwt,succeeded,41,
+20121219,1914,+1000,When_StringLiteral.gwt,running,2,
+20121219,1914,+1000,When_StringLiteral.gwt,succeeded,43,
+20121219,1914,+1000,Then_StringLiteral.gwt,running,2,
+20121219,1914,+1000,Then_StringLiteral.gwt,succeeded,45,

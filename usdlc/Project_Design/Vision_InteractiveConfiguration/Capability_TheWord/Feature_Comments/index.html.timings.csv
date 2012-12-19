@@ -77,3 +77,19 @@
 20120908,2145,+1000,When_CommentToEndOfLine.gwt,succeeded,525,525ms
 20120908,2145,+1000,Then_CommentToEndOfLine.gwt,running,3,
 20120908,2145,+1000,Then_CommentToEndOfLine.gwt,succeeded,338,338ms
+20121219,1905,+1000,Setup.coffee,running,0,in 5s
+20121219,1905,+1000,Setup.coffee,succeeded,76,
+20121219,1905,+1000,Given_InLineComments.gwt,running,2,
+20121219,1905,+1000,Given_InLineComments.gwt,succeeded,47,
+20121219,1905,+1000,When_InLineComments.gwt,running,1,
+20121219,1905,+1000,When_InLineComments.gwt,succeeded,50,
+20121219,1905,+1000,Then_InLineComments.gwt,running,2,
+20121219,1905,+1000,Then_InLineComments.gwt,succeeded,56,
+20121219,1905,+1000,Setup.coffee,running,0,in 4s
+20121219,1905,+1000,Setup.coffee,succeeded,64,
+20121219,1905,+1000,Given_CommentToEndOfLine.gwt,running,2,
+20121219,1905,+1000,Given_CommentToEndOfLine.gwt,succeeded,61,
+20121219,1905,+1000,When_CommentToEndOfLine.gwt,running,2,
+20121219,1905,+1000,When_CommentToEndOfLine.gwt,succeeded,86,
+20121219,1905,+1000,Then_CommentToEndOfLine.gwt,running,3,
+20121219,1905,+1000,Then_CommentToEndOfLine.gwt,succeeded,63,

@@ -21,3 +21,11 @@
 20120909,0832,+1000,When_Print.gwt,succeeded,101,101ms
 20120909,0832,+1000,Then_Print.gwt,running,7,
 20120909,0832,+1000,Then_Print.gwt,succeeded,151,151ms
+20121219,1911,+1000,Setup.coffee,running,0,in 33s
+20121219,1911,+1000,Setup.coffee,succeeded,76,
+20121219,1911,+1000,Given_Print.gwt,running,2,
+20121219,1911,+1000,Given_Print.gwt,succeeded,50,
+20121219,1911,+1000,When_Print.gwt,running,3,
+20121219,1911,+1000,When_Print.gwt,succeeded,75,
+20121219,1911,+1000,Then_Print.gwt,running,2,
+20121219,1911,+1000,Then_Print.gwt,succeeded,67,

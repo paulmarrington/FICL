@@ -1,6 +1,8 @@
-Then_CompileTime.gwt,succeeded
+Then_CompileTime.gwt,changed
 When_CompileTime.gwt,succeeded
 Given_CompileTime.gwt,succeeded
 Instrument.coffee,succeeded
 Setup.coffee,succeeded
 gwtDSL.coffee,succeeded
+,succeeded
+,succeeded

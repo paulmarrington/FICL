@@ -236,3 +236,69 @@
 20121219,1644,+1000,When_plus (+).gwt,succeeded,199,199ms
 20121219,1644,+1000,Then_plus (+).gwt,running,4,
 20121219,1644,+1000,Then_plus (+).gwt,succeeded,352,352ms
+20121219,1812,+1000,Setup.coffee,running,569,569ms
+20121219,1812,+1000,Setup.coffee,succeeded,0,in 1s
+20121219,1812,+1000,Given_plus (+).gwt,running,139,139ms
+20121219,1812,+1000,Given_plus (+).gwt,succeeded,332,332ms
+20121219,1812,+1000,When_plus (+).gwt,running,4,
+20121219,1812,+1000,When_plus (+).gwt,failed,406,406ms
+20121219,1855,+1000,Setup.coffee,running,42,in 42m 30s
+20121219,1855,+1000,Setup.coffee,succeeded,96,
+20121219,1855,+1000,Given_plus (+).gwt,running,4,
+20121219,1855,+1000,Given_plus (+).gwt,succeeded,64,
+20121219,1855,+1000,When_plus (+).gwt,running,3,
+20121219,1855,+1000,When_plus (+).gwt,failed,0,in 45s
+20121219,1858,+1000,Setup.coffee,running,2,in 2m 23s
+20121219,1858,+1000,Setup.coffee,succeeded,77,
+20121219,1858,+1000,Given_plus (+).gwt,running,3,
+20121219,1858,+1000,Given_plus (+).gwt,succeeded,51,
+20121219,1858,+1000,When_plus (+).gwt,running,5,
+20121219,1859,+1000,When_plus (+).gwt,failed,1,in 1m 25s
+20121219,1902,+1000,Setup.coffee,running,515,515ms
+20121219,1902,+1000,Setup.coffee,succeeded,0,in 2s
+20121219,1902,+1000,Given_plus (+).gwt,running,24,
+20121219,1902,+1000,Given_plus (+).gwt,succeeded,429,429ms
+20121219,1902,+1000,When_plus (+).gwt,running,4,
+20121219,1902,+1000,When_plus (+).gwt,succeeded,279,279ms
+20121219,1902,+1000,Then_plus (+).gwt,running,6,
+20121219,1902,+1000,Then_plus (+).gwt,succeeded,309,309ms
+20121219,1902,+1000,Setup.coffee,running,0,in 6s
+20121219,1902,+1000,Setup.coffee,succeeded,101,101ms
+20121219,1902,+1000,Given_minus (-).gwt,running,4,
+20121219,1902,+1000,Given_minus (-).gwt,succeeded,308,308ms
+20121219,1902,+1000,When_minus (-).gwt,running,3,
+20121219,1902,+1000,When_minus (-).gwt,succeeded,281,281ms
+20121219,1902,+1000,Then_minus (-).gwt,running,33,
+20121219,1902,+1000,Then_minus (-).gwt,succeeded,276,276ms
+20121219,1902,+1000,Setup.coffee,running,0,in 5s
+20121219,1902,+1000,Setup.coffee,succeeded,83,
+20121219,1902,+1000,Given_Multiply (*).gwt,running,3,
+20121219,1902,+1000,Given_Multiply (*).gwt,succeeded,118,118ms
+20121219,1902,+1000,When_Multiply (*).gwt,running,3,
+20121219,1902,+1000,When_Multiply (*).gwt,succeeded,124,124ms
+20121219,1902,+1000,Then_Multiply (*).gwt,running,4,
+20121219,1902,+1000,Then_Multiply (*).gwt,succeeded,142,142ms
+20121219,1902,+1000,Setup.coffee,running,0,in 2s
+20121219,1902,+1000,Setup.coffee,succeeded,83,
+20121219,1902,+1000,Given_Divide.gwt,running,3,
+20121219,1902,+1000,Given_Divide.gwt,succeeded,99,
+20121219,1902,+1000,When_Divide.gwt,running,3,
+20121219,1902,+1000,When_Divide.gwt,succeeded,108,108ms
+20121219,1902,+1000,Then_Divide.gwt,running,7,
+20121219,1902,+1000,Then_Divide.gwt,succeeded,167,167ms
+20121219,1902,+1000,Setup.coffee,running,0,in 3s
+20121219,1902,+1000,Setup.coffee,succeeded,74,
+20121219,1902,+1000,Given_dec.gwt,running,2,
+20121219,1902,+1000,Given_dec.gwt,succeeded,82,
+20121219,1902,+1000,When_dec.gwt,running,3,
+20121219,1902,+1000,When_dec.gwt,succeeded,94,
+20121219,1902,+1000,Then_dec.gwt,running,3,
+20121219,1902,+1000,Then_dec.gwt,succeeded,121,121ms
+20121219,1902,+1000,Setup.coffee,running,0,in 4s
+20121219,1902,+1000,Setup.coffee,succeeded,87,
+20121219,1902,+1000,Given_inc.gwt,running,9,
+20121219,1902,+1000,Given_inc.gwt,succeeded,105,105ms
+20121219,1902,+1000,When_inc.gwt,running,5,
+20121219,1902,+1000,When_inc.gwt,succeeded,107,107ms
+20121219,1902,+1000,Then_inc.gwt,running,7,
+20121219,1902,+1000,Then_inc.gwt,succeeded,120,120ms

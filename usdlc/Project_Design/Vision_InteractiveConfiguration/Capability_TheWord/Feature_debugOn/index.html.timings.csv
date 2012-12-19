@@ -108,3 +108,11 @@
 20120910,1137,+1000,When_debug.gwt,succeeded,47,
 20120910,1137,+1000,Then_debug.gwt,running,2,
 20120910,1137,+1000,Then_debug.gwt,succeeded,168,168ms
+20121219,1905,+1000,Setup.coffee,running,0,in 7s
+20121219,1905,+1000,Setup.coffee,succeeded,91,
+20121219,1905,+1000,Given_debug.gwt,running,2,
+20121219,1905,+1000,Given_debug.gwt,succeeded,67,
+20121219,1905,+1000,When_debug.gwt,running,2,
+20121219,1905,+1000,When_debug.gwt,succeeded,71,
+20121219,1905,+1000,Then_debug.gwt,running,2,
+20121219,1905,+1000,Then_debug.gwt,succeeded,109,109ms

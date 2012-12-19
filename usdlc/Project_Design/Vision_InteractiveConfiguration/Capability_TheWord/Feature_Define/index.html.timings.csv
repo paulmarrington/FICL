@@ -35,3 +35,11 @@
 20120908,1500,+1000,When_DefineANewWord.gwt,succeeded,134,134ms
 20120908,1500,+1000,Then_DefineANewWord.gwt,running,3,
 20120908,1500,+1000,Then_DefineANewWord.gwt,succeeded,177,177ms
+20121219,1905,+1000,Setup.coffee,running,0,in 5s
+20121219,1905,+1000,Setup.coffee,succeeded,93,
+20121219,1905,+1000,Given_DefineANewWord.gwt,running,2,
+20121219,1905,+1000,Given_DefineANewWord.gwt,succeeded,58,
+20121219,1905,+1000,When_DefineANewWord.gwt,running,4,
+20121219,1906,+1000,When_DefineANewWord.gwt,succeeded,58,
+20121219,1906,+1000,Then_DefineANewWord.gwt,running,2,
+20121219,1906,+1000,Then_DefineANewWord.gwt,succeeded,108,108ms

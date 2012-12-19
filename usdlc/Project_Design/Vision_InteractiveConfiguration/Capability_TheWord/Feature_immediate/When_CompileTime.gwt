@@ -1,2 +1,2 @@
 we run the FICL statements ": debug ;get-word " on" = set-debuggingCompile ; immediate"
-and "debug on 1 . debug off 2 ."
+and "debug-compile 1 . 2 ."

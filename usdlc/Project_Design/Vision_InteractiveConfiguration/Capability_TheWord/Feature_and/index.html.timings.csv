@@ -69,3 +69,75 @@
 20120910,0852,+1000,When_NumericNotFalse.gwt,succeeded,102,102ms
 20120910,0852,+1000,Then_NumericNotFalse.gwt,running,4,
 20120910,0852,+1000,Then_NumericNotFalse.gwt,succeeded,89,
+20121219,1902,+1000,Setup.coffee,running,0,in 6s
+20121219,1902,+1000,Setup.coffee,succeeded,100,
+20121219,1902,+1000,Given_and.gwt,running,3,
+20121219,1902,+1000,Given_and.gwt,succeeded,59,
+20121219,1902,+1000,When_and.gwt,running,2,
+20121219,1902,+1000,When_and.gwt,succeeded,62,
+20121219,1902,+1000,Then_and.gwt,running,2,
+20121219,1902,+1000,Then_and.gwt,failed,81,
+20121219,1903,+1000,Setup.coffee,running,1,in 1m 6s
+20121219,1903,+1000,Setup.coffee,succeeded,74,
+20121219,1903,+1000,Given_and.gwt,running,3,
+20121219,1903,+1000,Given_and.gwt,succeeded,45,
+20121219,1903,+1000,When_and.gwt,running,3,
+20121219,1904,+1000,When_and.gwt,succeeded,64,
+20121219,1904,+1000,Then_and.gwt,running,2,
+20121219,1904,+1000,Then_and.gwt,failed,49,
+20121219,1904,+1000,Setup.coffee,running,0,in 19s
+20121219,1904,+1000,Setup.coffee,succeeded,202,202ms
+20121219,1904,+1000,Given_and.gwt,running,15,
+20121219,1904,+1000,Given_and.gwt,succeeded,113,113ms
+20121219,1904,+1000,When_and.gwt,running,2,
+20121219,1904,+1000,When_and.gwt,succeeded,100,
+20121219,1904,+1000,Then_and.gwt,running,3,
+20121219,1904,+1000,Then_and.gwt,succeeded,94,
+20121219,1904,+1000,Setup.coffee,running,0,in 29s
+20121219,1904,+1000,Setup.coffee,succeeded,92,
+20121219,1904,+1000,Given_or.gwt,running,8,
+20121219,1904,+1000,Given_or.gwt,succeeded,197,197ms
+20121219,1904,+1000,When_or.gwt,running,3,
+20121219,1904,+1000,When_or.gwt,succeeded,72,
+20121219,1904,+1000,Then_or.gwt,running,2,
+20121219,1904,+1000,Then_or.gwt,succeeded,72,
+20121219,1904,+1000,Setup.coffee,running,0,in 5s
+20121219,1904,+1000,Setup.coffee,succeeded,187,187ms
+20121219,1904,+1000,Given_BooleanNot.gwt,running,3,
+20121219,1904,+1000,Given_BooleanNot.gwt,succeeded,68,
+20121219,1904,+1000,When_BooleanNot.gwt,running,2,
+20121219,1904,+1000,When_BooleanNot.gwt,succeeded,106,106ms
+20121219,1904,+1000,Then_BooleanNot.gwt,running,3,
+20121219,1904,+1000,Then_BooleanNot.gwt,succeeded,83,
+20121219,1905,+1000,Setup.coffee,running,0,in 11s
+20121219,1905,+1000,Setup.coffee,succeeded,61,
+20121219,1905,+1000,Given_BooleanNot.gwt,running,2,
+20121219,1905,+1000,Given_BooleanNot.gwt,succeeded,37,
+20121219,1905,+1000,When_BooleanNot.gwt,running,2,
+20121219,1905,+1000,When_BooleanNot.gwt,succeeded,40,
+20121219,1905,+1000,Then_BooleanNot.gwt,running,2,
+20121219,1905,+1000,Then_BooleanNot.gwt,succeeded,40,
+20121219,1905,+1000,Setup.coffee,running,0,in 5s
+20121219,1905,+1000,Setup.coffee,succeeded,100,
+20121219,1905,+1000,Given_BooleanNotFalse.gwt,running,5,
+20121219,1905,+1000,Given_BooleanNotFalse.gwt,succeeded,71,
+20121219,1905,+1000,When_BooleanNotFalse.gwt,running,2,
+20121219,1905,+1000,When_BooleanNotFalse.gwt,succeeded,68,
+20121219,1905,+1000,Then_BooleanNotFalse.gwt,running,2,
+20121219,1905,+1000,Then_BooleanNotFalse.gwt,succeeded,69,
+20121219,1905,+1000,Setup.coffee,running,0,in 5s
+20121219,1905,+1000,Setup.coffee,succeeded,93,
+20121219,1905,+1000,Given_NumericNotTrue.gwt,running,6,
+20121219,1905,+1000,Given_NumericNotTrue.gwt,succeeded,83,
+20121219,1905,+1000,When_NumericNotTrue.gwt,running,2,
+20121219,1905,+1000,When_NumericNotTrue.gwt,succeeded,60,
+20121219,1905,+1000,Then_NumericNotTrue.gwt,running,1,
+20121219,1905,+1000,Then_NumericNotTrue.gwt,succeeded,63,
+20121219,1905,+1000,Setup.coffee,running,0,in 2s
+20121219,1905,+1000,Setup.coffee,succeeded,53,
+20121219,1905,+1000,Given_NumericNotFalse.gwt,running,3,
+20121219,1905,+1000,Given_NumericNotFalse.gwt,succeeded,64,
+20121219,1905,+1000,When_NumericNotFalse.gwt,running,2,
+20121219,1905,+1000,When_NumericNotFalse.gwt,succeeded,46,
+20121219,1905,+1000,Then_NumericNotFalse.gwt,running,2,
+20121219,1905,+1000,Then_NumericNotFalse.gwt,succeeded,48,

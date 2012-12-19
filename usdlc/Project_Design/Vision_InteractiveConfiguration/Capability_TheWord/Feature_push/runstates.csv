@@ -1,6 +1,6 @@
 Given_push.gwt,succeeded
 When_push.gwt,succeeded
-Then_push.gwt,succeeded
+Then_push.gwt,failed
 Instrument.coffee,succeeded
 Setup.coffee,succeeded
 gwtDSL.coffee,succeeded

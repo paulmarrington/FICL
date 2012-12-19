@@ -2,20 +2,19 @@ package usdlc;
 
 import java.io.StringWriter;
 import java.io.Writer;
-import java.lang.Boolean;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Random;
 
-/** @noinspection deprecation*/
+/** @noinspection deprecation */
 public class FICL {
     private static final int RUNNING_WORD_STACK_DEPTH = 32;
     private static final int COMPILING_STACK_DEPTH = 16;
+	private static final int COMPILING_WORD_DEPTH = 64;
     private static final int OPERATING_STACK_DEPTH = 128;
     private static final int SECOND_STACK_DEPTH = 16;
     private static final int LOOP_STACK_DEPTH = 32;
 
-    public StringBuilder errors = new StringBuilder(64);
+    public StringBuffer errors = new StringBuffer(64);
     public boolean abort = false, isCompileMode = false;
     public boolean throwExceptions = true;
 
@@ -29,12 +28,12 @@ public class FICL {
      */
     public boolean compile(String sourceToCompile) {
         isCompileMode = true;
-        writer = new StringWriter();
+        writer = new StringBuffer();
         abort = false;
         source = sourceToCompile;
         sourceLength = source.length();
         sourcePointer = 0;
-        compiling.clear();
+        compiling.depth = 0;
         errors.setLength(0);
         String name;
         //noinspection NestedAssignment
@@ -89,7 +88,7 @@ public class FICL {
         String text = "";
         try {
             text = object.toString();
-            writer.write(text);
+            writer.append(text);
         } catch (Exception e) {
             abort("print," + text, e);
         }
@@ -128,17 +127,20 @@ public class FICL {
         // start by dropping any leading space characters
         do {
             if (sourcePointer == sourceLength) return null;
-        } while (Character.isSpace(source.charAt(sourcePointer++)));
+        } while (isSpace(source.charAt(sourcePointer++)));
         int first = sourcePointer - 1;
         // and go to where we have a space again
         do {
             if (sourcePointer == sourceLength) return source.substring(first);
-        } while (!Character.isSpace(source.charAt(sourcePointer++)));
+        } while (!isSpace(source.charAt(sourcePointer++)));
 
         String word = source.substring(first, sourcePointer - 1);
         if (debuggingCompile) print(word + ' ');
         return word;
     }
+	private boolean isSpace(char c) {
+		return (c == ' ') || (c == '\t') || (c == '\r') || (c == '\n');
+	}
 
     private boolean compileLiteral(String name) {
 	    int num = 0, sign = -1, idx = 0, len = name.length();
@@ -146,7 +148,7 @@ public class FICL {
 		    sign = idx = 1;
 	    }
 	    while (idx < len) {
-	        num = num * 10 + ('0' - name.charAt(idx++));
+		    num = (num * 10) + ('0' - name.charAt(idx++));
 	    }
 
 	    compilePushWord(name, new Integer(sign * num));
@@ -185,7 +187,7 @@ public class FICL {
                         value = 1;
                     }
                 } else {
-                    value = ((Number) object).intValue();
+                    value = ((Integer) object).intValue();
                 }
                 return value;
             } catch (Exception e) {
@@ -196,7 +198,7 @@ public class FICL {
     }
 
     private void compileWord(CompiledWord word) {
-        compiling.add(word);
+        compiling.push(word);
     }
 
     public void compileWord(String name, Runnable word) {
@@ -251,9 +253,11 @@ public class FICL {
     }
 
     private class WordOfWords implements Runnable {
-        private CompiledWord[] words = (CompiledWord[]) compiling.toArray(new CompiledWord[compiling.size()]);
+        private CompiledWord[] words;
 
         WordOfWords() {
+	        words = new CompiledWord[compiling.depth];
+	        System.arraycopy(compiling.stack, 1, words, 0, compiling.depth);
         }
 
         public void run() {
@@ -277,14 +281,14 @@ public class FICL {
     public String compilingWord = "";
     private String lastDefinition = "";
     private Stack runningWords = new Stack(RUNNING_WORD_STACK_DEPTH);
-    private ArrayList compiling = new ArrayList(16);
+    private Stack compiling = new Stack(COMPILING_WORD_DEPTH);
     public boolean debuggingCompile = false;
     private Runnable compiled = null;
     private Stack compilingStack = new Stack(COMPILING_STACK_DEPTH);
     public final Stack stack = new Stack(OPERATING_STACK_DEPTH);
     private final Stack secondStack = new Stack(SECOND_STACK_DEPTH);
     private final Stack loopStack = new Stack(LOOP_STACK_DEPTH);
-    private Writer writer = new StringWriter();
+    private StringBuffer writer = new StringBuffer();
 
     public class Dictionary extends Hashtable {
         public CompiledWord put(final String key, final CompiledWord value) {
@@ -334,7 +338,7 @@ public class FICL {
                 secondStack.push(new Integer(sourcePointer));
                 compilingWord = getWord();
                 compilingStack.push(compiling);
-                compiling = new ArrayList(16);
+                compiling = new Stack(COMPILING_WORD_DEPTH);
             }
         });
         immediate(";", new Runnable() {
@@ -346,7 +350,7 @@ public class FICL {
                         source.substring(start, sourcePointer);
 
                 //noinspection unchecked
-                compiling = (ArrayList) compilingStack.pop();
+                compiling = (Stack) compilingStack.pop();
                 lastDefinition = compilingWord;
                 compilingWord = (String) secondStack.pop();
                 dictionary.put(lastDefinition, compiledWord);
@@ -385,7 +389,7 @@ public class FICL {
         });
         immediate("begin", new Runnable() {
             public void run() {
-                final int[] beginLeaveEnd = {compiling.size(), 0};
+                final int[] beginLeaveEnd = {compiling.depth, 0};
                 loopStack.push(beginLeaveEnd);
             }
         });
@@ -404,7 +408,7 @@ public class FICL {
                 final int[] beginLeaveEnd = (int[]) loopStack.peek();
                 compileWord("?leave", new Runnable() {
                     public void run() {
-                        int testResult = ((Number) stack.pop()).intValue();
+                        int testResult = ((Integer) stack.pop()).intValue();
                         if (testResult == 0) {
                             jumpTo = beginLeaveEnd[1];
                         }
@@ -415,7 +419,7 @@ public class FICL {
         immediate("again", new Runnable() {
             public void run() {
                 final int[] beginLeaveEnd = (int[]) loopStack.pop();
-                beginLeaveEnd[1] = compiling.size() + 1;
+                beginLeaveEnd[1] = compiling.depth + 1;
                 compileWord("again", new Runnable() {
                     public void run() {
                         jumpTo = beginLeaveEnd[0];
@@ -464,7 +468,7 @@ public class FICL {
         });
         immediate("if", new Runnable() {
             public void run() {
-                final int[] ifElseNext = {compiling.size(), 0, 0};
+                final int[] ifElseNext = {compiling.depth, 0, 0};
                 secondStack.push(ifElseNext);
                 compileWord("if", new Runnable() {
                     public void run() {
@@ -479,7 +483,7 @@ public class FICL {
         immediate("else", new Runnable() {
             public void run() {
                 final int[] ifElseNext = (int[]) secondStack.peek();
-                ifElseNext[1] = compiling.size() + 1; // over else
+                ifElseNext[1] = compiling.depth + 1; // over else
                 compileWord("else", new Runnable() {
                     public void run() {
                         jumpTo = ifElseNext[2];
@@ -491,7 +495,7 @@ public class FICL {
             public void run() {
                 int[] ifElseNext = (int[]) secondStack.pop();
                 // make sure we run the then statement to clean up secondStack
-                ifElseNext[2] = compiling.size();
+                ifElseNext[2] = compiling.depth;
                 if (ifElseNext[1] == 0) ifElseNext[1] = ifElseNext[2];
             }
         });

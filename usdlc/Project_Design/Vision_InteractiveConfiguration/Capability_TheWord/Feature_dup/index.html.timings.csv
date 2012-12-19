@@ -21,3 +21,11 @@
 20120909,0910,+1000,When_dup.gwt,succeeded,38,
 20120909,0910,+1000,Then_dup.gwt,running,3,
 20120909,0910,+1000,Then_dup.gwt,succeeded,100,
+20121219,1905,+1000,Setup.coffee,running,0,in 4s
+20121219,1905,+1000,Setup.coffee,succeeded,127,127ms
+20121219,1905,+1000,Given_dup.gwt,running,4,
+20121219,1905,+1000,Given_dup.gwt,succeeded,66,
+20121219,1905,+1000,When_dup.gwt,running,2,
+20121219,1905,+1000,When_dup.gwt,succeeded,82,
+20121219,1905,+1000,Then_dup.gwt,running,2,
+20121219,1905,+1000,Then_dup.gwt,succeeded,75,

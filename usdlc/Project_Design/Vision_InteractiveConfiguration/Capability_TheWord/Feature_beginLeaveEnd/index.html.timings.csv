@@ -113,3 +113,19 @@
 20120909,2134,+1000,When_beginQLeaveEnd.gwt,succeeded,146,146ms
 20120909,2134,+1000,Then_beginQLeaveEnd.gwt,running,3,
 20120909,2135,+1000,Then_beginQLeaveEnd.gwt,succeeded,217,217ms
+20121219,1902,+1000,Setup.coffee,running,0,in 6s
+20121219,1902,+1000,Setup.coffee,succeeded,129,129ms
+20121219,1902,+1000,Given_beginLeaveEnd.gwt,running,3,
+20121219,1902,+1000,Given_beginLeaveEnd.gwt,succeeded,72,
+20121219,1902,+1000,When_beginLeaveEnd.gwt,running,3,
+20121219,1902,+1000,When_beginLeaveEnd.gwt,succeeded,73,
+20121219,1902,+1000,Then_beginLeaveEnd.gwt,running,3,
+20121219,1902,+1000,Then_beginLeaveEnd.gwt,succeeded,77,
+20121219,1902,+1000,Setup.coffee,running,0,in 3s
+20121219,1902,+1000,Setup.coffee,succeeded,66,
+20121219,1902,+1000,Given_beginQLeaveEnd.gwt,running,3,
+20121219,1902,+1000,Given_beginQLeaveEnd.gwt,succeeded,71,
+20121219,1902,+1000,When_beginQLeaveEnd.gwt,running,2,
+20121219,1902,+1000,When_beginQLeaveEnd.gwt,succeeded,66,
+20121219,1902,+1000,Then_beginQLeaveEnd.gwt,running,3,
+20121219,1902,+1000,Then_beginQLeaveEnd.gwt,succeeded,90,
