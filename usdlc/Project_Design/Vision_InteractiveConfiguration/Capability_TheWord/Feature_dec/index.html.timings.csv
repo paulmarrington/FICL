@@ -196,3 +196,43 @@
 20121124,0936,+1100,When_plus (+).gwt,succeeded,42,
 20121124,0936,+1100,Then_plus (+).gwt,running,2,
 20121124,0936,+1100,Then_plus (+).gwt,succeeded,32,
+20121219,1523,+1000,Setup.coffee,running,98,
+20121219,1523,+1000,Setup.coffee,succeeded,621,621ms
+20121219,1523,+1000,Given_plus (+).gwt,running,9,
+20121219,1523,+1000,Given_plus (+).gwt,succeeded,106,106ms
+20121219,1523,+1000,When_plus (+).gwt,running,2,
+20121219,1523,+1000,When_plus (+).gwt,succeeded,87,
+20121219,1523,+1000,Then_plus (+).gwt,running,2,
+20121219,1523,+1000,Then_plus (+).gwt,failed,162,162ms
+20121219,1524,+1000,Setup.coffee,running,0,in 35s
+20121219,1524,+1000,Setup.coffee,succeeded,122,122ms
+20121219,1524,+1000,Given_plus (+).gwt,running,4,
+20121219,1524,+1000,Given_plus (+).gwt,succeeded,72,
+20121219,1524,+1000,When_plus (+).gwt,running,3,
+20121219,1524,+1000,When_plus (+).gwt,succeeded,68,
+20121219,1524,+1000,Then_plus (+).gwt,running,3,
+20121219,1524,+1000,Then_plus (+).gwt,failed,87,
+20121219,1529,+1000,Setup.coffee,running,4,in 4m 59s
+20121219,1529,+1000,Setup.coffee,succeeded,71,
+20121219,1529,+1000,Given_plus (+).gwt,running,3,
+20121219,1529,+1000,Given_plus (+).gwt,succeeded,44,
+20121219,1529,+1000,When_plus (+).gwt,running,3,
+20121219,1532,+1000,When_plus (+).gwt,succeeded,3,in 3m 20s
+20121219,1532,+1000,Then_plus (+).gwt,running,6,
+20121219,1532,+1000,Then_plus (+).gwt,failed,60,
+20121219,1643,+1000,Setup.coffee,running,71,in 1h 11m 4s
+20121219,1643,+1000,Setup.coffee,succeeded,85,
+20121219,1643,+1000,Given_plus (+).gwt,running,3,
+20121219,1643,+1000,Given_plus (+).gwt,succeeded,58,
+20121219,1643,+1000,When_plus (+).gwt,running,3,
+20121219,1643,+1000,When_plus (+).gwt,succeeded,62,
+20121219,1643,+1000,Then_plus (+).gwt,running,3,
+20121219,1643,+1000,Then_plus (+).gwt,failed,72,
+20121219,1644,+1000,Setup.coffee,running,508,508ms
+20121219,1644,+1000,Setup.coffee,succeeded,0,in 1s
+20121219,1644,+1000,Given_plus (+).gwt,running,20,
+20121219,1644,+1000,Given_plus (+).gwt,succeeded,239,239ms
+20121219,1644,+1000,When_plus (+).gwt,running,4,
+20121219,1644,+1000,When_plus (+).gwt,succeeded,199,199ms
+20121219,1644,+1000,Then_plus (+).gwt,running,4,
+20121219,1644,+1000,Then_plus (+).gwt,succeeded,352,352ms

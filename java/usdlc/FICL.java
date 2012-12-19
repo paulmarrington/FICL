@@ -3,13 +3,11 @@ package usdlc;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.Boolean;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Random;
 
+/** @noinspection deprecation*/
 public class FICL {
     private static final int RUNNING_WORD_STACK_DEPTH = 32;
     private static final int COMPILING_STACK_DEPTH = 16;
@@ -98,7 +96,7 @@ public class FICL {
     }
 
     public void abort(String msg, Exception e) {
-        if (throwExceptions) throw new RuntimeException(msg, e);
+        if (throwExceptions) throw new RuntimeException(msg);
         abort(msg + ',' + e.toString());
     }
 
@@ -130,12 +128,12 @@ public class FICL {
         // start by dropping any leading space characters
         do {
             if (sourcePointer == sourceLength) return null;
-        } while (Character.isWhitespace(source.charAt(sourcePointer++)));
+        } while (Character.isSpace(source.charAt(sourcePointer++)));
         int first = sourcePointer - 1;
         // and go to where we have a space again
         do {
             if (sourcePointer == sourceLength) return source.substring(first);
-        } while (!Character.isWhitespace(source.charAt(sourcePointer++)));
+        } while (!Character.isSpace(source.charAt(sourcePointer++)));
 
         String word = source.substring(first, sourcePointer - 1);
         if (debuggingCompile) print(word + ' ');
@@ -143,11 +141,16 @@ public class FICL {
     }
 
     private boolean compileLiteral(String name) {
-        parsePosition.setIndex(0);
-        final Object value = numberParser.parse(name, parsePosition);
-        if (parsePosition.getIndex() != name.length()) return false;
-        compilePushWord(name, value);
-        return true;
+	    int num = 0, sign = -1, idx = 0, len = name.length();
+	    if (name.charAt(0) == '-') {
+		    sign = idx = 1;
+	    }
+	    while (idx < len) {
+	        num = num * 10 + ('0' - name.charAt(idx++));
+	    }
+
+	    compilePushWord(name, new Integer(sign * num));
+	    return true;
     }
 
     public class Stack {
@@ -189,18 +192,6 @@ public class FICL {
                 abort("pop Integer," + object, e);
             }
             return 0;
-        }
-
-        Object[] popObjectArray(int items) {
-            Object[] argv = new Object[items];
-            if (items > 0)
-                try {
-                    depth -= items;
-                    System.arraycopy(stack, depth + 1, argv, 0, items);
-                } catch (Exception e) {
-                    abort("pop parameters", e);
-                }
-            return argv;
         }
     }
 
@@ -281,15 +272,12 @@ public class FICL {
 
     private int jumpTo = 0;
 
-    private final NumberFormat numberParser = NumberFormat.getInstance();
-    private final ParsePosition parsePosition = new ParsePosition(0);
-
     private String source = "";
     private int sourcePointer = 0, sourceLength = 0;
     public String compilingWord = "";
     private String lastDefinition = "";
     private Stack runningWords = new Stack(RUNNING_WORD_STACK_DEPTH);
-    private Collection compiling = new ArrayList(16);
+    private ArrayList compiling = new ArrayList(16);
     public boolean debuggingCompile = false;
     private Runnable compiled = null;
     private Stack compilingStack = new Stack(COMPILING_STACK_DEPTH);
@@ -343,7 +331,7 @@ public class FICL {
         immediate(":", new Runnable() {
             public void run() {
                 secondStack.push(compilingWord);
-                secondStack.push(Integer.valueOf(sourcePointer));
+                secondStack.push(new Integer(sourcePointer));
                 compilingWord = getWord();
                 compilingStack.push(compiling);
                 compiling = new ArrayList(16);
@@ -358,7 +346,7 @@ public class FICL {
                         source.substring(start, sourcePointer);
 
                 //noinspection unchecked
-                compiling = (Collection) compilingStack.pop();
+                compiling = (ArrayList) compilingStack.pop();
                 lastDefinition = compilingWord;
                 compilingWord = (String) secondStack.pop();
                 dictionary.put(lastDefinition, compiledWord);
@@ -380,31 +368,19 @@ public class FICL {
                 compilePushWord("\"", getQuotedString());
             }
         });
-        immediate("%\"", new Runnable() {
-            public void run() {
-                final String format = getQuotedString();
-                final int argc = countPlaceholders(format);
-                compileWord(new Runnable() {
-                    public void run() {
-                        Object[] argv = stack.popObjectArray(argc);
-                        stack.push(String.format(format, argv));
-                    }
-                });
-            }
-        });
-        extend(".", new Runnable() {
+	    extend(".", new Runnable() {
             public void run() {
                 print(stack.pop());
             }
         });
         extend("and", new Runnable() {
             public void run() {
-                stack.push(Integer.valueOf(stack.popInt() & stack.popInt()));
+                stack.push(new Integer(stack.popInt() & stack.popInt()));
             }
         });
         extend("+", new Runnable() {
             public void run() {
-                stack.push(Integer.valueOf(stack.popInt() + stack.popInt()));
+                stack.push(new Integer(stack.popInt() + stack.popInt()));
             }
         });
         immediate("begin", new Runnable() {
@@ -457,7 +433,7 @@ public class FICL {
         });
         extend("dec", new Runnable() {
             public void run() {
-                stack.push(Integer.valueOf(stack.popInt() - 1));
+                stack.push(new Integer(stack.popInt() - 1));
             }
         });
         immediate("debug-compile", new Runnable() {
@@ -467,7 +443,7 @@ public class FICL {
         });
         extend("/", new Runnable() {
             public void run() {
-                stack.push(Integer.valueOf(stack.popInt() / stack.popInt()));
+                stack.push(new Integer(stack.popInt() / stack.popInt()));
             }
         });
         extend("drop", new Runnable() {
@@ -482,7 +458,8 @@ public class FICL {
         });
         extend("=", new Runnable() {
             public void run() {
-                stack.push(Boolean.valueOf(stack.pop().equals(stack.pop())));
+                stack.push((stack.pop().equals(stack.pop())) ?
+	                Boolean.TRUE : Boolean.FALSE);
             }
         });
         immediate("if", new Runnable() {
@@ -525,27 +502,27 @@ public class FICL {
         });
         extend("inc", new Runnable() {
             public void run() {
-                stack.push(Integer.valueOf(stack.popInt() + 1));
+                stack.push(new Integer(stack.popInt() + 1));
             }
         });
         extend("-", new Runnable() {
             public void run() {
-                stack.push(Integer.valueOf(stack.popInt() - stack.popInt()));
+                stack.push(new Integer(stack.popInt() - stack.popInt()));
             }
         });
         extend("*", new Runnable() {
             public void run() {
-                stack.push(Integer.valueOf(stack.popInt() * stack.popInt()));
+                stack.push(new Integer(stack.popInt() * stack.popInt()));
             }
         });
         extend("not", new Runnable() {
             public void run() {
-                stack.push(Boolean.valueOf(stack.popInt() == 0));
+                stack.push((stack.popInt() == 0) ? Boolean.TRUE : Boolean.FALSE);
             }
         });
         extend("or", new Runnable() {
             public void run() {
-                stack.push(Integer.valueOf(stack.popInt() | stack.popInt()));
+                stack.push(new Integer(stack.popInt() | stack.popInt()));
             }
         });
         immediate("push", new Runnable() {
@@ -556,7 +533,7 @@ public class FICL {
         extend("random", new Runnable() {
             public void run() {
                 int i = random.nextInt(stack.popInt());
-                stack.push(Integer.valueOf(i));
+                stack.push(new Integer(i));
             }
         });
         extend("return", new Runnable() {
@@ -587,17 +564,6 @@ public class FICL {
             text = source.substring(start, sourcePointer++);
         }
         return text;
-    }
-
-    private int countPlaceholders(String format) {
-        int count = 0, start = 0;
-        while ((start = format.indexOf('%', start)) != -1) {
-            if (format.charAt(++start) != '%')
-                count++;
-            else
-                start++;
-        }
-        return count;
     }
 
     private Random random = new Random();
