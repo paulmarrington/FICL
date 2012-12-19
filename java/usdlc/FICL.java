@@ -1,7 +1,5 @@
 package usdlc;
 
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.Hashtable;
 import java.util.Random;
 
