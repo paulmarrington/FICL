@@ -70,7 +70,9 @@
     <property name="compiler.args.ficl" value="${compiler.args}"/>
 
     <property name="ficl.output.dir" value="${module.ficl.basedir}/out/production/FICL"/>
+    <property name="ficl.output.compat1.3.dir" value="${module.ficl.basedir}/out/production-1.3/FICL"/>
     <property name="ficl.testoutput.dir" value="${module.ficl.basedir}/out/test/FICL"/>
+    <property name="ficl.classifier.compat1.3">compat1.3</property>
 
     <path id="ficl.module.bootclasspath">
         <!-- Paths to be included in compilation bootclasspath -->
@@ -112,8 +114,20 @@
 
     <target name="compile.module.ficl.production" description="Compile module FICL; production classes">
         <mkdir dir="${ficl.output.dir}"/>
+        <mkdir dir="${ficl.output.compat1.3.dir}"/>
+        <!-- source compatibility with 1.3 for Blackberry, target should be
+             left to default so as to use modern .class format -->
+        <javac destdir="${ficl.output.compat1.3.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+               memorymaximumsize="${compiler.max.memory}" fork="true" source="1.3" target="1.3">
+            <compilerarg line="${compiler.args.ficl}"/>
+            <bootclasspath refid="ficl.module.bootclasspath"/>
+            <classpath refid="ficl.module.production.classpath"/>
+            <src refid="ficl.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.ficl"/>
+        </javac>
         <javac destdir="${ficl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
-               memorymaximumsize="${compiler.max.memory}" fork="true" target="1.3" source="1.3">
+               memorymaximumsize="${compiler.max.memory}" fork="true"
+               source="1.5" target="1.5">
             <compilerarg line="${compiler.args.ficl}"/>
             <bootclasspath refid="ficl.module.bootclasspath"/>
             <classpath refid="ficl.module.production.classpath"/>
@@ -121,14 +135,19 @@
             <patternset refid="excluded.from.compilation.ficl"/>
         </javac>
 
+        <fileset dir="${module.ficl.basedir}/java" id="ficl.compiler.resources">
+            <patternset refid="compiler.resources"/>
+            <type type="file"/>
+        </fileset>
         <copy todir="${ficl.output.dir}">
-            <fileset dir="${module.ficl.basedir}/java">
-                <patternset refid="compiler.resources"/>
-                <type type="file"/>
-            </fileset>
+            <fileset refid="ficl.compiler.resources"/>
+        </copy>
+        <copy todir="${ficl.output.compat1.3.dir}">
+            <fileset refid="ficl.compiler.resources"/>
         </copy>
 
         <jar basedir="${ficl.output.dir}" destfile="${ficl.jar}-${ficl.version}.jar"/>
+        <jar basedir="${ficl.output.compat1.3.dir}" destfile="${ficl.jar}-${ficl.version}-${ficl.classifier.compat1.3}.jar"/>
     </target>
 
     <target name="compile.module.ficl.tests" depends="compile.module.ficl.production"
@@ -136,6 +155,7 @@
 
     <target name="clean.module.ficl" description="cleanup module">
         <delete dir="${ficl.output.dir}"/>
+        <delete dir="${ficl.output.compat1.3.dir}"/>
         <delete dir="${ficl.testoutput.dir}"/>
         <delete file="${ficl.jar}"/>
     </target>
@@ -158,6 +178,15 @@
             <arg value="-Dfile=${ficl.jar}-${ficl.version}.jar"/>
             <arg value="-Dversion=${ficl.version}"/>
             <arg value="-DgeneratePom=true"/>
+            <arg value="-Dpackaging=jar"/>
+        </exec>
+         <exec executable="mvn" failifexecutionfails="true">
+            <arg value="install:install-file"/>
+            <arg value="-DgroupId=${ficl.groupId}"/>
+            <arg value="-DartifactId=${ficl.artifactId}"/>
+            <arg value="-Dfile=${ficl.jar}-${ficl.version}-${ficl.classifier.compat1.3}.jar"/>
+            <arg value="-Dclassifier=${ficl.classifier.compat1.3}"/>
+            <arg value="-Dversion=${ficl.version}"/>
             <arg value="-Dpackaging=jar"/>
         </exec>
     </target>
