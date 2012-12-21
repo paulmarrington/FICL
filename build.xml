@@ -66,9 +66,7 @@
 
     <dirname property="module.ficl.basedir" file="${ant.file}"/>
 
-
     <property name="compiler.args.ficl" value="${compiler.args}"/>
-
     <property name="ficl.output.dir" value="${module.ficl.basedir}/out/production/FICL"/>
     <property name="ficl.output.compat1.3.dir" value="${module.ficl.basedir}/out/production-1.3/FICL"/>
     <property name="ficl.testoutput.dir" value="${module.ficl.basedir}/out/test/FICL"/>
@@ -112,42 +110,39 @@
     <target name="compile.module.ficl" depends="compile.module.ficl.production,compile.module.ficl.tests"
             description="Compile module FICL"/>
 
+    <macrodef name="compile-module-ficl">
+        <attribute name="jdk-version"/>
+        <attribute name="output-dir"/>
+        <attribute name="dest-file"/>
+
+        <sequential>
+            <mkdir dir="@{output-dir}"/>
+            <javac destdir="@{output-dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+                   includeantruntime="false"
+                   memorymaximumsize="${compiler.max.memory}" fork="true" source="@{jdk-version}" target="@{jdk-version}">
+                <compilerarg line="${compiler.args.ficl}"/>
+                <bootclasspath refid="ficl.module.bootclasspath"/>
+                <classpath refid="ficl.module.production.classpath"/>
+                <src refid="ficl.module.sourcepath"/>
+                <patternset refid="excluded.from.compilation.ficl"/>
+            </javac>
+            <copy todir="@{output-dir}">
+                <fileset dir="${module.ficl.basedir}/java" id="ficl.compiler.resources">
+                    <patternset refid="compiler.resources"/>
+                    <type type="file"/>
+                </fileset>
+            </copy>
+            <jar basedir="@{output-dir}" destfile="@{dest-file}"/>
+        </sequential>
+    </macrodef>
+
     <target name="compile.module.ficl.production" description="Compile module FICL; production classes">
-        <mkdir dir="${ficl.output.dir}"/>
-        <mkdir dir="${ficl.output.compat1.3.dir}"/>
-        <!-- source compatibility with 1.3 for Blackberry, target should be
-             left to default so as to use modern .class format -->
-        <javac destdir="${ficl.output.compat1.3.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
-               memorymaximumsize="${compiler.max.memory}" fork="true" source="1.3" target="1.3">
-            <compilerarg line="${compiler.args.ficl}"/>
-            <bootclasspath refid="ficl.module.bootclasspath"/>
-            <classpath refid="ficl.module.production.classpath"/>
-            <src refid="ficl.module.sourcepath"/>
-            <patternset refid="excluded.from.compilation.ficl"/>
-        </javac>
-        <javac destdir="${ficl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
-               memorymaximumsize="${compiler.max.memory}" fork="true"
-               source="1.5" target="1.5">
-            <compilerarg line="${compiler.args.ficl}"/>
-            <bootclasspath refid="ficl.module.bootclasspath"/>
-            <classpath refid="ficl.module.production.classpath"/>
-            <src refid="ficl.module.sourcepath"/>
-            <patternset refid="excluded.from.compilation.ficl"/>
-        </javac>
-
-        <fileset dir="${module.ficl.basedir}/java" id="ficl.compiler.resources">
-            <patternset refid="compiler.resources"/>
-            <type type="file"/>
-        </fileset>
-        <copy todir="${ficl.output.dir}">
-            <fileset refid="ficl.compiler.resources"/>
-        </copy>
-        <copy todir="${ficl.output.compat1.3.dir}">
-            <fileset refid="ficl.compiler.resources"/>
-        </copy>
-
-        <jar basedir="${ficl.output.dir}" destfile="${ficl.jar}-${ficl.version}.jar"/>
-        <jar basedir="${ficl.output.compat1.3.dir}" destfile="${ficl.jar}-${ficl.version}-${ficl.classifier.compat1.3}.jar"/>
+        <compile-module-ficl jdk-version="1.3"
+            output-dir="${ficl.output.compat1.3.dir}"
+            dest-file="${ficl.artifactId}-${ficl.version}-${ficl.classifier.compat1.3}.jar"/>
+        <compile-module-ficl jdk-version="1.5"
+            output-dir="${ficl.output.dir}"
+            dest-file="${ficl.artifactId}-${ficl.version}.jar"/>
     </target>
 
     <target name="compile.module.ficl.tests" depends="compile.module.ficl.production"
@@ -157,7 +152,8 @@
         <delete dir="${ficl.output.dir}"/>
         <delete dir="${ficl.output.compat1.3.dir}"/>
         <delete dir="${ficl.testoutput.dir}"/>
-        <delete file="${ficl.jar}"/>
+        <delete file="${ficl.artifactId}-${ficl.version}.jar"/>
+        <delete file="${ficl.artifactId}-${ficl.version}-${ficl.classifier.compat1.3}.jar"/>
     </target>
 
     <target name="init" description="Build initialization">
