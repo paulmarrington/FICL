@@ -1,3 +1,23 @@
 
 20120908,1848,+1000,Feature_;field/,running,6,in 6m 16s
 20120908,1848,+1000,Feature_;field/,data,4,
+20121221,1023,+1000,Setup.coffee,running,8,in 8m 50s
+20121221,1023,+1000,Setup.coffee,succeeded,63,
+20121221,1023,+1000,Given_TestUnknownWord.gwt,running,2,
+20121221,1023,+1000,Given_TestUnknownWord.gwt,succeeded,50,
+20121221,1023,+1000,When_TestUnknownWord.gwt,running,2,
+20121221,1023,+1000,When_TestUnknownWord.gwt,succeeded,46,
+20121221,1023,+1000,Then_TestUnknownWord.gwt,running,1,
+20121221,1023,+1000,Then_TestUnknownWord.gwt,failed,49,
+20121221,1028,+1000,Setup.coffee,running,109,109ms
+20121221,1028,+1000,Setup.coffee,succeeded,372,372ms
+20121221,1028,+1000,Given_TestUnknownWord.gwt,running,5,
+20121221,1028,+1000,Given_TestUnknownWord.gwt,succeeded,111,111ms
+20121221,1028,+1000,When_TestUnknownWord.gwt,running,3,
+20121221,1028,+1000,When_TestUnknownWord.gwt,failed,106,106ms
+20121221,1031,+1000,Setup.coffee,running,2,in 2m 44s
+20121221,1031,+1000,Setup.coffee,succeeded,117,117ms
+20121221,1031,+1000,Given_TestUnknownWord.gwt,running,3,
+20121221,1031,+1000,Given_TestUnknownWord.gwt,succeeded,83,
+20121221,1031,+1000,When_TestUnknownWord.gwt,running,3,
+20121221,1031,+1000,When_TestUnknownWord.gwt,failed,91,

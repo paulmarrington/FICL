@@ -1,2 +1,7 @@
 Setup.coffee,succeeded
 Instrument.coffee,succeeded
+Given_TestUnknownWord.gwt,succeeded
+,succeeded
+When_TestUnknownWord.gwt,failed
+Then_TestUnknownWord.gwt,changed
+gwtDSL.coffee,succeeded

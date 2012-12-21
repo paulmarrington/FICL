@@ -146,7 +146,9 @@ public class FICL {
 		    sign = idx = 1;
 	    }
 	    while (idx < len) {
-		    num = (num * 10) + ('0' - name.charAt(idx++));
+		    int digit = '0' - name.charAt(idx++);
+		    if (digit > 0 || digit < -9) return false; // NaN
+		    num = (num * 10) + digit;
 	    }
 
 	    compilePushWord(name, new Integer(sign * num));
