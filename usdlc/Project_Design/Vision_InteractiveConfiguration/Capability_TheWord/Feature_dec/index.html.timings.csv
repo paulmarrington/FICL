@@ -302,3 +302,27 @@
 20121219,1902,+1000,When_inc.gwt,succeeded,107,107ms
 20121219,1902,+1000,Then_inc.gwt,running,7,
 20121219,1902,+1000,Then_inc.gwt,succeeded,120,120ms
+20130101,1850,+1000,Setup.coffee,running,0,in 43s
+20130101,1850,+1000,Setup.coffee,succeeded,122,122ms
+20130101,1850,+1000,Given_plus (+).gwt,running,10,
+20130101,1850,+1000,Given_plus (+).gwt,succeeded,160,160ms
+20130101,1850,+1000,When_plus (+).gwt,running,4,
+20130101,1850,+1000,When_plus (+).gwt,failed,229,229ms
+20130101,1850,+1000,Setup.coffee,running,0,in 18s
+20130101,1850,+1000,Setup.coffee,succeeded,87,
+20130101,1850,+1000,Given_plus (+).gwt,running,3,
+20130101,1850,+1000,Given_plus (+).gwt,succeeded,45,
+20130101,1850,+1000,When_plus (+).gwt,running,2,
+20130101,1850,+1000,When_plus (+).gwt,failed,56,
+20130101,1853,+1000,Setup.coffee,running,2,in 2m 55s
+20130101,1853,+1000,Setup.coffee,succeeded,79,
+20130101,1853,+1000,Given_plus (+).gwt,running,4,
+20130101,1853,+1000,Given_plus (+).gwt,succeeded,52,
+20130101,1853,+1000,When_plus (+).gwt,running,3,
+20130101,1854,+1000,When_plus (+).gwt,failed,0,in 14s
+20130101,1854,+1000,Setup.coffee,running,0,in 43s
+20130101,1854,+1000,Setup.coffee,succeeded,69,
+20130101,1854,+1000,Given_plus (+).gwt,running,5,
+20130101,1854,+1000,Given_plus (+).gwt,succeeded,45,
+20130101,1854,+1000,When_plus (+).gwt,running,2,
+20130101,1855,+1000,When_plus (+).gwt,failed,0,in 44s

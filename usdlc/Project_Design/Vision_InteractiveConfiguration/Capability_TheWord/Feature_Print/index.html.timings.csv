@@ -29,3 +29,31 @@
 20121219,1911,+1000,When_Print.gwt,succeeded,75,
 20121219,1911,+1000,Then_Print.gwt,running,2,
 20121219,1911,+1000,Then_Print.gwt,succeeded,67,
+20130101,1839,+1000,Setup.coffee,running,46,
+20130101,1839,+1000,Setup.coffee,succeeded,463,463ms
+20130101,1839,+1000,Given_Print.gwt,running,6,
+20130101,1839,+1000,Given_Print.gwt,succeeded,114,114ms
+20130101,1839,+1000,When_Print.gwt,running,5,
+20130101,1839,+1000,When_Print.gwt,failed,513,513ms
+20130101,1845,+1000,Setup.coffee,running,6,in 6m 28s
+20130101,1845,+1000,Setup.coffee,succeeded,114,114ms
+20130101,1845,+1000,Given_Print.gwt,running,2,
+20130101,1845,+1000,Given_Print.gwt,succeeded,92,
+20130101,1845,+1000,When_Print.gwt,running,2,
+20130101,1845,+1000,When_Print.gwt,failed,136,136ms
+20130101,1849,+1000,
+20130101,1849,+1000,Setup.coffee,running,791,791msSetup.coffee,running,791,791ms
+20130101,1849,+1000,Setup.coffee,succeeded,0,in 1s
+20130101,1849,+1000,Setup.coffee,succeeded,0,in 1s
+20130101,1849,+1000,Given_Print.gwt,running,0,
+20130101,1849,+1000,Given_Print.gwt,running,0,
+20130101,1849,+1000,Given_Print.gwt,succeeded,280,280ms
+20130101,1849,+1000,When_Print.gwt,running,4,
+20130101,1849,+1000,Given_Print.gwt,succeeded,56,
+20130101,1849,+1000,When_Print.gwt,running,14,
+20130101,1849,+1000,When_Print.gwt,succeeded,277,277ms
+20130101,1849,+1000,Then_Print.gwt,running,11,
+20130101,1849,+1000,When_Print.gwt,succeeded,47,
+20130101,1849,+1000,Then_Print.gwt,running,12,
+20130101,1849,+1000,Then_Print.gwt,succeeded,0,in 1s
+20130101,1849,+1000,Then_Print.gwt,succeeded,99,

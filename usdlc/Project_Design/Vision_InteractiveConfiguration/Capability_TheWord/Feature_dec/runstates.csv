@@ -7,8 +7,8 @@ Given_inc.gwt,succeeded
 When_inc.gwt,succeeded
 Then_inc.gwt,succeeded
 Given_plus (+).gwt,succeeded
-When_plus (+).gwt,succeeded
-Then_plus (+).gwt,succeeded
+When_plus (+).gwt,changed
+Then_plus (+).gwt,changed
 Given_minus (-).gwt,succeeded
 When_minus (-).gwt,succeeded
 Then_minus (-).gwt,succeeded
@@ -22,3 +22,5 @@ Given_Divide.gwt,succeeded
 When_Divide.gwt,succeeded
 Then_Divide.gwt,succeeded
 gwtDSL.coffee,succeeded
+,succeeded
+,succeeded

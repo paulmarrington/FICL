@@ -145,13 +145,24 @@ public class FICL {
 	    if (name.charAt(0) == '-') {
 		    sign = idx = 1;
 	    }
+	    int decimal = -10000;
 	    while (idx < len) {
-		    int digit = '0' - name.charAt(idx++);
-		    if (digit > 0 || digit < -9) return false; // NaN
-		    num = (num * 10) + digit;
+		    int chr = name.charAt(idx++);
+		    if (chr == '.') {
+			    decimal = 1;
+		    } else {
+			    int digit = '0' - chr;
+			    if (digit > 0 || digit < -9) return false; // NaN
+			    num = (num * 10) + digit;
+			    decimal *= 10;
+		    }
 	    }
-
-	    compilePushWord(name, new Integer(sign * num));
+		if (decimal < 0) {
+	        compilePushWord(name, new Integer(sign * num));
+		} else {
+			double real = (sign * num) / (double) decimal;
+			compilePushWord(name, new Double(real));
+		}
 	    return true;
     }
 
