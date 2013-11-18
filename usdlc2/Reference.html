@@ -1,0 +1,168 @@
+<html>
+<head>
+	<title></title>
+	<link href="document.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="scayt-enabled">
+<h1>Reference</h1>
+
+<p>FICL is a FORTH based language using stack based control and word based commands.</p>
+
+<div class="metadata Ref">Ref: <span class="FICL"><a href="javascript:usdlc.edit_source({value:'FICL.java',path:'../FICL/java/usdlc/FICL.java',category:'usdlc'})">FICL.java</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee">java = gwt.java out: &#39;gen/classes&#39;, main: &#39;ficl&#39;
+java.compile &#39;java/ficl.java&#39;, &#39;java/usdlc/FICL.java&#39;
+repl = gwt.repl java.command_line(), (failed) -&gt;
+  process.exit failed
+
+gwt.monitor_output =
+  pass: /^Errors: 0$/m
+  fail: /^Errors: [1-9]\d*$/m
+
+gwt.file_processor.ficl = (name, next) -&gt;
+  gwt.add -&gt; repl.process.send_file name, &#39;\n_end_\n&#39;
+  next()</textarea></p>
+
+<h2>Arithmetic (+ - / * inc dec)</h2>
+
+<pre title="ficl" type="ficl">
+6 2 +   ( n1 n2 -- n3 )   8 expected
+6 2 -   ( n1 n2 -- n3 )   4 expected
+6 2 *   ( n1 n2 -- n3 )  12 expected
+6 2 /   ( n1 n2 -- n3 )   3 expected
+12 inc  ( n1 -- n1 )     13 expected
+12 dec  ( n1 -- n1 )     11 expected</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<h2>Boolean (and or not =)</h2>
+
+<pre title="ficl" type="ficl">
+0 0 and    ( n1 n2 -- b1 )   0 expected
+0 1 and    ( n1 n2 -- b1 )   0 expected
+1 0 and    ( n1 n2 -- b1 )   0 expected
+1 1 and    ( n1 n2 -- b1 )   1 expected
+
+0 0 or     ( n1 n2 -- b1 )   0 expected
+0 1 or     ( n1 n2 -- b1 )   1 expected
+1 0 or     ( n1 n2 -- b1 )   1 expected
+1 1 or     ( n1 n2 -- b1 )   1 expected
+
+1 not      ( b1 -- b2 )      0 expected
+0 not      ( b1 -- b2 )      1 expected
+
+12 14 =    ( n1 n2 -- b1 )   0 expected
+14 14 =    ( n1 n2 -- b1 )   1 expected
+
+&quot; string 1&quot; &quot; string 2&quot; =  ( s1 s1 -- b1 )  0 expected
+&quot; string 1&quot; &quot; string 1&quot; =  ( s1 s1 -- b1 )  1 expected</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<h2>Comments ( ( ) )</h2>
+
+<pre title="ficl" type="ficl">
+1 ( inline comment )   1 expected</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<h2>Conditional (if else then)</h2>
+
+<pre title="ficl" type="ficl">
+12 0 if 2 - then        ( b1 -- )  12 expected
+12 1 if 2 - then        ( b1 -- )  10 expected
+
+12 0 if 2 else 4 then - ( b1 -- )   8 expected
+12 1 if 2 else 4 then - ( b1 -- )  10 expected</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<h2>Debugging (debug-compile .s)</h2>
+
+<p><em><strong>debug-compile</strong></em> will print out the compiled form of all future words.</p>
+
+<p><em><strong>.s</strong></em> will dump the stack contents to the output buffer.</p>
+
+<h2>Define (: return&nbsp;; variable)</h2>
+
+<p class="p1">A <em><strong>variable</strong></em>&nbsp;is an immediate word that replaces the last definition with it&#39;s result. This allows definitions that don&#39;t change on reference to only be evaluated once. A word must place a single value on the stack to be loaded.</p>
+
+<pre title="ficl" type="ficl">
+ : test_word 6 2 * ; variable ( -- n1 )
+test_word            12 expected
+
+: add_two test_word 2 + ;
+add_two             14 expected
+
+: test_word 3 ; ( -- n1 )
+add_two             5 expected
+
+: test 1 1 if return then 1 + ;
+test                 1 expected
+</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<h2>Loops (begin leave ?leave again)</h2>
+
+<div><b class="blue">begin ( -- ) ...&nbsp;leave ( -- ) ...&nbsp;?leave ( b1 -- ) ...&nbsp;again ( -- )</b></div>
+
+<div>&nbsp;</div>
+
+<div>Primary looping mechanism. It loops forever unless leave or ?leave are encountered.</div>
+
+<div>&nbsp;</div>
+
+<div style="margin-left: 40px;"><code><strong><span style="background-color: rgb(255, 160, 122);">begin</span></strong>&nbsp;words boolean-1&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">?leave</span></strong>&nbsp;words if&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">leave</span></strong>&nbsp;then&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">again</span></strong></code></div>
+
+<div style="margin-left: 40px;">&nbsp;</div>
+
+<pre title="ficl" type="ficl">
+5 begin dec dup not if leave then again   0 expected
+
+5 begin dec dup ?leave again              0 expected
+</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<h2>Print (.)</h2>
+
+<p class="p1">Convert the top of stack to printable form and write to output buffer.</p>
+
+<h2>Stack Control (drop dup swap over)</h2>
+
+<pre title="ficl" type="ficl">
+1 2 drop     ( a -- )            1 expected
+1 dup +      ( a -- a a )        2 expected
+1 2 swap /   ( a b -- b a )      2 expected
+1 2 over + + ( a b -- a b a )    4 expected</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<h2>String Literal (&quot;)</h2>
+
+<p>Note that the leading spaces exists because &quot; is a word. The string is trimmed before saving.</p>
+
+<pre title="ficl" type="ficl">
+&quot; a string&quot;    ( -- s1 )   &quot; a string&quot;  expected
+&quot; a string &quot;   ( -- s1 )   &quot; a string &quot; expected</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+</body>
+</html>

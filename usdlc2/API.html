@@ -1,0 +1,168 @@
+<html>
+<head>
+	<title></title>
+	<link href="document.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="scayt-enabled">
+<h1>FICL API</h1>
+
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee">java = gwt.java out: &#39;gen/classes&#39;
+java.compile &#39;java/usdlc/FICL.java&#39;,
+             &#39;gen/usdlc2/FICL_API/Scaffold.java&#39;
+
+gwt.monitor_output =
+  pass: /^Errors: 0$/m
+  fail: /^Errors: [1-9]\d*$/m
+
+gwt.file_processor.java = (name, next) -&gt;
+  java.compile name
+  name = java.class_name name
+  java.run name
+  next()</textarea></p>
+
+<h2>Creating&nbsp;FICL</h2>
+
+<p style="display: block;">An instance of FICL is ready to use as soon as it has been instanciated.</p>
+
+<pre style="display: block;" title="java" type="java">
+import usdlc.FICL;
+
+public class Creating_FICL extends Scaffold {
+  public static void main(String[] args) {
+    new Creating_FICL();
+  }
+    
+  protected void instrument() {
+      /***************/
+      final FICL ficl = new FICL();
+      
+      String result = ficl.toString();
+      expect(&quot;Instantiation&quot;, &quot;&quot;, result);
+      /***************/
+  }
+}</pre>
+
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="FICL"><a href="javascript:usdlc.edit_source({value:'FICL.java',path:'../FICL/java/usdlc/FICL.java',category:'usdlc'})">FICL.java</a></span></div>
+
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
+
+<h2>Feeding FICL</h2>
+
+<h2>Extending FICL</h2>
+
+<h2>Data Sharing</h2>
+
+<p>The other way to share functionality between the parent application and FICL is if both entities can share a data store. This data can reside within the FICL store or within the parent application and referenced by FICL. If using the former, changing the data can automatically trigger a FICL word.</p>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<h3>Access to the FICL Store (get, put)</h3>
+
+<pre title="java" type="java">
+import usdlc.FICL;
+
+public class Access_to_the_FICL_Store_get_put_
+extends Scaffold {
+  public static void main(String[] args) {
+    new Access_to_the_FICL_Store_get_put_();
+  }
+    
+  protected void instrument() {
+      /***************/
+      final FICL ficl = new FICL();
+      
+      expect(&quot;Not set&quot;, ficl.get(&quot;testVar&quot;) == null);
+      
+      ficl.put(&quot;testVar&quot;, new Integer(24));
+      ficl.run(&quot;testVar .&quot;);
+      ficl.putInt(&quot;testVar&quot;, 23);
+      ficl.run(&quot;testVar .&quot;);
+      
+      expect(&quot;Set&quot;, ficl.get(&quot;testVar&quot;) != null);
+      expect(&quot;Get Int&quot;, ficl.getInt(&quot;testVar&quot;) == 23);
+      expect(&quot;Get&quot;, ficl.get(&quot;testVar&quot;), new Integer(23));
+      
+      String result = ficl.toString();
+      expect(&quot;Put&quot;, &quot; 24 23&quot;, result);
+      /***************/
+  }
+}</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<h3>Trigger on Store Data Update</h3>
+
+<p>FICL provides the ability to run a word whenever data changes.</p>
+
+<pre title="java" type="java">
+import usdlc.FICL;
+
+public class Trigger_on_Store_Data_Update
+extends Scaffold {
+  public static void main(String[] args) {
+    new Trigger_on_Store_Data_Update();
+  }
+    
+  protected void instrument() {
+      /***************/
+      final FICL ficl = new FICL();
+    
+      ficl.putInt(&quot;testVar&quot;, 0);
+      ficl.run(&quot;: myTrigger testVar . ;&quot;);
+      
+      ficl.trigger_word_on_update(&quot;myTrigger&quot;, &quot;testVar&quot;);
+      
+      ficl.put(&quot;testVar&quot;, new Integer(24));
+      ficl.putInt(&quot;testVar&quot;, 23);
+      
+      String result = ficl.toString();
+      expect(&quot;Trigger&quot;, &quot; 24 23&quot;, result);
+      /***************/
+  }
+}</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<h2>Scaffold</h2>
+
+<pre style="width: 454.75px; display: block;" title="java" type="java">
+public abstract class Scaffold {
+
+  protected abstract void instrument();
+  
+  protected Scaffold() {
+    try {
+      instrument();
+    } catch(Exception e) {
+      error(e.toString());
+      e.printStackTrace();
+    } finally {
+      System.out.println(&quot;Errors: &quot; + errors);
+    }
+  }
+  
+  protected void expect(String msg, boolean test) {
+    if (!test) error(msg);
+  }
+  
+  protected void expect(String msg,
+  Object expect, Object found) {
+    if (!expect.equals(found))
+      error(msg+&quot;\nExpecting &#39;&quot;+expect+&quot;&#39;, Found &#39;&quot;+found+&quot;&#39;&quot;);
+  }
+  
+  protected void error(String msg) {
+      errors++;
+      System.out.println(&quot;Error: &quot; + msg);
+  }
+
+  protected int errors = 0;
+} </pre>
+</body>
+</html>

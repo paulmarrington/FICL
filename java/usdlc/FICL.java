@@ -1,585 +1,636 @@
+/* Copyright (C) 2013 paul@marrington.net, see /GPL license */
 package usdlc;
 
 import java.util.Hashtable;
-import java.util.Random;
 
-/** @noinspection deprecation */
 public class FICL {
-    private static final int RUNNING_WORD_STACK_DEPTH = 32;
-    private static final int COMPILING_STACK_DEPTH = 16;
-	private static final int COMPILING_WORD_DEPTH = 64;
-    private static final int OPERATING_STACK_DEPTH = 128;
-    private static final int SECOND_STACK_DEPTH = 16;
-    private static final int LOOP_STACK_DEPTH = 32;
+  public FICL() {
+    context.oStack = newList(64);
+    context.iStack = newIntList(64);
+    context.compiling = newWordList(64);
+    context.runningWords = newWordList(32);
+    context.secondStack = newList(32);
+    context.loopStack = newIntList(32);
+    context.ifStack = newIntList(32);
+    context.writer = stringBuffer();
+    init();
+  }
 
-    public StringBuffer errors = new StringBuffer(64);
-    public boolean abort = false, isCompileMode = false;
-    public boolean throwExceptions = true;
-
-    public FICL() {
-        init();
+  /** compile and run source */
+  synchronized public boolean run(String sourceToCompile) {
+    context.isCompileMode = true;
+    context.abort = false;
+    context.source = sourceToCompile;
+    context.sourceLength = strlen(context.source);
+    context.sourcePointer = context.cp = 0;
+    clearErrors();
+    String name;
+    while (!context.abort && ((name = getSourceWord()) != null)) {
+      CompiledWord word = (CompiledWord) getStore(name);
+      if (word != null) {
+        if (word.type == TYPE_IMMEDIATE)
+          ((Runnable) word.data).run();
+        else
+          context.compiling[context.cp++] = word;
+      } else if (!compileLiteral(name)) {
+        abort("Unknown word: " + name);
+        break;
+      }
     }
+    context.compilingWord = "[[compiled]]";
+    context.isCompileMode = false;
+    context.debuggingCompile = false;
+    if (!context.abort) runWordList(buildWordList());
+    return !context.abort;
+  }
 
-    /**
-     * Compile FORTH code. No execution, but a call to run afterwards will
-     * run the code just compiled.
-     */
-    public boolean compile(String sourceToCompile) {
-        isCompileMode = true;
-        writer = new StringBuffer();
-        abort = false;
-        source = sourceToCompile;
-        sourceLength = source.length();
-        sourcePointer = 0;
-        compiling.depth = 0;
-        errors.setLength(0);
-        String name;
-        //noinspection NestedAssignment
-        while (!abort && ((name = getWord()) != null)) {
-            if (dictionary.containsKey(name)) {
-                CompiledWord word = (CompiledWord) dictionary.get(name);
-                // we call the word in compile mode
-                if (word.immediate)
-                    word.run();
-                else
-                    compileWord(word);
-            } else if (!compileLiteral(name)) {
-                abort("Unknown word: " + name);
-                break;
-            }
-        }
-        compilingWord = "[[compiled]]";
-        compiled = new WordOfWords();
-        isCompileMode = false;
-        return !abort;
+  synchronized public void extend(String name, Runnable actor) {
+    storeWord(name, createWord(name, TYPE_RUNNABLE, 0, actor));
+  }
+
+  /** Extend FICL with a new word. */
+  synchronized public void immediate(String name, Runnable actor) {
+    storeWord(name, createWord(name, TYPE_IMMEDIATE, 0, actor));
+  }
+
+  synchronized public int popInt() {
+    return context.iStack[--context.isp & 63];
+  }
+
+  synchronized public Object pop() {
+    int popped = context.iStack[--context.isp & 63];
+    if (popped == nan) {
+      return context.oStack[--context.osp & 63];
     }
+    return newInteger(popped);
+  }
 
-    /**
-     * Run the code just compiled.
-     */
-    public boolean run() {
-        debuggingCompile = false;
-        return run("[[compiled]]", compiled);
+  synchronized public void abort(String msg) {
+    if (context.isCompileMode) {
+      error("compile,"); error(context.compilingWord); error(",");
+    } else {
+      error("run,");
+      for (int i = 0; i < (context.rwsp & 31); i++) {
+        error(context.runningWords[i].name); error("->");
+      }
+      error(",");
     }
+    error(msg); error("\n");
+    context.abort = true;
+    resetContext();
+  }
 
-    /**
-     * compile and run source
-     */
-    public boolean run(String sourceCode) {
-        return compile(sourceCode) && run();
+  synchronized public Object get(String name) {
+    CompiledWord word = (CompiledWord) getStore(name);
+    if (word == null) return null;
+    switch (word.type) {
+      case TYPE_DATA: return word.data;
+      case TYPE_INT: return newInteger(word.integer);
+      default: return null;
     }
-
-    boolean run(String name, Runnable actor) {
-        runningWords.push(name);
-        try {
-            actor.run();
-        } finally {
-            runningWords.pop();
-        }
-        return !abort;
+  }
+  synchronized public int getInt(String name) {
+    CompiledWord word = (CompiledWord) getStore(name);
+    if (word.type == TYPE_INT) return word.integer;
+    return nan;
+  }
+  synchronized public void put(String name, Object value) {
+    storeWord( name, createWord(name, TYPE_DATA, 0, value));
+  }
+  synchronized public void putInt(String name, int value) {
+    storeWord( name, createWord(name, TYPE_INT, value, null));
+  }
+  synchronized public boolean trigger_word_on_update(String trigger, String data) {
+    CompiledWord triggerWord = (CompiledWord) getStore(trigger);
+    CompiledWord dataWord = (CompiledWord) getStore(data);
+    if(triggerWord == null || dataWord == null) return false;
+    dataWord.trigger = triggerWord;
+    return true;
+  }
+  synchronized public void runWord(CompiledWord word) {
+    context.runningWords[context.rwsp++ & 31] = context.currentWord = word;
+    switch (word.type) {
+      case TYPE_DATA:
+        context.oStack[context.osp++ & 63] = word.data;
+        context.iStack[context.isp++ & 63] = nan;
+        break;
+      case TYPE_INT:
+        context.iStack[context.isp++ & 63] = word.integer;
+        break;
+      case TYPE_RUNNABLE:
+        ((Runnable) word.data).run();
+        break;
+      case TYPE_WORD_LIST:
+        runWordList((CompiledWord[]) word.data);
+        break;
     }
+    context.rwsp--;
+  }
+  ////////////////////////////////////////////////////////
+  public class Context {
+    public boolean abort, isCompileMode, debuggingCompile;
+    public StringBuffer writer, errors;
+    public String source, compilingWord, lastDefinition;
+    public int sourcePointer, sourceLength, jumpTo;
+    public CompiledWord currentWord;
+    public CompiledWord[] compiling, runningWords;
+    public Object[] oStack, secondStack;
+    public int[] iStack, loopStack, ifStack;
+    public int isp, osp, cp, rwsp, ssp, lsp, ifsp;
+  }
 
-    /**
-     * Write to standard out
-     */
-    public void print(Object object) {
-        String text = "";
-        try {
-            text = object.toString();
-            writer.append(text);
-        } catch (Exception e) {
-            abort("print," + text, e);
-        }
+  public Context context = newContext();
+
+  private void resetContext() {
+    context.isp = context.osp = context.rwsp = context.ssp =
+        context.cp = context.lsp = context.ifsp = 0;
+  }
+
+  private class CompiledWord {
+    int type, integer;
+    String name;
+    Object data;
+    CompiledWord trigger;
+  }
+
+  private static final int TYPE_RUNNABLE = 1;
+  private static final int TYPE_IMMEDIATE = 2;
+  private static final int TYPE_WORD_LIST = 4;
+  private static final int TYPE_DATA = 8;
+  private static final int TYPE_INT = 16;
+
+  private void copyWord(CompiledWord to, CompiledWord from) {
+    to.type = from.type;
+    to.integer = from.integer;
+    to.name = from.name;
+    to.data = from.data;
+  }
+
+  CompiledWord[] buildWordList() {
+    CompiledWord[] words = new CompiledWord[context.cp];
+    System.arraycopy(context.compiling, 0, words, 0, context.cp);
+    context.cp = 0;
+    return words;
+  }
+
+  private void runWordList(CompiledWord[] words) {
+    int runPointer = 0;
+    int end = words.length;
+    while (runPointer < end) {
+      if (context.abort) break;
+      CompiledWord word = words[runPointer++];
+      runWord(word);
+      if (context.jumpTo != 0) runPointer = context.jumpTo;
+      context.jumpTo = 0;
     }
+  }
 
-    public void abort(String msg, Exception e) {
-        if (throwExceptions) throw new RuntimeException(msg);
-        abort(msg + ',' + e.toString());
+  private String getSourceWord() {
+    do {
+      if (context.sourcePointer == context.sourceLength) return null;
+    } while (isSpace(getNextSourceChar()));
+    int first = context.sourcePointer - 1;
+    do {
+      if (context.sourcePointer == context.sourceLength)
+        return substring(context.source, first, context.sourceLength);
+    } while (!isSpace(getNextSourceChar()));
+
+    String word = substring(context.source, first, context.sourcePointer - 1);
+    if (context.debuggingCompile) output(word + ' ');
+    return word;
+  }
+
+  private String getSourceText(char chr) {
+    int start = context.sourcePointer;
+    context.sourcePointer = context.source.indexOf(chr, context.sourcePointer);
+    String text;
+    if (context.sourcePointer == -1) {
+      context.sourcePointer = context.sourceLength;
+      text = context.source.substring(start);
+    } else {
+      text = context.source.substring(start, context.sourcePointer++);
     }
+    return text;
+  }
 
-    public void abort(String msg) {
-        if (isCompileMode)
-            errors.append("compile,").append(compilingWord).append(',');
-        else {
-            errors.append("run,");
-            for (int i = 1; i <= runningWords.depth; i++) {
-                errors.append(runningWords.stack[i]).append("->");
-            }
-            errors.append(',');
-        }
-        errors.append(msg).append('\n');
-        abort = true;
-        reset();
+  private boolean isSpace(char c) {
+    return (c == ' ') || (c == '\t') ||
+        (c == '\r') || (c == '\n');
+  }
+
+  ////////////////////////////////////////////////////////
+  private boolean compileLiteral(String name) {
+    int num = 0, sign = -1, idx = 0, len = name.length();
+    if (name.charAt(0) == '-') {
+      sign = idx = 1;
     }
-
-    public void reset() {
-        stack.depth = secondStack.depth = 0;
-        compilingStack.depth = runningWords.depth = 0;
+    int decimal = -10000;
+    while (idx < len) {
+      int chr = name.charAt(idx++);
+      if (chr == '.') {
+        decimal = 1;
+      } else {
+        int digit = '0' - chr;
+        if (digit > 0 || digit < -9) return false;
+        num = (num * 10) + digit;
+        decimal *= 10;
+      }
     }
-
-    public String toString() {
-        return writer.toString();
+    if (decimal < 0) {
+      context.compiling[context.cp++] =
+          createWord("", TYPE_INT, sign * num, null);
+    } else {
+      context.compiling[context.cp++] = createWord("",
+          TYPE_DATA, 0, newDouble((sign * num) / (double) decimal));
     }
+    return true;
+  }
 
-    public String getWord() {
-        // start by dropping any leading space characters
-        do {
-            if (sourcePointer == sourceLength) return null;
-        } while (isSpace(source.charAt(sourcePointer++)));
-        int first = sourcePointer - 1;
-        // and go to where we have a space again
-        do {
-            if (sourcePointer == sourceLength) return source.substring(first);
-        } while (!isSpace(source.charAt(sourcePointer++)));
+  private CompiledWord
+  createWord(String name, int type, int integer, Object data) {
+    CompiledWord word = (CompiledWord) getStore(name);
+    if (word == null || name.length() == 0) word = newWord();
+    word.type = type;
+    word.name = name;
+    word.data = data;
+    word.integer = integer;
+    return word;
+  }
 
-        String word = source.substring(first, sourcePointer - 1);
-        if (debuggingCompile) print(word + ' ');
-        return word;
+  ////////////////////////////////////////////////////////
+  private void storeWord(String key, CompiledWord value) {
+    CompiledWord word = (CompiledWord) getStore(key);
+    if (word != null) {
+      copyWord(word, value);
+    } else {
+      putStore(key, value);
+      word = value;
     }
-	private boolean isSpace(char c) {
-		return (c == ' ') || (c == '\t') || (c == '\r') || (c == '\n');
-	}
+    if (word.trigger != null) runWord(word.trigger);
+  }
 
-    private boolean compileLiteral(String name) {
-	    int num = 0, sign = -1, idx = 0, len = name.length();
-	    if (name.charAt(0) == '-') {
-		    sign = idx = 1;
-	    }
-	    int decimal = -10000;
-	    while (idx < len) {
-		    int chr = name.charAt(idx++);
-		    if (chr == '.') {
-			    decimal = 1;
-		    } else {
-			    int digit = '0' - chr;
-			    if (digit > 0 || digit < -9) return false; // NaN
-			    num = (num * 10) + digit;
-			    decimal *= 10;
-		    }
-	    }
-		if (decimal < 0) {
-	        compilePushWord(name, new Integer(sign * num));
-		} else {
-			double real = (sign * num) / (double) decimal;
-			compilePushWord(name, new Double(real));
-		}
-	    return true;
-    }
+  ////////////////////////////////////////////////////////
+  private void init() {
+    immediate(":", new Runnable() {
+      public void run() {
+        context.secondStack[context.ssp++ & 31] = context.compilingWord;
+        context.compilingWord = getSourceWord();
+        context.secondStack[context.ssp++ & 31] = context.compiling;
+        context.compiling = newWordList(64);
+      }
+    });
+    immediate(";", new Runnable() {
+      public void run() {
+        final CompiledWord compiledWord = createWord(
+            context.compilingWord, TYPE_WORD_LIST, 0, buildWordList());
 
-    public class Stack {
-        Object[] stack;
-        public int size = 0, depth = 0;
-
-        public Stack(int depth) {
-            stack = new Object[size = depth];
-        }
-
-        public Object peek() {
-            return stack[depth];
-        }
-
-        public Object pop() {
-            Object value = stack[depth];
-            depth = (depth - 1) % size;
-            return value;
-        }
-
-        public void push(Object value) {
-            depth = (depth + 1) % size;
-            stack[depth] = value;
-        }
-
-        public int popInt() {
-            Object object = pop();
-            try {
-                int value = 0;
-                if (object instanceof Boolean) {
-                    if (((Boolean) object).booleanValue()) {
-                        value = 1;
-                    }
-                } else {
-                    value = ((Integer) object).intValue();
-                }
-                return value;
-            } catch (Exception e) {
-                abort("pop Integer," + object, e);
-            }
-            return 0;
-        }
-    }
-
-    private void compileWord(CompiledWord word) {
-        compiling.push(word);
-    }
-
-    public void compileWord(String name, Runnable word) {
-        compileWord(new CompiledWord(name, word));
-    }
-
-    public void compileWord(Runnable word) {
-        compileWord(new CompiledWord(compilingWord, word));
-    }
-
-    public void compilePushWord(String name, Object value) {
-        compileWord(compiledPushWord(name, value));
-    }
-
-    public class CompiledWord {
-        public String name, source = "";
-        public Runnable actor;
-        public boolean immediate = false, variable = false;
-
-        CompiledWord(String name, Runnable actor) {
-            this.name = this.source = name;
-            this.actor = actor;
-        }
-
-        public void run() {
-            try {
-                FICL.this.run(name, actor);
-            } catch (Exception e) {
-                abort("run", e);
-            }
-        }
-    }
-
-    private class ImmediateWord extends CompiledWord {
-        ImmediateWord(String name, Runnable actor) {
-            super(name, actor);
-            immediate = true;
-        }
-    }
-
-    private class VariableWord extends CompiledWord {
-        CompiledWord value;
-
-        VariableWord(String name, CompiledWord actor) {
-            super(name, actor.actor);
-            variable = true;
-        }
-
-        public void run() {
-            value.run();
-        }
-    }
-
-    private class WordOfWords implements Runnable {
-        private CompiledWord[] words;
-
-        WordOfWords() {
-	        words = new CompiledWord[compiling.depth];
-	        System.arraycopy(compiling.stack, 1, words, 0, compiling.depth);
-        }
-
-        public void run() {
-            int runPointer = 0;
-            int end = words.length;
-            while (runPointer < end) {
-                if (abort) break;
-                CompiledWord word = words[runPointer++];
-                //System.out.println(word.name+"("+(runPointer-1)+")");
-                word.run();
-                if (jumpTo != 0) runPointer = jumpTo;
-                jumpTo = 0;
-            }
-        }
-    }
-
-    private int jumpTo = 0;
-
-    private String source = "";
-    private int sourcePointer = 0, sourceLength = 0;
-    public String compilingWord = "";
-    private String lastDefinition = "";
-    private Stack runningWords = new Stack(RUNNING_WORD_STACK_DEPTH);
-    private Stack compiling = new Stack(COMPILING_WORD_DEPTH);
-    public boolean debuggingCompile = false;
-    private Runnable compiled = null;
-    private Stack compilingStack = new Stack(COMPILING_STACK_DEPTH);
-    public final Stack stack = new Stack(OPERATING_STACK_DEPTH);
-    private final Stack secondStack = new Stack(SECOND_STACK_DEPTH);
-    private final Stack loopStack = new Stack(LOOP_STACK_DEPTH);
-    private StringBuffer writer = new StringBuffer();
-
-    public class Dictionary extends Hashtable {
-        public CompiledWord put(final String key, final CompiledWord value) {
-            boolean wasVariable = (containsKey(key) && ((CompiledWord) get(key)).variable);
-            if (wasVariable) {
-                compileWord(new Runnable() {
-                    public void run() {
-                        ((VariableWord) get(key)).value = value;
-                    }
-                });
-            } else {
-                super.put(key, value);
-            }
-            return value;
-        }
-    }
-
-    public final Dictionary dictionary = new Dictionary();
-
-    /**
-     * Extend FICL with a new word.
-     */
-    public void extend(String name, Runnable actor) {
-        dictionary.put(name, new CompiledWord(name, actor));
-    }
-
-    public CompiledWord compiledPushWord(String name, final Object value) {
-        return new CompiledWord(name, new Runnable() {
-            public void run() {
-                stack.push(value);
-            }
-        });
-    }
-
-    /**
-     * Extend FICL with a new word.
-     */
-    public void immediate(String name, Runnable actor) {
-        dictionary.put(name, new ImmediateWord(name, actor));
-    }
-
-    ////////////////////////////////////////////////////////
-    private void init() {
-        immediate(":", new Runnable() {
-            public void run() {
-                secondStack.push(compilingWord);
-                secondStack.push(new Integer(sourcePointer));
-                compilingWord = getWord();
-                compilingStack.push(compiling);
-                compiling = new Stack(COMPILING_WORD_DEPTH);
-            }
-        });
-        immediate(";", new Runnable() {
-            public void run() {
-                int start = ((Integer) secondStack.pop()).intValue();
-                final CompiledWord compiledWord =
-                        new CompiledWord(compilingWord, new WordOfWords());
-                compiledWord.source =
-                        source.substring(start, sourcePointer);
-
-                //noinspection unchecked
-                compiling = (Stack) compilingStack.pop();
-                lastDefinition = compilingWord;
-                compilingWord = (String) secondStack.pop();
-                dictionary.put(lastDefinition, compiledWord);
-            }
-        });
-        immediate("(", new Runnable() {
-            public void run() {
-                sourcePointer = source.indexOf(')', sourcePointer) + 1;
-                if (sourcePointer == 0) sourcePointer = sourceLength;
-            }
-        });
-        immediate("\\", new Runnable() {
-            public void run() {
-                sourcePointer = sourceLength;
-            }
-        });
-        immediate("\"", new Runnable() {
-            public void run() {
-                compilePushWord("\"", getQuotedString());
-            }
-        });
-	    extend(".", new Runnable() {
-            public void run() {
-                print(stack.pop());
-            }
-        });
-        extend("and", new Runnable() {
-            public void run() {
-                stack.push(new Integer(stack.popInt() & stack.popInt()));
-            }
-        });
-        extend("+", new Runnable() {
-            public void run() {
-                stack.push(new Integer(stack.popInt() + stack.popInt()));
-            }
-        });
-        immediate("begin", new Runnable() {
-            public void run() {
-                final int[] beginLeaveEnd = {compiling.depth, 0};
-                loopStack.push(beginLeaveEnd);
-            }
-        });
-        immediate("leave", new Runnable() {
-            public void run() {
-                final int[] beginLeaveEnd = (int[]) loopStack.peek();
-                compileWord("leave", new Runnable() {
-                    public void run() {
-                        jumpTo = beginLeaveEnd[1];
-                    }
-                });
-            }
-        });
-        immediate("?leave", new Runnable() {
-            public void run() {
-                final int[] beginLeaveEnd = (int[]) loopStack.peek();
-                compileWord("?leave", new Runnable() {
-                    public void run() {
-                        int testResult = ((Integer) stack.pop()).intValue();
-                        if (testResult == 0) {
-                            jumpTo = beginLeaveEnd[1];
-                        }
-                    }
-                });
-            }
-        });
-        immediate("again", new Runnable() {
-            public void run() {
-                final int[] beginLeaveEnd = (int[]) loopStack.pop();
-                beginLeaveEnd[1] = compiling.depth + 1;
-                compileWord("again", new Runnable() {
-                    public void run() {
-                        jumpTo = beginLeaveEnd[0];
-                    }
-                });
-            }
-        });
-        immediate("constant", new Runnable() {
-            public void run() {
-                ((CompiledWord) dictionary.get(lastDefinition)).run();
-                final Object constant = stack.pop();
-                dictionary.put(lastDefinition, compiledPushWord(
-                        lastDefinition + " - constant", constant));
-            }
-        });
-        extend("dec", new Runnable() {
-            public void run() {
-                stack.push(new Integer(stack.popInt() - 1));
-            }
-        });
-        immediate("debug-compile", new Runnable() {
-            public void run() {
-                debuggingCompile = true;
-            }
-        });
-        extend("/", new Runnable() {
-            public void run() {
-                stack.push(new Integer(stack.popInt() / stack.popInt()));
-            }
-        });
-        extend("drop", new Runnable() {
-            public void run() {
-                stack.pop();
-            }
-        });
-        extend("dup", new Runnable() {
-            public void run() {
-                stack.push(stack.peek());
-            }
-        });
-        extend("=", new Runnable() {
-            public void run() {
-                stack.push((stack.pop().equals(stack.pop())) ?
-	                Boolean.TRUE : Boolean.FALSE);
-            }
-        });
-        immediate("if", new Runnable() {
-            public void run() {
-                final int[] ifElseNext = {compiling.depth, 0, 0};
-                secondStack.push(ifElseNext);
-                compileWord("if", new Runnable() {
-                    public void run() {
-                        int testResult = stack.popInt();
-                        if (testResult == 0) {
-                            jumpTo = ifElseNext[1];
-                        }
-                    }
-                });
-            }
-        });
-        immediate("else", new Runnable() {
-            public void run() {
-                final int[] ifElseNext = (int[]) secondStack.peek();
-                ifElseNext[1] = compiling.depth + 1; // over else
-                compileWord("else", new Runnable() {
-                    public void run() {
-                        jumpTo = ifElseNext[2];
-                    }
-                });
-            }
-        });
-        immediate("then", new Runnable() {
-            public void run() {
-                int[] ifElseNext = (int[]) secondStack.pop();
-                // make sure we run the then statement to clean up secondStack
-                ifElseNext[2] = compiling.depth;
-                if (ifElseNext[1] == 0) ifElseNext[1] = ifElseNext[2];
-            }
-        });
-        immediate("immediate", new Runnable() {
-            public void run() {
-                ((CompiledWord) dictionary.get(lastDefinition)).immediate = true;
-            }
-        });
-        extend("inc", new Runnable() {
-            public void run() {
-                stack.push(new Integer(stack.popInt() + 1));
-            }
-        });
-        extend("-", new Runnable() {
-            public void run() {
-                stack.push(new Integer(stack.popInt() - stack.popInt()));
-            }
-        });
-        extend("*", new Runnable() {
-            public void run() {
-                stack.push(new Integer(stack.popInt() * stack.popInt()));
-            }
-        });
-        extend("not", new Runnable() {
-            public void run() {
-                stack.push((stack.popInt() == 0) ? Boolean.TRUE : Boolean.FALSE);
-            }
-        });
-        extend("or", new Runnable() {
-            public void run() {
-                stack.push(new Integer(stack.popInt() | stack.popInt()));
-            }
-        });
-        immediate("push", new Runnable() {
-            public void run() {
-                compilePushWord("push", dictionary.get(getWord()));
-            }
-        });
-        extend("random", new Runnable() {
-            public void run() {
-                int i = random.nextInt(stack.popInt());
-                stack.push(new Integer(i));
-            }
-        });
-        extend("return", new Runnable() {
-            public void run() {
-                jumpTo = 100000;
-            }
-        });
-        immediate("variable", new Runnable() {
-            public void run() {
-                final CompiledWord word = (CompiledWord) dictionary.get(lastDefinition);
-                if (!word.variable) {
-                    dictionary.put(lastDefinition, new VariableWord(
-                            lastDefinition + " - variable", word));
-                    dictionary.put(lastDefinition, word);   // matches second
-                }
-            }
-        });
-    }
-
-    private String getQuotedString() {
-        int start = sourcePointer;
-        sourcePointer = source.indexOf('"', sourcePointer);
-        String text;
-        if (sourcePointer == -1) {
-            sourcePointer = sourceLength;
-            text = source.substring(start);
+        context.compiling = (CompiledWord[])
+            context.secondStack[--context.ssp & 31];
+        context.lastDefinition = context.compilingWord;
+        storeWord(context.lastDefinition, compiledWord);
+        context.compilingWord = (String)
+            context.secondStack[--context.ssp & 31];
+      }
+    });
+    immediate("(", new Runnable() {
+      public void run() {
+        getSourceText(')');
+      }
+    });
+    immediate("\"", new Runnable() {
+      public void run() {
+        context.compiling[context.cp++] =
+            createWord("", TYPE_DATA, 0, getSourceText('"'));
+      }
+    });
+    extend(".", new Runnable() {
+      public void run() {
+        int data = context.iStack[--context.isp & 63];
+        output(" ");
+        if (data == nan) {
+          output(context.oStack[--context.osp & 63]);
         } else {
-            text = source.substring(start, sourcePointer++);
+          outputInteger(data);
         }
-        return text;
-    }
+      }
+    });
+    extend("and", new Runnable() {
+      public void run() {
+        int b = context.iStack[--context.isp & 63];
+        int a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++] = a & b;
+      }
+    });
+    extend("+", new Runnable() {
+      public void run() {
+        int b = context.iStack[--context.isp & 63];
+        int a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++ & 63] = a + b;
+      }
+    });
+    immediate("begin", new Runnable() {
+      public void run() {
+        context.loopStack[context.lsp++ & 31] = context.cp;
+        context.loopStack[context.lsp++ & 31] = 0;
+      }
+    });
+    immediate("leave", new Runnable() {
+      public void run() {
+        context.loopStack[context.lsp++ & 31] = context.cp;
+        context.compiling[context.cp++] = createWord(
+            "", TYPE_RUNNABLE, 0, new Runnable() {
+          public void run() {
+            context.jumpTo = context.currentWord.integer;
+          }
+        });
+      }
+    });
+    immediate("?leave", new Runnable() {
+      public void run() {
+        context.loopStack[context.lsp++ & 31] = context.cp;
+        context.compiling[context.cp++ & 15] = createWord("", TYPE_RUNNABLE, 0,
+            new Runnable() {
+              public void run() {
+                int a = context.iStack[--context.isp & 63];
+                if (a == 0)
+                  context.jumpTo = context.currentWord.integer;
+              }
+            });
+      }
+    });
+    immediate("again", new Runnable() {
+      public void run() {
+        int cp, to = context.cp + 1;
+        while ((cp = context.loopStack[--context.lsp & 31]) != 0) {
+          context.compiling[cp].integer = to;
+        }
+        final int start = context.loopStack[--context.lsp & 31];
+        context.compiling[context.cp++] = createWord("", TYPE_RUNNABLE, 0,
+            new Runnable() {
+              public void run() {
+                context.jumpTo = start;
+              }
+            });
+      }
+    });
+    immediate("variable", new Runnable() {
+      public void run() {
+        runWord((CompiledWord) getStore(context.lastDefinition));
+        int result = context.iStack[--context.isp & 63];
+        CompiledWord word;
+        if (result != nan) {
+          word = createWord(context.lastDefinition, TYPE_INT, result, null);
+        } else {
+          Object object = context.oStack[--context.osp & 63];
+          word = createWord(context.lastDefinition, TYPE_DATA, 0, object);
+        }
+        storeWord(context.lastDefinition, word);
+      }
+    });
+    extend("dec", new Runnable() {
+      public void run() {
+        context.iStack[(context.isp - 1) & 63] -= 1;
+      }
+    });
+    immediate("debug-compile", new Runnable() {
+      public void run() {
+        context.debuggingCompile = true;
+      }
+    });
+    extend(".s", new Runnable() {
+      public void run() {
+        output("\n");
+        for (int i = 0; i < (context.osp & 63); i++) {
+          output(context.oStack[i]); output("\n");
+        }
+        output("=====\n");
+        for (int i = 0; i < (context.isp & 63); i++) {
+          if (context.iStack[i] != nan) {
+            outputInteger(context.iStack[i]); output(" ");
+          } else {
+            output("^ ");
+          }
+        }
+        output("\n");
+      }
+    });
+    extend("/", new Runnable() {
+      public void run() {
+        int b = context.iStack[--context.isp & 63];
+        int a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++ & 63] = a / b;
+      }
+    });
+    extend("drop", new Runnable() {
+      public void run() {
+        int a = context.iStack[--context.isp & 63];
+        if (a == nan) --context.osp;
+      }
+    });
+    extend("dup", new Runnable() {
+      public void run() {
+        int a = context.iStack[(context.isp - 1) & 63];
+        if (a == nan) {
+          context.iStack[context.isp++ & 63] = nan;
+          Object ao = context.oStack[context.osp & 63];
+          context.oStack[context.osp++ & 63] = ao;
+        } else {
+          context.iStack[context.isp++ & 63] = a;
+        }
+      }
+    });
+    extend("swap", new Runnable() { // ( a b -- b a )
+      public void run() {
+        int b = context.iStack[(context.isp - 1) & 63];
+        int a = context.iStack[(context.isp - 2) & 63];
+        if (b == nan && a == nan) {
+          Object bo = context.oStack[(context.osp - 1) & 63];
+          context.oStack[(context.osp - 1) & 63] =
+              context.oStack[(context.osp - 2) & 63];
+          context.oStack[(context.osp - 2) & 63] = bo;
+        }
+        context.iStack[(context.isp - 1) & 63] = a;
+        context.iStack[(context.isp - 2) & 63] = b;
+      }
+    });
+    extend("over", new Runnable() { // ( a b -- a b a )
+      public void run() {
+        int a = context.iStack[(context.isp - 2) & 63];
+        if (a == nan) {
+          context.iStack[context.isp++ & 63] = nan;
+          context.oStack[context.osp++ & 63] =
+              context.oStack[(context.osp - 2) & 63];
+        } else {
+          context.iStack[context.isp++ & 63] = a;
+        }
+      }
+    });
+    extend("=", new Runnable() {
+      public void run() {
+        int b = context.iStack[--context.isp & 63];
+        int a = context.iStack[--context.isp & 63];
+        int equals = 0;
+        if (a == b) {
+          if (a == nan) {
+            Object bo = context.oStack[--context.osp & 63];
+            Object ao = context.oStack[--context.osp & 63];
+            context.iStack[context.isp++ & 63] = ao.equals(bo) ? 1 : 0;
+            return;
+          }
+          equals = 1;
+        }
+        context.iStack[context.isp++ & 63] = equals;
+        if (a == nan) --context.osp;
+        if (b == nan) --context.osp;
+      }
+    });
+    immediate("if", new Runnable() {
+      public void run() {
+        context.ifStack[context.ifsp++ & 31] = context.cp;
+        context.compiling[context.cp++] = createWord("", TYPE_RUNNABLE, 0,
+            new Runnable() {
+              public void run() {
+                int a = context.iStack[--context.isp & 63];
+                if (a == 0)
+                  context.jumpTo = context.currentWord.integer;
+              }
+            });
+      }
+    });
+    immediate("else", new Runnable() {
+      public void run() {
+        final int jumpFrom = context.ifStack[--context.ifsp & 31];
+        context.compiling[jumpFrom].integer = context.cp + 1;
+        context.ifStack[context.ifsp++ & 31] = context.cp;
+        context.compiling[context.cp++ & 15] = createWord("", TYPE_RUNNABLE, 0,
+            new Runnable() {
+              public void run() {
+                context.jumpTo = context.currentWord.integer;
+              }
+            });
+      }
+    });
+    immediate("then", new Runnable() {
+      public void run() {
+        final int jumpFrom = context.ifStack[--context.ifsp & 31];
+        context.compiling[jumpFrom].integer = context.cp;
+      }
+    });
+    extend("inc", new Runnable() {
+      public void run() {
+        context.iStack[(context.isp - 1) & 63] += 1;
+      }
+    });
+    extend("-", new Runnable() {
+      public void run() {
+        int b = context.iStack[--context.isp & 63];
+        int a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++ & 63] = a - b;
+      }
+    });
+    extend("*", new Runnable() {
+      public void run() {
+        int b = context.iStack[--context.isp & 63];
+        int a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++ & 63] = a * b;
+      }
+    });
+    extend("not", new Runnable() {
+      public void run() {
+        int isp = (context.isp - 1) & 63;
+        context.iStack[isp] = (context.iStack[isp] == 0) ? 1 : 0;
+      }
+    });
+    extend("or", new Runnable() {
+      public void run() {
+        int b = context.iStack[--context.isp & 63];
+        int a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++ & 63] = a | b;
+      }
+    });
+    extend("return", new Runnable() {
+      public void run() {
+        context.jumpTo = 100000;
+      }
+    });
+  }
 
-    private Random random = new Random();
+  ////////////////////////////////////////////////////////
+  private int nan = Integer.MAX_VALUE;
+
+  private Context newContext() {
+    return new Context();
+  }
+
+  private Object getStore(String key) {
+    return store.get(key);
+  }
+
+  private void putStore(String key, Object value) {
+    store.put(key, value);
+  }
+
+  private final Hashtable store = new Hashtable();
+
+  private CompiledWord newWord() {
+    return new CompiledWord();
+  }
+
+  private Double newDouble(double value) {
+    return new Double(value);
+  }
+
+  private void clearErrors() {
+    context.errors = new StringBuffer();
+  }
+
+  private void output(Object item) {
+    context.writer.append(item.toString());
+  }
+
+  private void outputInteger(int integer) {
+    context.writer.append(Integer.toString(integer));
+  }
+
+  public String toString() {
+    String result = context.writer.toString();
+    context.writer = stringBuffer();
+    return result;
+  }
+
+  private void error(Object item) {
+    context.errors.append(item.toString());
+  }
+
+  private char getNextSourceChar() {
+    return context.source.charAt(context.sourcePointer++);
+  }
+
+  private Object[] newList(int items) {
+    return new Object[items];
+  }
+
+  private CompiledWord[] newWordList(int items) {
+    return new CompiledWord[items];
+  }
+
+  private int[] newIntList(int items) {
+    return new int[items];
+  }
+
+  private Integer newInteger(int value) {
+    return new Integer(value);
+  }
+
+  private StringBuffer stringBuffer() {
+    return new StringBuffer();
+  }
+
+  private int strlen(String text) {
+    return text.length();
+  }
+
+  private String substring(String text, int from, int to) {
+    return text.substring(from, to);
+  }
 }

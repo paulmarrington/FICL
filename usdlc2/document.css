@@ -1,0 +1,101 @@
+/* Copyright (C) 2013 paul@marrington.net, see /GPL license */
+body {
+  counter-reset: H2;
+  margin-left: 55px;
+}
+h1 {
+  margin-left: -50px;
+}
+h2 {
+  counter-reset: H3;
+  margin-left: -40px;
+}
+h2:before {
+  content: counter(H2) " - ";
+  counter-increment: H2;
+}
+h3 {
+  counter-reset: H4;
+  margin-left: -30px;
+}
+h3:before {
+  content: counter(H2) "." counter(H3) " - ";
+  counter-increment: H3;
+}
+h4 {
+  counter-reset: H5;
+  margin-left: -20px;
+}
+h4:before {
+  content: counter(H2) "." counter(H3) "." counter(H4) " - ";
+  counter-increment: H4;
+}
+h5 {
+  counter-reset: H6;
+  margin-left: -10px;
+}
+h5:before {
+  content: counter(H2) "." counter(H3) "." counter(H4) "." counter(H5) " - ";
+  counter-increment: H5;
+}
+h6 {
+  counter-reset: H7;
+  margin-left: 0px;
+}
+h6:before {
+  content: counter(H2) "." counter(H3) "." counter(H4) "." counter(H5) "." counter(H6) " - ";
+  counter-increment: H6;
+}
+
+.outline > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+pre[type], textarea[type] {
+  margin: 0 10px;
+  padding: 0.5em 1em 1em 1em;
+}
+pre[type] {
+  border: 1px inset #cff;
+  background-color: #fffcff;
+  width: 85%;
+}
+pre[type=gwt] {
+  border: 1px inset #cff;
+  background-color: #fcffff;
+  width: 85%;
+}
+textarea[source] {
+  width: 80%;
+  padding: 2;
+  height: 1.7em;
+  border: 1px inset #9f9;
+  background-color: #f8fff8;
+}
+textarea[type="gwt.coffee"] {
+  width: 80%;
+  border: 1px inset #9f9;
+  background-color: #fafffa;
+}
+body.cke_editable textarea[source] {
+  display: none;
+}
+div.metadata {
+  font-style: italic;
+  color: #ccc;
+  width: 75%;
+  text-align: right;
+  padding-left: 0.5em;
+  font-size: smaller;
+  text-indent: -3em;
+  margin-left: 6em;
+}
+div.metadata a {padding-left: 0.5em;}
+/* unvisited link */
+div.metadata a:link    {color:rgba(0, 92, 255, 0.52);}
+/* visited link */
+div.metadata a:visited {color:rgba(0, 92, 255, 0.44);}
+/* mouse over link */
+div.metadata a:hover   {color:rgba(0, 214, 255, 0.81);}
+/* selected link */
+div.metadata a:active  {color:rgba(0, 214, 255, 0.81);}
