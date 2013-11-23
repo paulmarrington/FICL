@@ -31,7 +31,7 @@ public class FICL {
         if (word.type == TYPE_IMMEDIATE)
           ((Runnable) word.data).run();
         else
-          context.compiling[context.cp++] = word;
+          context.compiling[context.cp++ & 63] = word;
       } else if (!compileLiteral(name)) {
         abort("Unknown word: " + name);
         break;
@@ -45,12 +45,12 @@ public class FICL {
   }
 
   synchronized public void extend(String name, Runnable actor) {
-    storeWord(name, createWord(name, TYPE_RUNNABLE, 0, actor));
+    storeWord(name, TYPE_RUNNABLE, 0, actor);
   }
 
   /** Extend FICL with a new word. */
   synchronized public void immediate(String name, Runnable actor) {
-    storeWord(name, createWord(name, TYPE_IMMEDIATE, 0, actor));
+    storeWord(name, TYPE_IMMEDIATE, 0, actor);
   }
 
   synchronized public int popInt() {
@@ -63,6 +63,11 @@ public class FICL {
       return context.oStack[--context.osp & 63];
     }
     return newInteger(popped);
+  }
+
+  synchronized public void push(Object data) {
+    context.oStack[context.osp++ & 63] = data;
+    context.iStack[context.isp++ & 63] = nan;
   }
 
   synchronized public void abort(String msg) {
@@ -95,10 +100,13 @@ public class FICL {
     return nan;
   }
   synchronized public void put(String name, Object value) {
-    storeWord( name, createWord(name, TYPE_DATA, 0, value));
+    Object old = get(name);
+    if ((value == null && old != null) || !value.equals(old))
+      storeWord( name, TYPE_DATA, 0, value);
   }
   synchronized public void putInt(String name, int value) {
-    storeWord( name, createWord(name, TYPE_INT, value, null));
+    if (getInt(name) != value)
+      storeWord( name, TYPE_INT, value, null);
   }
   synchronized public boolean trigger_word_on_update(String trigger, String data) {
     CompiledWord triggerWord = (CompiledWord) getStore(trigger);
@@ -159,11 +167,10 @@ public class FICL {
   private static final int TYPE_DATA = 8;
   private static final int TYPE_INT = 16;
 
-  private void copyWord(CompiledWord to, CompiledWord from) {
-    to.type = from.type;
-    to.integer = from.integer;
-    to.name = from.name;
-    to.data = from.data;
+  private void copyWord(CompiledWord to, int type, int integer, Object data) {
+    to.type = type;
+    to.integer = integer;
+    to.data = data;
   }
 
   CompiledWord[] buildWordList() {
@@ -237,10 +244,10 @@ public class FICL {
       }
     }
     if (decimal < 0) {
-      context.compiling[context.cp++] =
+      context.compiling[context.cp++ & 63] =
           createWord("", TYPE_INT, sign * num, null);
     } else {
-      context.compiling[context.cp++] = createWord("",
+      context.compiling[context.cp++ & 63] = createWord("",
           TYPE_DATA, 0, newDouble((sign * num) / (double) decimal));
     }
     return true;
@@ -258,40 +265,76 @@ public class FICL {
   }
 
   ////////////////////////////////////////////////////////
-  private void storeWord(String key, CompiledWord value) {
-    CompiledWord word = (CompiledWord) getStore(key);
+  private void storeWord(String name, int type, int integer, Object data) {
+    CompiledWord word = (CompiledWord) getStore(name);
     if (word != null) {
-      copyWord(word, value);
+      copyWord(word, type, integer, data);
     } else {
-      putStore(key, value);
-      word = value;
+      word = createWord(name, type, integer, data);
+      putStore(name, word);
     }
-    if (word.trigger != null) runWord(word.trigger);
+    if (word.trigger != null &&
+       (word.type == TYPE_DATA || word.type == TYPE_INT)) {
+      runWord(word.trigger);
+    }
   }
-
+  ////////////////////////////////////////////////////////
+  private void start_compiling(String name) {
+    context.secondStack[context.ssp++ & 31] = context.compilingWord;
+    context.compilingWord = name;
+    context.secondStack[context.ssp++ & 31] = context.compiling;
+    context.compiling = newWordList(64);
+  }
+  private CompiledWord[] end_compiling() {
+    CompiledWord[] wordList = buildWordList();
+    context.compiling = (CompiledWord[])
+        context.secondStack[--context.ssp & 31];
+    context.lastDefinition = context.compilingWord;
+    context.compilingWord = (String)
+        context.secondStack[--context.ssp & 31];
+    return wordList;
+  }
+  private Runnable end_compile_word = new Runnable() {
+    public void run() {
+      storeWord(context.lastDefinition, TYPE_WORD_LIST, 0, end_compiling());
+    }
+  };
+  private Runnable end_compile_trigger = new Runnable() {
+    public void run() {
+      CompiledWord[] words = end_compiling();
+      CompiledWord target = (CompiledWord) getStore(context.lastDefinition);
+      if (target.trigger == null) {
+        target.trigger = createWord("", TYPE_WORD_LIST, 0, words);
+      } else {
+        CompiledWord[] first = (CompiledWord[]) target.trigger.data;
+        CompiledWord[] cat = new CompiledWord[first.length + words.length];
+        System.arraycopy(first, 0, cat, 0, first.length);
+        System.arraycopy(words, 0, cat, first.length, words.length);
+        target.trigger.data = cat;
+      }
+    }
+  };
   ////////////////////////////////////////////////////////
   private void init() {
     immediate(":", new Runnable() {
       public void run() {
-        context.secondStack[context.ssp++ & 31] = context.compilingWord;
-        context.compilingWord = getSourceWord();
-        context.secondStack[context.ssp++ & 31] = context.compiling;
-        context.compiling = newWordList(64);
+        start_compiling(getSourceWord());
+        context.secondStack[context.ssp++ & 31] = end_compile_word;
+      }
+    });
+    immediate(":on-update-to", new Runnable() {
+      public void run() {
+        start_compiling(getSourceWord());
+        context.secondStack[context.ssp++ & 31] = end_compile_trigger;
       }
     });
     immediate(";", new Runnable() {
       public void run() {
-        final CompiledWord compiledWord = createWord(
-            context.compilingWord, TYPE_WORD_LIST, 0, buildWordList());
-
-        context.compiling = (CompiledWord[])
-            context.secondStack[--context.ssp & 31];
-        context.lastDefinition = context.compilingWord;
-        storeWord(context.lastDefinition, compiledWord);
-        context.compilingWord = (String)
-            context.secondStack[--context.ssp & 31];
+        Runnable ender = (Runnable) context.secondStack[--context.ssp & 31];
+        ender.run();
       }
     });
+
     immediate("(", new Runnable() {
       public void run() {
         getSourceText(')');
@@ -299,7 +342,7 @@ public class FICL {
     });
     immediate("\"", new Runnable() {
       public void run() {
-        context.compiling[context.cp++] =
+        context.compiling[context.cp++ & 63] =
             createWord("", TYPE_DATA, 0, getSourceText('"'));
       }
     });
@@ -337,7 +380,7 @@ public class FICL {
     immediate("leave", new Runnable() {
       public void run() {
         context.loopStack[context.lsp++ & 31] = context.cp;
-        context.compiling[context.cp++] = createWord(
+        context.compiling[context.cp++ & 63] = createWord(
             "", TYPE_RUNNABLE, 0, new Runnable() {
           public void run() {
             context.jumpTo = context.currentWord.integer;
@@ -348,7 +391,7 @@ public class FICL {
     immediate("?leave", new Runnable() {
       public void run() {
         context.loopStack[context.lsp++ & 31] = context.cp;
-        context.compiling[context.cp++ & 15] = createWord("", TYPE_RUNNABLE, 0,
+        context.compiling[context.cp++ & 63] = createWord("", TYPE_RUNNABLE, 0,
             new Runnable() {
               public void run() {
                 int a = context.iStack[--context.isp & 63];
@@ -365,26 +408,30 @@ public class FICL {
           context.compiling[cp].integer = to;
         }
         final int start = context.loopStack[--context.lsp & 31];
-        context.compiling[context.cp++] = createWord("", TYPE_RUNNABLE, 0,
-            new Runnable() {
+        context.compiling[context.cp++ & 63] =
+            createWord("", TYPE_RUNNABLE, 0, new Runnable() {
               public void run() {
                 context.jumpTo = start;
               }
             });
       }
     });
-    immediate("variable", new Runnable() {
+    immediate("set", new Runnable() {
       public void run() {
-        runWord((CompiledWord) getStore(context.lastDefinition));
-        int result = context.iStack[--context.isp & 63];
-        CompiledWord word;
-        if (result != nan) {
-          word = createWord(context.lastDefinition, TYPE_INT, result, null);
-        } else {
-          Object object = context.oStack[--context.osp & 63];
-          word = createWord(context.lastDefinition, TYPE_DATA, 0, object);
-        }
-        storeWord(context.lastDefinition, word);
+        final String name = getSourceWord();
+        if (getStore(name) == null) storeWord(name, TYPE_INT, 0, null);
+        context.compiling[context.cp++ & 63] =
+            createWord("", TYPE_RUNNABLE, 0, new Runnable() {
+              public void run() {
+                int value = context.iStack[--context.isp & 63];
+                if (value != nan) {
+                  storeWord(name, TYPE_INT, value, null);
+                } else {
+                  Object object = context.oStack[--context.osp & 63];
+                  storeWord(name, TYPE_DATA, 0, object);
+                }
+              }
+            });
       }
     });
     extend("dec", new Runnable() {
@@ -401,12 +448,14 @@ public class FICL {
       public void run() {
         output("\n");
         for (int i = 0; i < (context.osp & 63); i++) {
-          output(context.oStack[i]); output("\n");
+          output(context.oStack[i]);
+          output("\n");
         }
         output("=====\n");
         for (int i = 0; i < (context.isp & 63); i++) {
           if (context.iStack[i] != nan) {
-            outputInteger(context.iStack[i]); output(" ");
+            outputInteger(context.iStack[i]);
+            output(" ");
           } else {
             output("^ ");
           }
@@ -487,8 +536,8 @@ public class FICL {
     immediate("if", new Runnable() {
       public void run() {
         context.ifStack[context.ifsp++ & 31] = context.cp;
-        context.compiling[context.cp++] = createWord("", TYPE_RUNNABLE, 0,
-            new Runnable() {
+        context.compiling[context.cp++ & 63] =
+            createWord("", TYPE_RUNNABLE, 0, new Runnable() {
               public void run() {
                 int a = context.iStack[--context.isp & 63];
                 if (a == 0)
@@ -502,8 +551,8 @@ public class FICL {
         final int jumpFrom = context.ifStack[--context.ifsp & 31];
         context.compiling[jumpFrom].integer = context.cp + 1;
         context.ifStack[context.ifsp++ & 31] = context.cp;
-        context.compiling[context.cp++ & 15] = createWord("", TYPE_RUNNABLE, 0,
-            new Runnable() {
+        context.compiling[context.cp++ & 63] =
+            createWord("", TYPE_RUNNABLE, 0, new Runnable() {
               public void run() {
                 context.jumpTo = context.currentWord.integer;
               }
@@ -554,6 +603,7 @@ public class FICL {
       }
     });
   }
+  private String triggerName;
 
   ////////////////////////////////////////////////////////
   private int nan = Integer.MAX_VALUE;

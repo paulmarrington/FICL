@@ -22,7 +22,7 @@ gwt.file_processor.java = (name, next) -&gt;
 
 <h2>Creating&nbsp;FICL</h2>
 
-<p style="display: block;">An instance of FICL is ready to use as soon as it has been instanciated.</p>
+<p style="display: block;">An instance of FICL is ready to use as soon as it has been created.</p>
 
 <pre style="display: block;" title="java" type="java">
 import usdlc.FICL;
@@ -114,7 +114,8 @@ extends Scaffold {
       ficl.putInt(&quot;testVar&quot;, 0);
       ficl.run(&quot;: myTrigger testVar . ;&quot;);
       
-      ficl.trigger_word_on_update(&quot;myTrigger&quot;, &quot;testVar&quot;);
+      ficl.trigger_word_on_update(
+        &quot;myTrigger&quot;, &quot;testVar&quot;);
       
       ficl.put(&quot;testVar&quot;, new Integer(24));
       ficl.putInt(&quot;testVar&quot;, 23);

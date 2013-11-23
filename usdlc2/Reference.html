@@ -8,7 +8,7 @@
 
 <p>FICL is a FORTH based language using stack based control and word based commands.</p>
 
-<div class="metadata Ref">Ref: <span class="FICL"><a href="javascript:usdlc.edit_source({value:'FICL.java',path:'../FICL/java/usdlc/FICL.java',category:'usdlc'})">FICL.java</a></span></div>
+<div class="metadata Ref">Ref: <span class="FICL"><a href="javascript:usdlc.edit_source({value:'FICL.java',path:'../FICL/java/usdlc/FICL.java',category:'usdlc'})">FICL.java</a></span><span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
 <p><textarea readonly="readonly" source="true" type="gwt.coffee">java = gwt.java out: &#39;gen/classes&#39;, main: &#39;ficl&#39;
 java.compile &#39;java/ficl.java&#39;, &#39;java/usdlc/FICL.java&#39;
@@ -91,19 +91,13 @@ gwt.file_processor.ficl = (name, next) -&gt;
 
 <p><em><strong>.s</strong></em> will dump the stack contents to the output buffer.</p>
 
-<h2>Define (: return&nbsp;; variable)</h2>
+<h2>Define (: return&nbsp;; set)</h2>
 
-<p class="p1">A <em><strong>variable</strong></em>&nbsp;is an immediate word that replaces the last definition with it&#39;s result. This allows definitions that don&#39;t change on reference to only be evaluated once. A word must place a single value on the stack to be loaded.</p>
+<p class="p1">FICL is extensible by creating words of word lists. Use <em>return</em>&nbsp;to leave a word prematurely.</p>
 
 <pre title="ficl" type="ficl">
- : test_word 6 2 * ; variable ( -- n1 )
-test_word            12 expected
-
-: add_two test_word 2 + ;
-add_two             14 expected
-
-: test_word 3 ; ( -- n1 )
-add_two             5 expected
+: add_two 2 + ; ( n -- n )
+3 add_two             5 expected
 
 : test 1 1 if return then 1 + ;
 test                 1 expected
@@ -163,6 +157,42 @@ test                 1 expected
 
 <div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
+<h2 class="metadata Ref">Variables (set :on-update-to)</h2>
+
+<p>use&nbsp;<em><strong>set</strong></em>&nbsp;( n -- ) to create or assign to a variable from the top of the stack. A variable is a word that pushes it&#39;s value onto the stack when referenced.</p>
+
+<pre title="ficl" type="ficl">
+1 set test_data                test_data 1 expected
+test_data 2 + set test_data    test_data 3 expected</pre>
+
+<p>One of the benefit of shared data between the underlying application and FICL is that a FICL word can be run when data changes.</p>
+
+<pre title="ficl" type="ficl">
+1 set my-data
+0 set triggered
+
+:on-update-to my-data   triggered inc set triggered ;
+
+triggered 0 expected
+2 set my-data
+triggered 1 expected
+3 set my-data
+triggered 2 expected
+</pre>
+
 <p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+
+<p>Triggers accumulate.&nbsp;Use the&nbsp;<em>return</em>&nbsp;statement to skip additional trigger functionality.</p>
+
+<pre title="ficl" type="ficl">
+:on-update-to my-data   triggered 2 + set triggered return ;
+( never run since return above skips it )
+:on-update-to my-data   0 set triggered ;
+
+triggered 2 expected
+5 set my-data
+triggered 5 expected</pre>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 </body>
 </html>

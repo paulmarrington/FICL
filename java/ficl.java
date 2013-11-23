@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ficl {
-  public static int errors = 0;
-
   public static void main(String[] args) {
     try {
       final FICL ficl = new FICL();
@@ -65,4 +63,6 @@ public class ficl {
       e.printStackTrace();
     }
   }
+
+  public static int errors = 0;
 }
