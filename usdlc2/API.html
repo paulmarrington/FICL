@@ -4,7 +4,7 @@
 	<link href="document.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="scayt-enabled">
-<h1>FICL API</h1>
+<h1>FICL API <span style="font-size:14px;">(<a href="http://www.screencast.com/t/SprHndAo">screencast</a>)</span></h1>
 
 <p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee">java = gwt.java out: &#39;gen/classes&#39;
 java.compile &#39;java/usdlc/FICL.java&#39;,
@@ -28,16 +28,16 @@ gwt.file_processor.java = (name, next) -&gt;
 import usdlc.FICL;
 
 public class Creating_FICL extends Scaffold {
-  public static void main(String[] args) {
+  public static void main(String[] <span data-scayt_word="args" data-scaytid="2">args</span>) {
     new Creating_FICL();
   }
     
   protected void instrument() {
       /***************/
-      final FICL ficl = new FICL();
+      final FICL <span data-scayt_word="ficl" data-scaytid="3">ficl</span> = new FICL();
       
       String result = ficl.toString();
-      expect(&quot;Instantiation&quot;, &quot;&quot;, result);
+      expect(&quot;<span data-scayt_word="Instantiation" data-scaytid="4">Instantiation</span>&quot;, &quot;&quot;, result);
       /***************/
   }
 }</pre>
@@ -52,37 +52,37 @@ public class Creating_FICL extends Scaffold {
 
 <h2>Data Sharing</h2>
 
-<p>The other way to share functionality between the parent application and FICL is if both entities can share a data store. This data can reside within the FICL store or within the parent application and referenced by FICL. If using the former, changing the data can automatically trigger a FICL word.</p>
+<p style="display: block;">The other way to share functionality between the parent application and FICL is if both entities can share a data store. This data can reside within the FICL store or within the parent application and referenced by FICL. If using the former, changing the data can automatically trigger a FICL word.</p>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
 <h3>Access to the FICL Store (get, put)</h3>
 
-<pre title="java" type="java">
+<pre contenteditable="false" title="java" type="java">
 import usdlc.FICL;
 
 public class Access_to_the_FICL_Store_get_put_
 extends Scaffold {
-  public static void main(String[] args) {
+  public static void main(String[] <span data-scayt_word="args" data-scaytid="5">args</span>) {
     new Access_to_the_FICL_Store_get_put_();
   }
     
   protected void instrument() {
       /***************/
-      final FICL ficl = new FICL();
+      final FICL <span data-scayt_word="ficl" data-scaytid="6">ficl</span> = new FICL();
       
-      expect(&quot;Not set&quot;, ficl.get(&quot;testVar&quot;) == null);
+      expect(&quot;Not set&quot;, ficl.get(&quot;<span data-scayt_word="testVar" data-scaytid="12">testVar</span>&quot;) == null);
       
-      ficl.put(&quot;testVar&quot;, new Integer(24));
-      ficl.run(&quot;testVar .&quot;);
-      ficl.putInt(&quot;testVar&quot;, 23);
-      ficl.run(&quot;testVar .&quot;);
+      ficl.put(&quot;<span data-scayt_word="testVar" data-scaytid="13">testVar</span>&quot;, new Integer(24));
+      ficl.run(&quot;<span data-scayt_word="testVar" data-scaytid="14">testVar</span> .&quot;);
+      ficl.putInt(&quot;<span data-scayt_word="testVar" data-scaytid="15">testVar</span>&quot;, 23);
+      ficl.run(&quot;<span data-scayt_word="testVar" data-scaytid="16">testVar</span> .&quot;);
       
-      expect(&quot;Set&quot;, ficl.get(&quot;testVar&quot;) != null);
-      expect(&quot;Get Int&quot;, ficl.getInt(&quot;testVar&quot;) == 23);
-      expect(&quot;Get&quot;, ficl.get(&quot;testVar&quot;), new Integer(23));
+      expect(&quot;Set&quot;, ficl.get(&quot;<span data-scayt_word="testVar" data-scaytid="17">testVar</span>&quot;) != null);
+      expect(&quot;Get <span data-scayt_word="Int" data-scaytid="20">Int</span>&quot;, ficl.getInt(&quot;<span data-scayt_word="testVar" data-scaytid="18">testVar</span>&quot;) == 23);
+      expect(&quot;Get&quot;, ficl.get(&quot;<span data-scayt_word="testVar" data-scaytid="19">testVar</span>&quot;), new Integer(23));
       
       String result = ficl.toString();
       expect(&quot;Put&quot;, &quot; 24 23&quot;, result);
@@ -90,35 +90,35 @@ extends Scaffold {
   }
 }</pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
 <h3>Trigger on Store Data Update</h3>
 
-<p>FICL provides the ability to run a word whenever data changes.</p>
+<p style="display: block;">FICL provides the ability to run a word whenever data changes.</p>
 
 <pre title="java" type="java">
 import usdlc.FICL;
 
 public class Trigger_on_Store_Data_Update
 extends Scaffold {
-  public static void main(String[] args) {
+  public static void main(String[] <span data-scayt_word="args" data-scaytid="22">args</span>) {
     new Trigger_on_Store_Data_Update();
   }
     
   protected void instrument() {
       /***************/
-      final FICL ficl = new FICL();
+      final FICL <span data-scayt_word="ficl" data-scaytid="23">ficl</span> = new FICL();
     
-      ficl.putInt(&quot;testVar&quot;, 0);
-      ficl.run(&quot;: myTrigger testVar . ;&quot;);
+      ficl.putInt(&quot;<span data-scayt_word="testVar" data-scaytid="24">testVar</span>&quot;, 0);
+      ficl.run(&quot;: myTrigger <span data-scayt_word="testVar" data-scaytid="25">testVar</span> . ;&quot;);
       
       ficl.trigger_word_on_update(
-        &quot;myTrigger&quot;, &quot;testVar&quot;);
+        &quot;myTrigger&quot;, &quot;<span data-scayt_word="testVar" data-scaytid="26">testVar</span>&quot;);
       
-      ficl.put(&quot;testVar&quot;, new Integer(24));
-      ficl.putInt(&quot;testVar&quot;, 23);
+      ficl.put(&quot;<span data-scayt_word="testVar" data-scaytid="27">testVar</span>&quot;, new Integer(24));
+      ficl.putInt(&quot;<span data-scayt_word="testVar" data-scaytid="28">testVar</span>&quot;, 23);
       
       String result = ficl.toString();
       expect(&quot;Trigger&quot;, &quot; 24 23&quot;, result);
@@ -126,9 +126,9 @@ extends Scaffold {
   }
 }</pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="ficl"><a href="javascript:usdlc.edit_source({value:'ficl.java',path:'../FICL/java/ficl.java',category:'java'})">ficl.java</a></span><span class="FICL"><a href="javascript:usdlc.edit_source({value:'FICL.java',path:'../FICL/java/usdlc/FICL.java',category:'usdlc'})">FICL.java</a></span><span class="GPL"><a href="javascript:usdlc.edit_source({value:'GPL.txt',path:'../FICL/GPL.txt',category:'FICL'})">GPL.txt</a></span><span class="build"><a href="javascript:usdlc.edit_source({value:'build.xml',path:'../FICL/build.xml',category:'FICL'})">build.xml</a></span><span class="README"><a href="javascript:usdlc.edit_source({value:'README.md',path:'../FICL/README.md',category:'FICL'})">README.md</a></span></div>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
 <h2>Scaffold</h2>
 
@@ -155,7 +155,8 @@ public abstract class Scaffold {
   protected void expect(String msg,
   Object expect, Object found) {
     if (!expect.equals(found))
-      error(msg+&quot;\nExpecting &#39;&quot;+expect+&quot;&#39;, Found &#39;&quot;+found+&quot;&#39;&quot;);
+      error(msg+&quot;\nExpecting &#39;&quot;+expect+
+            &quot;&#39;, Found &#39;&quot;+found+&quot;&#39;&quot;);
   }
   
   protected void error(String msg) {

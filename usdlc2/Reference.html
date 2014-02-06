@@ -6,94 +6,95 @@
 <body class="scayt-enabled">
 <h1>Reference</h1>
 
-<p>FICL is a FORTH based language using stack based control and word based commands.</p>
+<p style="display: block;">FICL is a FORTH based language using stack based control and word based commands.</p>
 
-<div class="metadata Ref">Ref: <span class="FICL"><a href="javascript:usdlc.edit_source({value:'FICL.java',path:'../FICL/java/usdlc/FICL.java',category:'usdlc'})">FICL.java</a></span><span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="FICL"><a href="javascript:usdlc.edit_source({value:'FICL.java',path:'../FICL/java/usdlc/FICL.java',category:'usdlc'})">FICL.java</a></span><span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="ficl"><a href="javascript:usdlc.edit_source({value:'ficl.java',path:'../FICL/java/ficl.java',category:'java'})">ficl.java</a></span></div>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee">java = gwt.java out: &#39;gen/classes&#39;, main: &#39;ficl&#39;
-java.compile &#39;java/ficl.java&#39;, &#39;java/usdlc/FICL.java&#39;
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee">#1. Make sure instrumented code is up to date
+java = gwt.java out: 'gen/classes', main: 'ficl'
+java.compile 'java'
 repl = gwt.repl java.command_line(), (failed) -&gt;
   process.exit failed
-
+#2. Recognise pass and fail conditions in console output
 gwt.monitor_output =
   pass: /^Errors: 0$/m
   fail: /^Errors: [1-9]\d*$/m
-
+#3. Load instrumentation scripts by file extension
 gwt.file_processor.ficl = (name, next) -&gt;
-  gwt.add -&gt; repl.process.send_file name, &#39;\n_end_\n&#39;
+  gwt.add -&gt; repl.process.send_file name, '\n_end_\n', -&gt;
   next()</textarea></p>
 
 <h2>Arithmetic (+ - / * inc dec)</h2>
 
 <pre title="ficl" type="ficl">
-6 2 +   ( n1 n2 -- n3 )   8 expected
-6 2 -   ( n1 n2 -- n3 )   4 expected
-6 2 *   ( n1 n2 -- n3 )  12 expected
-6 2 /   ( n1 n2 -- n3 )   3 expected
-12 inc  ( n1 -- n1 )     13 expected
-12 dec  ( n1 -- n1 )     11 expected</pre>
+6 2 +   ( <span data-scayt_word="n1" data-scaytid="5">n1</span> <span data-scayt_word="n2" data-scaytid="13">n2</span> -- <span data-scayt_word="n3" data-scaytid="17">n3</span> )   8 expected
+6 2 -   ( <span data-scayt_word="n1" data-scaytid="6">n1</span> <span data-scayt_word="n2" data-scaytid="14">n2</span> -- <span data-scayt_word="n3" data-scaytid="18">n3</span> )   4 expected
+6 2 *   ( <span data-scayt_word="n1" data-scaytid="7">n1</span> <span data-scayt_word="n2" data-scaytid="15">n2</span> -- <span data-scayt_word="n3" data-scaytid="19">n3</span> )  12 expected
+6 2 /   ( <span data-scayt_word="n1" data-scaytid="8">n1</span> <span data-scayt_word="n2" data-scaytid="16">n2</span> -- <span data-scayt_word="n3" data-scaytid="20">n3</span> )   3 expected
+12 <span data-scayt_word="inc" data-scaytid="2">inc</span>  ( <span data-scayt_word="n1" data-scaytid="9">n1</span> -- <span data-scayt_word="n1" data-scaytid="10">n1</span> )     13 expected
+12 <span data-scayt_word="dec" data-scaytid="4">dec</span>  ( <span data-scayt_word="n1" data-scaytid="11">n1</span> -- <span data-scayt_word="n1" data-scaytid="12">n1</span> )     11 expected</pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
 <h2>Boolean (and or not =)</h2>
 
 <pre title="ficl" type="ficl">
-0 0 and    ( n1 n2 -- b1 )   0 expected
-0 1 and    ( n1 n2 -- b1 )   0 expected
-1 0 and    ( n1 n2 -- b1 )   0 expected
-1 1 and    ( n1 n2 -- b1 )   1 expected
+0 0 and    ( <span data-scayt_word="n1" data-scaytid="22">n1</span> <span data-scayt_word="n2" data-scaytid="32">n2</span> -- <span data-scayt_word="b1" data-scaytid="83">b1</span> )   0 expected
+0 1 and    ( <span data-scayt_word="n1" data-scaytid="23">n1</span> <span data-scayt_word="n2" data-scaytid="33">n2</span> -- <span data-scayt_word="b1" data-scaytid="84">b1</span> )   0 expected
+1 0 and    ( <span data-scayt_word="n1" data-scaytid="24">n1</span> <span data-scayt_word="n2" data-scaytid="34">n2</span> -- <span data-scayt_word="b1" data-scaytid="85">b1</span> )   0 expected
+1 1 and    ( <span data-scayt_word="n1" data-scaytid="25">n1</span> <span data-scayt_word="n2" data-scaytid="35">n2</span> -- <span data-scayt_word="b1" data-scaytid="86">b1</span> )   1 expected
 
-0 0 or     ( n1 n2 -- b1 )   0 expected
-0 1 or     ( n1 n2 -- b1 )   1 expected
-1 0 or     ( n1 n2 -- b1 )   1 expected
-1 1 or     ( n1 n2 -- b1 )   1 expected
+0 0 or     ( <span data-scayt_word="n1" data-scaytid="26">n1</span> <span data-scayt_word="n2" data-scaytid="36">n2</span> -- <span data-scayt_word="b1" data-scaytid="87">b1</span> )   0 expected
+0 1 or     ( <span data-scayt_word="n1" data-scaytid="27">n1</span> <span data-scayt_word="n2" data-scaytid="37">n2</span> -- <span data-scayt_word="b1" data-scaytid="88">b1</span> )   1 expected
+1 0 or     ( <span data-scayt_word="n1" data-scaytid="28">n1</span> <span data-scayt_word="n2" data-scaytid="38">n2</span> -- <span data-scayt_word="b1" data-scaytid="89">b1</span> )   1 expected
+1 1 or     ( <span data-scayt_word="n1" data-scaytid="29">n1</span> <span data-scayt_word="n2" data-scaytid="39">n2</span> -- <span data-scayt_word="b1" data-scaytid="90">b1</span> )   1 expected
 
-1 not      ( b1 -- b2 )      0 expected
-0 not      ( b1 -- b2 )      1 expected
+1 not      ( <span data-scayt_word="b1" data-scaytid="91">b1</span> -- <span data-scayt_word="b2" data-scaytid="97">b2</span> )      0 expected
+0 not      ( <span data-scayt_word="b1" data-scaytid="92">b1</span> -- <span data-scayt_word="b2" data-scaytid="98">b2</span> )      1 expected
 
-12 14 =    ( n1 n2 -- b1 )   0 expected
-14 14 =    ( n1 n2 -- b1 )   1 expected
+12 14 =    ( <span data-scayt_word="n1" data-scaytid="30">n1</span> <span data-scayt_word="n2" data-scaytid="40">n2</span> -- <span data-scayt_word="b1" data-scaytid="93">b1</span> )   0 expected
+14 14 =    ( <span data-scayt_word="n1" data-scaytid="31">n1</span> <span data-scayt_word="n2" data-scaytid="41">n2</span> -- <span data-scayt_word="b1" data-scaytid="94">b1</span> )   1 expected
 
-&quot; string 1&quot; &quot; string 2&quot; =  ( s1 s1 -- b1 )  0 expected
-&quot; string 1&quot; &quot; string 1&quot; =  ( s1 s1 -- b1 )  1 expected</pre>
+" string 1" " string 2" =  ( <span data-scayt_word="s1" data-scaytid="99">s1</span> <span data-scayt_word="s1" data-scaytid="100">s1</span> -- <span data-scayt_word="b1" data-scaytid="95">b1</span> )  0 expected
+" string 1" " string 1" =  ( <span data-scayt_word="s1" data-scaytid="101">s1</span> <span data-scayt_word="s1" data-scaytid="102">s1</span> -- <span data-scayt_word="b1" data-scaytid="96">b1</span> )  1 expected</pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
 <h2>Comments ( ( ) )</h2>
 
 <pre title="ficl" type="ficl">
 1 ( inline comment )   1 expected</pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
 <h2>Conditional (if else then)</h2>
 
 <pre title="ficl" type="ficl">
-12 0 if 2 - then        ( b1 -- )  12 expected
-12 1 if 2 - then        ( b1 -- )  10 expected
+12 0 if 2 - then        ( <span data-scayt_word="b1" data-scaytid="105">b1</span> -- )  12 expected
+12 1 if 2 - then        ( <span data-scayt_word="b1" data-scaytid="106">b1</span> -- )  10 expected
 
-12 0 if 2 else 4 then - ( b1 -- )   8 expected
-12 1 if 2 else 4 then - ( b1 -- )  10 expected</pre>
+12 0 if 2 else 4 then - ( <span data-scayt_word="b1" data-scaytid="107">b1</span> -- )   8 expected
+12 1 if 2 else 4 then - ( <span data-scayt_word="b1" data-scaytid="108">b1</span> -- )  10 expected</pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
 <h2>Debugging (debug-compile .s)</h2>
 
-<p><em><strong>debug-compile</strong></em> will print out the compiled form of all future words.</p>
+<p style="display: block;"><em><strong>debug-compile</strong></em> will print out the compiled form of all future words.</p>
 
-<p><em><strong>.s</strong></em> will dump the stack contents to the output buffer.</p>
+<p style="display: block;"><em><strong>.s</strong></em> will dump the stack contents to the output buffer.</p>
 
 <h2>Define (: return&nbsp;; set)</h2>
 
-<p class="p1">FICL is extensible by creating words of word lists. Use <em>return</em>&nbsp;to leave a word prematurely.</p>
+<p class="p1" style="display: block;">FICL is extensible by creating words of word lists. Use <em>return</em>&nbsp;to leave a word prematurely.</p>
 
 <pre title="ficl" type="ficl">
 : add_two 2 + ; ( n -- n )
@@ -103,75 +104,102 @@ gwt.file_processor.ficl = (name, next) -&gt;
 test                 1 expected
 </pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
 <h2>Loops (begin leave ?leave again)</h2>
 
-<div><b class="blue">begin ( -- ) ...&nbsp;leave ( -- ) ...&nbsp;?leave ( b1 -- ) ...&nbsp;again ( -- )</b></div>
+<div style="display: block;"><b class="blue">begin ( -- ) ...&nbsp;leave ( -- ) ...&nbsp;?leave ( b1 -- ) ...&nbsp;again ( -- )</b></div>
 
-<div>&nbsp;</div>
+<div style="display: block;"> </div>
 
-<div>Primary looping mechanism. It loops forever unless leave or ?leave are encountered.</div>
+<div style="display: block;">Primary looping mechanism. It loops forever unless leave or ?leave are encountered.</div>
 
-<div>&nbsp;</div>
+<div style="display: block;"> </div>
 
-<div style="margin-left: 40px;"><code><strong><span style="background-color: rgb(255, 160, 122);">begin</span></strong>&nbsp;words boolean-1&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">?leave</span></strong>&nbsp;words if&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">leave</span></strong>&nbsp;then&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">again</span></strong></code></div>
+<div style="margin-left: 40px; display: block;"><code><strong><span style="background-color: rgb(255, 160, 122);">begin</span></strong>&nbsp;words boolean-1&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">?leave</span></strong>&nbsp;words if&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">leave</span></strong>&nbsp;then&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">again</span></strong></code></div>
 
-<div style="margin-left: 40px;">&nbsp;</div>
+<div style="margin-left: 40px; display: block;"> </div>
 
 <pre title="ficl" type="ficl">
-5 begin dec dup not if leave then again   0 expected
+5 begin <span data-scayt_word="dec" data-scaytid="117">dec</span> <span data-scayt_word="dup" data-scaytid="121">dup</span> not if leave then again   0 expected
 
-5 begin dec dup ?leave again              0 expected
+5 begin <span data-scayt_word="dec" data-scaytid="118">dec</span> <span data-scayt_word="dup" data-scaytid="122">dup</span> ?leave again              0 expected
 </pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
+
+<h2 class="metadata Ref">Persistence (:upload ;upload load)</h2>
+
+<p>Given a file name, save everything following until ;upload. Use load to reload previously saved data. The functionality is in a separate file so that the persistence mechanism can be changed.</p>
+
+<p>By default persistence is session only. To persist to the file system, use</p>
+
+<div style="background:#eee;border:1px solid #ccc;padding:5px 10px;"><code>ficl.setPersistence(new usdlc.FICL_File(baseDir));</code></div>
+
+<p>or implent the interface <em>FICL_Persistence</em>&nbsp;to persist across the wire, to a database, or wherever.</p>
+
+<pre title="ficl" type="ficl">
+0 set counter
+:upload counter++
+  counter inc set counter
+;upload
+load counter++
+load counter++
+counter 3 expected</pre>
+
+<p>�</p>
+
+<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
 <p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
 
+<p> </p>
+
 <h2>Print (.)</h2>
 
-<p class="p1">Convert the top of stack to printable form and write to output buffer.</p>
+<p class="p1" style="display: block;">Convert the top of stack to printable form and write to output buffer.</p>
 
 <h2>Stack Control (drop dup swap over)</h2>
 
 <pre title="ficl" type="ficl">
 1 2 drop     ( a -- )            1 expected
-1 dup +      ( a -- a a )        2 expected
+1 <span data-scayt_word="dup" data-scaytid="126">dup</span> +      ( a -- a a )        2 expected
 1 2 swap /   ( a b -- b a )      2 expected
 1 2 over + + ( a b -- a b a )    4 expected</pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
-<h2>String Literal (&quot;)</h2>
+<h2>String Literal (")</h2>
 
-<p>Note that the leading spaces exists because &quot; is a word. The string is trimmed before saving.</p>
-
-<pre title="ficl" type="ficl">
-&quot; a string&quot;    ( -- s1 )   &quot; a string&quot;  expected
-&quot; a string &quot;   ( -- s1 )   &quot; a string &quot; expected</pre>
-
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
-
-<h2 class="metadata Ref">Variables (set :on-update-to)</h2>
-
-<p>use&nbsp;<em><strong>set</strong></em>&nbsp;( n -- ) to create or assign to a variable from the top of the stack. A variable is a word that pushes it&#39;s value onto the stack when referenced.</p>
+<p style="display: block;">Note that the leading spaces exists because " is a word. The string is trimmed before saving.</p>
 
 <pre title="ficl" type="ficl">
+" a string"    ( -- <span data-scayt_word="s1" data-scaytid="130">s1</span> )   " a string"  expected
+" a string "   ( -- <span data-scayt_word="s1" data-scaytid="131">s1</span> )   " a string " expected</pre>
+
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+
+<h2 class="metadata Ref">Variables (set :on-update)</h2>
+
+<p style="display: block;">use&nbsp;<em><strong>set</strong></em>&nbsp;( n -- ) to create or assign to a variable from the top of the stack. A variable is a word that pushes it's value onto the stack when referenced.</p>
+
+<pre contenteditable="false" title="ficl" type="ficl">
 1 set test_data                test_data 1 expected
 test_data 2 + set test_data    test_data 3 expected</pre>
 
-<p>One of the benefit of shared data between the underlying application and FICL is that a FICL word can be run when data changes.</p>
+<p style="display: block;">One of the benefit of shared data between the underlying application and FICL is that a FICL word can be run when data changes.</p>
 
 <pre title="ficl" type="ficl">
 1 set my-data
 0 set triggered
 
-:on-update-to my-data   triggered inc set triggered ;
+:on-update my-data   triggered inc set triggered ;
 
 triggered 0 expected
 2 set my-data
@@ -180,19 +208,19 @@ triggered 1 expected
 triggered 2 expected
 </pre>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
-<p>Triggers accumulate.&nbsp;Use the&nbsp;<em>return</em>&nbsp;statement to skip additional trigger functionality.</p>
+<p style="display: block;">Triggers accumulate.&nbsp;Use the&nbsp;<em>return</em>&nbsp;statement to skip additional trigger functionality.</p>
 
 <pre title="ficl" type="ficl">
-:on-update-to my-data   triggered 2 + set triggered return ;
+:on-update my-data   triggered 2 + set triggered return ;
 ( never run since return above skips it )
-:on-update-to my-data   0 set triggered ;
+:on-update my-data   0 set triggered ;
 
 triggered 2 expected
 5 set my-data
 triggered 5 expected</pre>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 </body>
 </html>
