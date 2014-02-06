@@ -1,7 +1,10 @@
 /* Copyright (C) 2013 paul@marrington.net, see /GPL license */
 package usdlc;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Hashtable;
+//import usdlc.FICL_File;
 
 public class FICL {
   public FICL() {
@@ -12,19 +15,38 @@ public class FICL {
     context.secondStack = newList(32);
     context.loopStack = newIntList(32);
     context.ifStack = newIntList(32);
+    context.uploadStack = newList(32);
     context.writer = stringBuffer();
+    context.recording = null;
     init();
   }
 
   /** compile and run source */
   synchronized public boolean run(String sourceToCompile) {
-    context.isCompileMode = true;
-    context.abort = false;
-    context.source = sourceToCompile;
-    context.sourceLength = strlen(context.source);
-    context.sourcePointer = context.cp = 0;
-    clearErrors();
+    try {
+      if (sourceToCompile == null || sourceToCompile.length() == 0) return true;
+      context.abort = false;
+      context.source = sourceToCompile;
+      context.sourceLength = strlen(context.source);
+      context.sourcePointer = 0;
+      clearErrors();
+      compile();
+      if (!context.abort && (context.lsp | context.ssp | context.ifsp) == 0) {
+        runWordList(buildWordList());
+      }
+      if (context.debuggingCompile) stackDump(context.writer);
+      return !context.abort;
+    } catch (Throwable throwable) {
+      error(throwable);
+      return true;
+    } finally {
+      output(context.errors);
+    }
+  }
+
+  private void compile() {
     String name;
+    context.isCompileMode = true;
     while (!context.abort && ((name = getSourceWord()) != null)) {
       CompiledWord word = (CompiledWord) getStore(name);
       if (word != null) {
@@ -33,15 +55,10 @@ public class FICL {
         else
           context.compiling[context.cp++ & 63] = word;
       } else if (!compileLiteral(name)) {
-        abort("Unknown word: " + name);
-        break;
+        if (context.debuggingCompile) output(" [[Unknown word: " + name+"]]");
       }
     }
-    context.compilingWord = "[[compiled]]";
     context.isCompileMode = false;
-    context.debuggingCompile = false;
-    if (!context.abort) runWordList(buildWordList());
-    return !context.abort;
   }
 
   synchronized public void extend(String name, Runnable actor) {
@@ -70,20 +87,15 @@ public class FICL {
     context.iStack[context.isp++ & 63] = nan;
   }
 
-  synchronized public void abort(String msg) {
-    if (context.isCompileMode) {
-      error("compile,"); error(context.compilingWord); error(",");
-    } else {
-      error("run,");
-      for (int i = 0; i < (context.rwsp & 31); i++) {
-        error(context.runningWords[i].name); error("->");
-      }
-      error(",");
-    }
-    error(msg); error("\n");
-    context.abort = true;
-    resetContext();
+  synchronized public void pushInt(int data) {
+    context.iStack[context.isp++ & 63] = data;
   }
+
+//  synchronized public void abort(String msg) {
+//    error(msg);
+//    context.abort = true;
+//    resetContext();
+//  }
 
   synchronized public Object get(String name) {
     CompiledWord word = (CompiledWord) getStore(name);
@@ -96,25 +108,25 @@ public class FICL {
   }
   synchronized public int getInt(String name) {
     CompiledWord word = (CompiledWord) getStore(name);
-    if (word.type == TYPE_INT) return word.integer;
+    if (word != null && word.type == TYPE_INT) return word.integer;
     return nan;
   }
   synchronized public void put(String name, Object value) {
     Object old = get(name);
-    if ((value == null && old != null) || !value.equals(old))
+    if (value == null || !value.equals(old))
       storeWord( name, TYPE_DATA, 0, value);
   }
   synchronized public void putInt(String name, int value) {
     if (getInt(name) != value)
       storeWord( name, TYPE_INT, value, null);
   }
-  synchronized public boolean trigger_word_on_update(String trigger, String data) {
-    CompiledWord triggerWord = (CompiledWord) getStore(trigger);
-    CompiledWord dataWord = (CompiledWord) getStore(data);
-    if(triggerWord == null || dataWord == null) return false;
-    dataWord.trigger = triggerWord;
-    return true;
-  }
+//  synchronized public boolean trigger_word_on_update(String trigger, String data) {
+//    CompiledWord triggerWord = (CompiledWord) getStore(trigger);
+//    CompiledWord dataWord = (CompiledWord) getStore(data);
+//    if(triggerWord == null || dataWord == null) return false;
+//    dataWord.trigger = triggerWord;
+//    return true;
+//  }
   synchronized public void runWord(CompiledWord word) {
     context.runningWords[context.rwsp++ & 31] = context.currentWord = word;
     switch (word.type) {
@@ -135,24 +147,44 @@ public class FICL {
     context.rwsp--;
   }
   ////////////////////////////////////////////////////////
+  public class Persist implements FICL_Persistence {
+    Hashtable store = new Hashtable();
+
+    public void location(final String dir) {}
+
+    public String upload(String name, String contents) {
+      store.put(name, contents);
+      return "";
+    }
+    public String load(String name) {
+      String contents = (String) store.get(name);
+      return (contents == null) ? "" : contents;
+    }
+  }
+  private FICL_Persistence persist = new Persist();
+  // as in ficl.setPersistence(new FICL_File(baseDir));
+  public void setPersistence(FICL_Persistence persistance) {
+    persist = persistance;
+  }
+  ////////////////////////////////////////////////////////
   public class Context {
     public boolean abort, isCompileMode, debuggingCompile;
-    public StringBuffer writer, errors;
+    public StringBuffer writer, errors, recording;
     public String source, compilingWord, lastDefinition;
     public int sourcePointer, sourceLength, jumpTo;
     public CompiledWord currentWord;
     public CompiledWord[] compiling, runningWords;
-    public Object[] oStack, secondStack;
+    public Object[] oStack, secondStack, uploadStack;
     public int[] iStack, loopStack, ifStack;
-    public int isp, osp, cp, rwsp, ssp, lsp, ifsp;
+    public int isp, osp, cp, rwsp, ssp, lsp, ifsp, ulsp;
   }
 
   public Context context = newContext();
 
-  private void resetContext() {
-    context.isp = context.osp = context.rwsp = context.ssp =
-        context.cp = context.lsp = context.ifsp = 0;
-  }
+//  private void resetContext() {
+//    context.isp = context.osp = context.rwsp = context.ssp =
+//        context.cp = context.lsp = context.ifsp = 0;
+//  }
 
   private class CompiledWord {
     int type, integer;
@@ -185,8 +217,7 @@ public class FICL {
     int end = words.length;
     while (runPointer < end) {
       if (context.abort) break;
-      CompiledWord word = words[runPointer++];
-      runWord(word);
+      runWord(words[runPointer++]);
       if (context.jumpTo != 0) runPointer = context.jumpTo;
       context.jumpTo = 0;
     }
@@ -194,16 +225,19 @@ public class FICL {
 
   private String getSourceWord() {
     do {
-      if (context.sourcePointer == context.sourceLength) return null;
+      if (context.sourcePointer >= context.sourceLength) return null;
     } while (isSpace(getNextSourceChar()));
     int first = context.sourcePointer - 1;
     do {
-      if (context.sourcePointer == context.sourceLength)
-        return substring(context.source, first, context.sourceLength);
+      if (context.sourcePointer == context.sourceLength) {
+        context.sourcePointer = context.sourceLength + 1;
+        break;
+      }
     } while (!isSpace(getNextSourceChar()));
 
     String word = substring(context.source, first, context.sourcePointer - 1);
-    if (context.debuggingCompile) output(word + ' ');
+    if (context.debuggingCompile) output(" [["+word+"]] ");
+    if (context.recording != null) context.recording.append(word).append(' ');
     return word;
   }
 
@@ -217,6 +251,7 @@ public class FICL {
     } else {
       text = context.source.substring(start, context.sourcePointer++);
     }
+    if (context.recording != null) context.recording.append(text).append(chr);
     return text;
   }
 
@@ -280,6 +315,7 @@ public class FICL {
   }
   ////////////////////////////////////////////////////////
   private void start_compiling(String name) {
+//System.out.println(" %%%% start_compiling %%%%% "+name+": "+context.ssp);
     context.secondStack[context.ssp++ & 31] = context.compilingWord;
     context.compilingWord = name;
     context.secondStack[context.ssp++ & 31] = context.compiling;
@@ -292,17 +328,23 @@ public class FICL {
     context.lastDefinition = context.compilingWord;
     context.compilingWord = (String)
         context.secondStack[--context.ssp & 31];
+//System.out.println(" %%%% end_compiling %%%%% "+context.lastDefinition+": " +
+//    ""+context.ssp);
     return wordList;
   }
   private Runnable end_compile_word = new Runnable() {
     public void run() {
-      storeWord(context.lastDefinition, TYPE_WORD_LIST, 0, end_compiling());
+      storeWord(context.compilingWord, TYPE_WORD_LIST, 0, end_compiling());
     }
   };
   private Runnable end_compile_trigger = new Runnable() {
     public void run() {
       CompiledWord[] words = end_compiling();
       CompiledWord target = (CompiledWord) getStore(context.lastDefinition);
+      if (target == null) {
+        put(context.lastDefinition, "");
+	target = (CompiledWord) getStore(context.lastDefinition);
+      }
       if (target.trigger == null) {
         target.trigger = createWord("", TYPE_WORD_LIST, 0, words);
       } else {
@@ -322,7 +364,7 @@ public class FICL {
         context.secondStack[context.ssp++ & 31] = end_compile_word;
       }
     });
-    immediate(":on-update-to", new Runnable() {
+    immediate(":on-update", new Runnable() {
       public void run() {
         start_compiling(getSourceWord());
         context.secondStack[context.ssp++ & 31] = end_compile_trigger;
@@ -331,7 +373,7 @@ public class FICL {
     immediate(";", new Runnable() {
       public void run() {
         Runnable ender = (Runnable) context.secondStack[--context.ssp & 31];
-        ender.run();
+        if (ender != null) ender.run();
       }
     });
 
@@ -445,23 +487,7 @@ public class FICL {
       }
     });
     extend(".s", new Runnable() {
-      public void run() {
-        output("\n");
-        for (int i = 0; i < (context.osp & 63); i++) {
-          output(context.oStack[i]);
-          output("\n");
-        }
-        output("=====\n");
-        for (int i = 0; i < (context.isp & 63); i++) {
-          if (context.iStack[i] != nan) {
-            outputInteger(context.iStack[i]);
-            output(" ");
-          } else {
-            output("^ ");
-          }
-        }
-        output("\n");
-      }
+      public void run() { stackDump(context.writer); }
     });
     extend("/", new Runnable() {
       public void run() {
@@ -481,11 +507,10 @@ public class FICL {
         int a = context.iStack[(context.isp - 1) & 63];
         if (a == nan) {
           context.iStack[context.isp++ & 63] = nan;
-          Object ao = context.oStack[context.osp & 63];
+          Object ao = context.oStack[(context.osp-1) & 63];
           context.oStack[context.osp++ & 63] = ao;
-        } else {
-          context.iStack[context.isp++ & 63] = a;
         }
+        context.iStack[context.isp++ & 63] = a;
       }
     });
     extend("swap", new Runnable() { // ( a b -- b a )
@@ -506,12 +531,10 @@ public class FICL {
       public void run() {
         int a = context.iStack[(context.isp - 2) & 63];
         if (a == nan) {
-          context.iStack[context.isp++ & 63] = nan;
           context.oStack[context.osp++ & 63] =
               context.oStack[(context.osp - 2) & 63];
-        } else {
-          context.iStack[context.isp++ & 63] = a;
         }
+        context.iStack[context.isp++ & 63] = a;
       }
     });
     extend("=", new Runnable() {
@@ -602,9 +625,26 @@ public class FICL {
         context.jumpTo = 100000;
       }
     });
+    immediate(":upload", new Runnable() {
+      public void run() {
+        context.uploadStack[context.ulsp++ & 31] = getSourceWord();
+        context.recording = new StringBuffer();
+      }
+    });
+    immediate(";upload", new Runnable() {
+      public void run() {
+        String name = (String) context.uploadStack[--context.ulsp & 31];
+	      context.recording.setLength(context.recording.length() - 8);
+	      persist.upload(name, context.recording.toString());
+        context.recording = null;
+      }
+    });
+    immediate("load", new Runnable() {
+      public void run() {
+        FICL.this.run(persist.load(getSourceWord()));
+      }
+    });
   }
-  private String triggerName;
-
   ////////////////////////////////////////////////////////
   private int nan = Integer.MAX_VALUE;
 
@@ -634,11 +674,11 @@ public class FICL {
     context.errors = new StringBuffer();
   }
 
-  private void output(Object item) {
+  protected void output(Object item) {
     context.writer.append(item.toString());
   }
 
-  private void outputInteger(int integer) {
+  protected void outputInteger(int integer) {
     context.writer.append(Integer.toString(integer));
   }
 
@@ -648,8 +688,44 @@ public class FICL {
     return result;
   }
 
-  private void error(Object item) {
-    context.errors.append(item.toString());
+  private void error(Throwable throwable) {
+    StringWriter sw = new StringWriter();
+    throwable.printStackTrace(new PrintWriter(sw));
+    error(sw.toString());
+  }
+  private void error(String msg) {
+    context.errors.append("\n========\n");
+    if (context.isCompileMode) {
+      context.errors.append("compile: ").append(context.compilingWord)
+          .append(",");
+    } else {
+      context.errors.append("run: ");
+      for (int i = 0; i < (context.rwsp & 31); i++) {
+        context.errors.append(context.runningWords[i].name).append("->");
+      }
+    }
+    context.errors.append(msg);
+    stackDump(context.errors);
+    context.errors.append("\n========\n");
+  }
+  private void stackDump(StringBuffer out) {
+    out.append("\n");
+    int osp = 0;
+    for (int i = 0; i < (context.isp & 63); i++) {
+      out.append("\n").append(i).append(':');
+      if (context.iStack[i] == nan) {
+        out.append(context.oStack[osp++]);
+      } else {
+        out.append(context.iStack[i]).append(" ");
+      }
+    }
+    if (context.isp > 0) out.append("\n======");
+    out.append("\nsp=").append(context.isp).
+        append(", loop sp=").append(context.lsp).
+        append(", 2nd sp=").append(context.ssp).
+        append(", if sp=").append(context.ifsp).
+        append(", upload sp=").append(context.ulsp).
+        append("\n");
   }
 
   private char getNextSourceChar() {
