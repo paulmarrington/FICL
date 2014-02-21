@@ -6,9 +6,9 @@
 <body class="scayt-enabled">
 <h1>FICL API <span style="font-size:14px;">(<a href="http://www.screencast.com/t/SprHndAo">screencast</a>)</span></h1>
 
-<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee">java = gwt.java out: &#39;gen/classes&#39;
-java.compile &#39;java/usdlc/FICL.java&#39;,
-             &#39;gen/usdlc2/FICL_API/Scaffold.java&#39;
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee">java = gwt.java out: 'gen/classes'
+java.compile 'java/usdlc/FICL.java',
+             'gen/usdlc2/FICL_API/Scaffold.java'
 
 gwt.monitor_output =
   pass: /^Errors: 0$/m
@@ -37,7 +37,7 @@ public class Creating_FICL extends Scaffold {
       final FICL <span data-scayt_word="ficl" data-scaytid="3">ficl</span> = new FICL();
       
       String result = ficl.toString();
-      expect(&quot;<span data-scayt_word="Instantiation" data-scaytid="4">Instantiation</span>&quot;, &quot;&quot;, result);
+      expect("<span data-scayt_word="Instantiation" data-scaytid="4">Instantiation</span>", "", result);
       /***************/
   }
 }</pre>
@@ -73,19 +73,19 @@ extends Scaffold {
       /***************/
       final FICL <span data-scayt_word="ficl" data-scaytid="6">ficl</span> = new FICL();
       
-      expect(&quot;Not set&quot;, ficl.get(&quot;<span data-scayt_word="testVar" data-scaytid="12">testVar</span>&quot;) == null);
+      expect("Not set", ficl.get("<span data-scayt_word="testVar" data-scaytid="12">testVar</span>") == null);
       
-      ficl.put(&quot;<span data-scayt_word="testVar" data-scaytid="13">testVar</span>&quot;, new Integer(24));
-      ficl.run(&quot;<span data-scayt_word="testVar" data-scaytid="14">testVar</span> .&quot;);
-      ficl.putInt(&quot;<span data-scayt_word="testVar" data-scaytid="15">testVar</span>&quot;, 23);
-      ficl.run(&quot;<span data-scayt_word="testVar" data-scaytid="16">testVar</span> .&quot;);
+      ficl.put("<span data-scayt_word="testVar" data-scaytid="13">testVar</span>", new Integer(24));
+      ficl.run("<span data-scayt_word="testVar" data-scaytid="14">testVar</span> .");
+      ficl.putInt("<span data-scayt_word="testVar" data-scaytid="15">testVar</span>", 23);
+      ficl.run("<span data-scayt_word="testVar" data-scaytid="16">testVar</span> .");
       
-      expect(&quot;Set&quot;, ficl.get(&quot;<span data-scayt_word="testVar" data-scaytid="17">testVar</span>&quot;) != null);
-      expect(&quot;Get <span data-scayt_word="Int" data-scaytid="20">Int</span>&quot;, ficl.getInt(&quot;<span data-scayt_word="testVar" data-scaytid="18">testVar</span>&quot;) == 23);
-      expect(&quot;Get&quot;, ficl.get(&quot;<span data-scayt_word="testVar" data-scaytid="19">testVar</span>&quot;), new Integer(23));
+      expect("Set", ficl.get("<span data-scayt_word="testVar" data-scaytid="17">testVar</span>") != null);
+      expect("Get <span data-scayt_word="Int" data-scaytid="20">Int</span>", ficl.getInt("<span data-scayt_word="testVar" data-scaytid="18">testVar</span>") == 23);
+      expect("Get", ficl.get("<span data-scayt_word="testVar" data-scaytid="19">testVar</span>"), new Integer(23));
       
       String result = ficl.toString();
-      expect(&quot;Put&quot;, &quot; 24 23&quot;, result);
+      expect("Put", " 24 23", result);
       /***************/
   }
 }</pre>
@@ -111,17 +111,17 @@ extends Scaffold {
       /***************/
       final FICL <span data-scayt_word="ficl" data-scaytid="23">ficl</span> = new FICL();
     
-      ficl.putInt(&quot;<span data-scayt_word="testVar" data-scaytid="24">testVar</span>&quot;, 0);
-      ficl.run(&quot;: myTrigger <span data-scayt_word="testVar" data-scaytid="25">testVar</span> . ;&quot;);
+      ficl.putInt("<span data-scayt_word="testVar" data-scaytid="24">testVar</span>", 0);
+      ficl.run(": myTrigger <span data-scayt_word="testVar" data-scaytid="25">testVar</span> . ;");
       
       ficl.trigger_word_on_update(
-        &quot;myTrigger&quot;, &quot;<span data-scayt_word="testVar" data-scaytid="26">testVar</span>&quot;);
+        "myTrigger", "<span data-scayt_word="testVar" data-scaytid="26">testVar</span>");
       
-      ficl.put(&quot;<span data-scayt_word="testVar" data-scaytid="27">testVar</span>&quot;, new Integer(24));
-      ficl.putInt(&quot;<span data-scayt_word="testVar" data-scaytid="28">testVar</span>&quot;, 23);
+      ficl.put("<span data-scayt_word="testVar" data-scaytid="27">testVar</span>", new Integer(24));
+      ficl.putInt("<span data-scayt_word="testVar" data-scaytid="28">testVar</span>", 23);
       
       String result = ficl.toString();
-      expect(&quot;Trigger&quot;, &quot; 24 23&quot;, result);
+      expect("Trigger", " 24 23", result);
       /***************/
   }
 }</pre>
@@ -144,7 +144,7 @@ public abstract class Scaffold {
       error(e.toString());
       e.printStackTrace();
     } finally {
-      System.out.println(&quot;Errors: &quot; + errors);
+      System.out.println("Errors: " + errors);
     }
   }
   
@@ -155,13 +155,13 @@ public abstract class Scaffold {
   protected void expect(String msg,
   Object expect, Object found) {
     if (!expect.equals(found))
-      error(msg+&quot;\nExpecting &#39;&quot;+expect+
-            &quot;&#39;, Found &#39;&quot;+found+&quot;&#39;&quot;);
+      error(msg+"\nExpecting '"+expect+
+            "', Found '"+found+"'");
   }
   
   protected void error(String msg) {
       errors++;
-      System.out.println(&quot;Error: &quot; + msg);
+      System.out.println("Error: " + msg);
   }
 
   protected int errors = 0;

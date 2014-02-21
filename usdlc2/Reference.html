@@ -38,6 +38,20 @@ gwt.file_processor.ficl = (name, next) -&gt;
 
 <p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
+<h2>Arrays ([ ])</h2>
+
+<p style="display: block;">FICL captures a list of results on the stack for combined processing. It expects a word that takes two words and returns one (reduce) or two (map).</p>
+
+<pre title="ficl" type="ficl">
+[ 1 2 0 ] and              0 expected
+[ 11 1 3 ] and             1 expected
+[ 1 2 3 ] +                6 expected</pre>
+
+<p style="display: block;"><br />
+<textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
+
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="ficl"><a href="javascript:usdlc.edit_source({value:'ficl.java',path:'../FICL/java/ficl.java',category:'java'})">ficl.java</a></span></div>
+
 <h2>Boolean (and or not =)</h2>
 
 <pre title="ficl" type="ficl">
@@ -76,23 +90,23 @@ gwt.file_processor.ficl = (name, next) -&gt;
 <h2>Conditional (if else then)</h2>
 
 <pre title="ficl" type="ficl">
-12 0 if 2 - then        ( <span data-scayt_word="b1" data-scaytid="105">b1</span> -- )  12 expected
-12 1 if 2 - then        ( <span data-scayt_word="b1" data-scaytid="106">b1</span> -- )  10 expected
+12 0 if 2 - then        ( b1 -- )  12 expected
+12 1 if 2 - then        ( b1 -- )  10 expected
 
-12 0 if 2 else 4 then - ( <span data-scayt_word="b1" data-scaytid="107">b1</span> -- )   8 expected
-12 1 if 2 else 4 then - ( <span data-scayt_word="b1" data-scaytid="108">b1</span> -- )  10 expected</pre>
+12 0 if 2 else 4 then - ( b1 -- )   8 expected
+12 1 if 2 else 4 then - ( b1 -- )  10 expected</pre>
 
 <div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
 <p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
-<h2>Debugging (debug-compile .s)</h2>
+<h2>Debugging (.d .s)</h2>
 
-<p style="display: block;"><em><strong>debug-compile</strong></em> will print out the compiled form of all future words.</p>
+<p style="display: block;"><em><strong>.d</strong></em>&nbsp;will print out the compiled form of all future words. When they are run it also prints out helpful data such as name, contents and stack depth. It is a toggle.</p>
 
 <p style="display: block;"><em><strong>.s</strong></em> will dump the stack contents to the output buffer.</p>
 
-<h2>Define (: return&nbsp;; set)</h2>
+<h2>Define (: return&nbsp;;)</h2>
 
 <p class="p1" style="display: block;">FICL is extensible by creating words of word lists. Use <em>return</em>&nbsp;to leave a word prematurely.</p>
 
@@ -101,8 +115,7 @@ gwt.file_processor.ficl = (name, next) -&gt;
 3 add_two             5 expected
 
 : test 1 1 if return then 1 + ;
-test                 1 expected
-</pre>
+test                  1 expected</pre>
 
 <div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
@@ -123,9 +136,9 @@ test                 1 expected
 <div style="margin-left: 40px; display: block;"> </div>
 
 <pre title="ficl" type="ficl">
-5 begin <span data-scayt_word="dec" data-scaytid="117">dec</span> <span data-scayt_word="dup" data-scaytid="121">dup</span> not if leave then again   0 expected
+5 begin dec dup not if leave then again   0 expected
 
-5 begin <span data-scayt_word="dec" data-scaytid="118">dec</span> <span data-scayt_word="dup" data-scaytid="122">dup</span> ?leave again              0 expected
+5 begin dec dup ?leave again              0 expected
 </pre>
 
 <div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
@@ -134,30 +147,28 @@ test                 1 expected
 
 <h2 class="metadata Ref">Persistence (:upload ;upload load)</h2>
 
-<p>Given a file name, save everything following until ;upload. Use load to reload previously saved data. The functionality is in a separate file so that the persistence mechanism can be changed.</p>
+<p style="display: block;">Given a file name, save everything following until ;upload. Use load to reload previously saved data. The functionality is in a separate file so that the persistence mechanism can be changed.</p>
 
-<p>By default persistence is session only. To persist to the file system, use</p>
+<p style="display: block;">By default persistence is session only. To persist to the file system, use</p>
 
-<div style="background:#eee;border:1px solid #ccc;padding:5px 10px;"><code>ficl.setPersistence(new usdlc.FICL_File(baseDir));</code></div>
+<div style="background-color: rgb(238, 238, 238); border: 1px solid rgb(204, 204, 204); padding: 5px 10px; display: block; background-position: initial initial; background-repeat: initial initial;"><code>ficl.setPersistence(new usdlc.FICL_File(baseDir));</code></div>
 
-<p>or implent the interface <em>FICL_Persistence</em>&nbsp;to persist across the wire, to a database, or wherever.</p>
+<p style="display: block;">or implent the interface <em>FICL_Persistence</em>&nbsp;to persist across the wire, to a database, or wherever.</p>
 
 <pre title="ficl" type="ficl">
 0 set counter
 :upload counter++
   counter inc set counter
 ;upload
-load counter++
-load counter++
+load: counter++
+load: counter++
 counter 3 expected</pre>
 
-<p>�</p>
+<div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
-<div class="metadata Ref">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
+<p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
-<p><textarea readonly="readonly" source="true" type="gwt.coffee"></textarea></p>
-
-<p> </p>
+<p style="display: block;"> </p>
 
 <h2>Print (.)</h2>
 
@@ -175,51 +186,66 @@ counter 3 expected</pre>
 
 <p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
-<h2>String Literal (")</h2>
+<h2>Strings (" "")</h2>
 
-<p style="display: block;">Note that the leading spaces exists because " is a word. The string is trimmed before saving.</p>
+<p style="display: block;">Note that the leading spaces exists because " is a word. The string is trimmed before saving. Two double-quotes are used to concatenate two strings.</p>
 
 <pre title="ficl" type="ficl">
-" a string"    ( -- <span data-scayt_word="s1" data-scaytid="130">s1</span> )   " a string"  expected
-" a string "   ( -- <span data-scayt_word="s1" data-scaytid="131">s1</span> )   " a string " expected</pre>
+" a string"    ( -- s1 )       " a string"  expected
+" a string "   ( -- s1 )       " a string " expected
+" ab" " cd" "" ( s1 s2 -- s3 ) " abcd"      expected
+" ef" 33 ""    ( o1 o2 -- s3)  " ef33"      expected</pre>
 
 <div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
-<h2 class="metadata Ref">Variables (set :on-update)</h2>
+<h2 class="metadata Ref">Variables (set: :on-update ref:)</h2>
 
 <p style="display: block;">use&nbsp;<em><strong>set</strong></em>&nbsp;( n -- ) to create or assign to a variable from the top of the stack. A variable is a word that pushes it's value onto the stack when referenced.</p>
 
 <pre contenteditable="false" title="ficl" type="ficl">
-1 set test_data                test_data 1 expected
-test_data 2 + set test_data    test_data 3 expected</pre>
+1 set: test_data                test_data 1 expected
+test_data 2 + set: test_data    test_data 3 expected</pre>
 
 <p style="display: block;">One of the benefit of shared data between the underlying application and FICL is that a FICL word can be run when data changes.</p>
 
 <pre title="ficl" type="ficl">
-1 set my-data
-0 set triggered
+1 set: my-data
+0 set: triggered
 
-:on-update my-data   triggered inc set triggered ;
+:on-update my-data   triggered inc set: triggered ;
 
 triggered 0 expected
-2 set my-data
+2 set: my-data
 triggered 1 expected
-3 set my-data
+3 set: my-data
 triggered 2 expected
 </pre>
 
 <p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
-<p style="display: block;">Triggers accumulate.&nbsp;Use the&nbsp;<em>return</em>&nbsp;statement to skip additional trigger functionality.</p>
+<p style="display: block;">Triggers do not accumulate. Re-definition will overwrite prior definitions. Where multiple triggers is desirable, use <strong>ref:</strong> <em>name</em> to separate them.</p>
 
 <pre title="ficl" type="ficl">
-:on-update my-data   triggered 2 + set triggered return ;
-( never run since return above skips it )
-:on-update my-data   0 set triggered ;
+:on-update my-data   triggered 2 + set: triggered ;
 
 triggered 2 expected
-5 set my-data
-triggered 5 expected</pre>
+5 set: my-data
+triggered 4 expected ( from 1 trigger )
+
+:on-update my-data ref: t2
+  triggered inc set: triggered
+;
+
+2 set: my-data
+triggered 7 expected ( from 2 triggers )
+
+:on-update my-data ref: t2
+  triggered triggered 2 + set: triggered
+;
+
+3 set: my-data
+triggered 11 expected ( from 2 triggers )
+</pre>
 
 <div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 </body>
