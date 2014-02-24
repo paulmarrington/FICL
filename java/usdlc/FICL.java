@@ -445,7 +445,15 @@ public class FICL {
     immediate("\"", new Runnable() {
       public void run() {
         context.compiling[context.cp++ & 63] =
-            createNewWord("\"", TYPE_DATA, 0, getSourceText('"'));
+            createNewWord("\"",
+                          TYPE_DATA, 0, getSourceText('"'));
+      }
+    });
+    immediate("'", new Runnable() {
+      public void run() {
+        context.compiling[context.cp++ & 63] =
+            createNewWord("'", 
+                          TYPE_DATA, 0, getSourceText('\''));
       }
     });
     extend(".", new Runnable() {
