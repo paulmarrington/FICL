@@ -452,7 +452,7 @@ public class FICL {
     immediate("'", new Runnable() {
       public void run() {
         context.compiling[context.cp++ & 63] =
-            createNewWord("'", 
+            createNewWord("'",
                           TYPE_DATA, 0, getSourceText('\''));
       }
     });
@@ -730,13 +730,24 @@ public class FICL {
         context.compiling[context.cp++ & 63] = createNewWord(
             "]"+name, TYPE_RUNNABLE, 0, new Runnable() {
             public void run() {
-              int start = context.loopStack[--context.lsp & 31];
-              if (start + 1 >= context.isp) return;
+              int start = context.loopStack[--context.lsp & 31] + 1;
+              if (start >= context.isp) return; // empty array
 
-              int end = context.isp;
-              context.isp = ++start;
+              int end = context.isp; int obs = 0;
               for (int i = start; i < end; i++) {
-                pushInt(context.iStack[i]);
+                if (context.iStack[i] == nan) obs++;
+              }
+              context.isp = start; // leaves one on the stack
+              context.osp -= obs;
+              Object[] obl = new Object[obs];
+              System.arraycopy(context.oStack, context.osp, obl, 0, obs);
+              obs = 0;
+              for (int i = start; i < end; i++) {
+                if (context.iStack[i] != nan) {
+                  pushInt(context.iStack[i]);
+                } else {
+                  push(obl[obs++]);
+                }
                 ((Runnable) action.data).run();
               }
             }
@@ -745,8 +756,8 @@ public class FICL {
     });
     extend("\"\"", new Runnable() {
       public void run() { // concat 2 strings
-        String s1 = (String) pop();
-        String s2 = (String) pop();
+        String s2 = pop().toString();
+        String s1 = pop().toString();
         push(s1 + s2);
       }
     });
@@ -831,6 +842,11 @@ public class FICL {
     context.errors.append(msg);
     stackDump(context.errors);
     context.errors.append("\n========\n");
+  }
+  private void stackDump(String msg) {
+    context.writer.append("\n%%%%%%%%%%\n"+msg+"\n%%%%%%%%%%");
+    stackDump(context.writer);
+    context.writer.append("%%%%%%%%%%\n%%%%%%%%%%\n");
   }
   private void stackDump(StringBuffer out) {
     out.append("\n");
