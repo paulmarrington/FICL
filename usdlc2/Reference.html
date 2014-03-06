@@ -8,12 +8,12 @@
 
 <p style="display: block;">FICL is a FORTH based language using stack based control and word based commands.</p>
 
-<div class="metadata Ref" style="display: block;">Ref: <span class="FICL"><a href="javascript:usdlc.edit_source({value:'FICL.java',path:'../FICL/java/usdlc/FICL.java',category:'usdlc'})">FICL.java</a></span><span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="ficl"><a href="javascript:usdlc.edit_source({value:'ficl.java',path:'../FICL/java/ficl.java',category:'java'})">ficl.java</a></span></div>
+<div class="metadata Ref" style="display: block;">Ref: <span class="FICL"><a href="javascript:usdlc.edit_source({value:'FICL.java',path:'../FICL/java/usdlc/FICL.java',category:'usdlc'})">FICL.java</a></span><span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="ficl"><a href="javascript:usdlc.edit_source({value:'ficl.java',path:'../FICL/java/ficl.java',category:'java'})">ficl.java</a></span><span class="FICL_Persistence"><a href="javascript:usdlc.edit_source({value:'FICL_Persistence.java',path:'../FICL/java/usdlc/FICL_Persistence.java',category:'usdlc'})">FICL_Persistence.java</a></span></div>
 
 <p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee">#1. Make sure instrumented code is up to date
 java = gwt.java out: 'gen/classes', main: 'ficl'
 java.compile 'java'
-repl = gwt.repl java.command_line(), (failed) -&gt;
+repl = gwt.repl java.run_command(), (failed) -&gt;
   process.exit failed
 #2. Recognise pass and fail conditions in console output
 gwt.monitor_output =
@@ -45,7 +45,8 @@ gwt.file_processor.ficl = (name, next) -&gt;
 <pre title="ficl" type="ficl">
 [ 1 2 0 ] and              0 expected
 [ 11 1 3 ] and             1 expected
-[ 1 2 3 ] +                6 expected</pre>
+[ 1 2 3 ] +                6 expected
+[ ' a' ' b' ' c' ] ""      " abc" expected</pre>
 
 <p style="display: block;"><br />
 <textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
