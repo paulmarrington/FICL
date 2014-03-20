@@ -58,24 +58,40 @@ gwt.file_processor.ficl = (name, next) -&gt;
 <h2>Boolean (and or not =)</h2>
 
 <pre title="ficl" type="ficl">
-0 0 and    ( <span data-scayt_word="n1" data-scaytid="22">n1</span> <span data-scayt_word="n2" data-scaytid="32">n2</span> -- <span data-scayt_word="b1" data-scaytid="83">b1</span> )   0 expected
-0 1 and    ( <span data-scayt_word="n1" data-scaytid="23">n1</span> <span data-scayt_word="n2" data-scaytid="33">n2</span> -- <span data-scayt_word="b1" data-scaytid="84">b1</span> )   0 expected
-1 0 and    ( <span data-scayt_word="n1" data-scaytid="24">n1</span> <span data-scayt_word="n2" data-scaytid="34">n2</span> -- <span data-scayt_word="b1" data-scaytid="85">b1</span> )   0 expected
-1 1 and    ( <span data-scayt_word="n1" data-scaytid="25">n1</span> <span data-scayt_word="n2" data-scaytid="35">n2</span> -- <span data-scayt_word="b1" data-scaytid="86">b1</span> )   1 expected
+0 0 and    0 expected
+0 1 and    0 expected
+1 0 and    0 expected
+1 1 and    1 expected
 
-0 0 or     ( <span data-scayt_word="n1" data-scaytid="26">n1</span> <span data-scayt_word="n2" data-scaytid="36">n2</span> -- <span data-scayt_word="b1" data-scaytid="87">b1</span> )   0 expected
-0 1 or     ( <span data-scayt_word="n1" data-scaytid="27">n1</span> <span data-scayt_word="n2" data-scaytid="37">n2</span> -- <span data-scayt_word="b1" data-scaytid="88">b1</span> )   1 expected
-1 0 or     ( <span data-scayt_word="n1" data-scaytid="28">n1</span> <span data-scayt_word="n2" data-scaytid="38">n2</span> -- <span data-scayt_word="b1" data-scaytid="89">b1</span> )   1 expected
-1 1 or     ( <span data-scayt_word="n1" data-scaytid="29">n1</span> <span data-scayt_word="n2" data-scaytid="39">n2</span> -- <span data-scayt_word="b1" data-scaytid="90">b1</span> )   1 expected
+0 0 or     0 expected
+0 1 or     1 expected
+1 0 or     1 expected
+1 1 or     1 expected
 
-1 not      ( <span data-scayt_word="b1" data-scaytid="91">b1</span> -- <span data-scayt_word="b2" data-scaytid="97">b2</span> )      0 expected
-0 not      ( <span data-scayt_word="b1" data-scaytid="92">b1</span> -- <span data-scayt_word="b2" data-scaytid="98">b2</span> )      1 expected
+1 not      0 expected
+0 not      1 expected
 
-12 14 =    ( <span data-scayt_word="n1" data-scaytid="30">n1</span> <span data-scayt_word="n2" data-scaytid="40">n2</span> -- <span data-scayt_word="b1" data-scaytid="93">b1</span> )   0 expected
-14 14 =    ( <span data-scayt_word="n1" data-scaytid="31">n1</span> <span data-scayt_word="n2" data-scaytid="41">n2</span> -- <span data-scayt_word="b1" data-scaytid="94">b1</span> )   1 expected
+12 14 =    0 expected
+14 14 =    1 expected
 
-" string 1" " string 2" =  ( <span data-scayt_word="s1" data-scaytid="99">s1</span> <span data-scayt_word="s1" data-scaytid="100">s1</span> -- <span data-scayt_word="b1" data-scaytid="95">b1</span> )  0 expected
-" string 1" " string 1" =  ( <span data-scayt_word="s1" data-scaytid="101">s1</span> <span data-scayt_word="s1" data-scaytid="102">s1</span> -- <span data-scayt_word="b1" data-scaytid="96">b1</span> )  1 expected</pre>
+" string 1" " string 2" =  0 expected
+" string 1" " string 1" =  1 expected
+
+11 13 &gt;    0 expected
+13 11 &gt;    1 expected
+13 13 &gt;    0 expected
+
+11 13 &lt;    1 expected
+13 11 &lt;    0 expected
+13 13 &lt;    0 expected
+
+11 13 &gt;=   0 expected
+13 11 &gt;=   1 expected
+13 13 &gt;=   1 expected
+
+11 13 &lt;=   1 expected
+13 11 &lt;=   0 expected
+13 13 &lt;=   1 expected</pre>
 
 <div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
 
@@ -124,24 +140,22 @@ test                  1 expected</pre>
 
 <p style="display: block;"><textarea readonly="readonly" source="true" style="display: none;" type="gwt.coffee"></textarea></p>
 
-<h2>Loops (begin leave ?leave again)</h2>
+<h2>Loops (begin leave again)</h2>
 
-<div style="display: block;"><b class="blue">begin ( -- ) ...&nbsp;leave ( -- ) ...&nbsp;?leave ( b1 -- ) ...&nbsp;again ( -- )</b></div>
-
-<div style="display: block;"> </div>
-
-<div style="display: block;">Primary looping mechanism. It loops forever unless leave or ?leave are encountered.</div>
+<div style="display: block;"><b class="blue">begin ( -- ) ...&nbsp;leave ( -- ) ...&nbsp;again ( -- )</b></div>
 
 <div style="display: block;"> </div>
 
-<div style="margin-left: 40px; display: block;"><code><strong><span style="background-color: rgb(255, 160, 122);">begin</span></strong>&nbsp;words boolean-1&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">?leave</span></strong>&nbsp;words if&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">leave</span></strong>&nbsp;then&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">again</span></strong></code></div>
+<div style="display: block;">Primary looping mechanism. It loops forever unless leave or are encountered.</div>
+
+<div style="display: block;"> </div>
+
+<div style="margin-left: 40px; display: block;"><code><strong><span style="background-color: rgb(255, 160, 122);">begin</span></strong>&nbsp;words boolean-1&nbsp;if&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">leave</span></strong>&nbsp;then&nbsp;<strong><span style="background-color: rgb(255, 160, 122);">again</span></strong></code></div>
 
 <div style="margin-left: 40px; display: block;"> </div>
 
 <pre title="ficl" type="ficl">
 5 begin dec dup not if leave then again   0 expected
-
-5 begin dec dup ?leave again              0 expected
 </pre>
 
 <div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span></div>
