@@ -221,13 +221,20 @@ public class FICL {
   private static final int TYPE_INT = 16;
 
   private boolean copyWord(CompiledWord to, int type, long val, Object data) {
-    if (to.type != type || to.integer != val || to.data != data) {
+    if (to.type != type || to.integer != val || !cmp(to.data, data)) {
       to.type = type;
       to.integer = val;
       to.data = data;
       return true;
     }
     return false;
+  }
+
+  private boolean cmp(final Object left, final Object right) {
+    if (left == null) {
+      return right == null;
+    }
+    return left.equals(right);
   }
 
   CompiledWord[] buildWordList() {
@@ -475,6 +482,34 @@ public class FICL {
         context.iStack[context.isp++] = a & b;
       }
     });
+    extend(">", new Runnable() {
+      public void run() {
+        long b = context.iStack[--context.isp & 63];
+        long a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++] = a > b ? 1 : 0;
+      }
+    });
+    extend("<", new Runnable() {
+      public void run() {
+        long b = context.iStack[--context.isp & 63];
+        long a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++] = a < b ? 1 : 0;
+      }
+    });
+    extend(">=", new Runnable() {
+      public void run() {
+        long b = context.iStack[--context.isp & 63];
+        long a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++] = a >= b ? 1 : 0;
+      }
+    });
+    extend("<=", new Runnable() {
+      public void run() {
+        long b = context.iStack[--context.isp & 63];
+        long a = context.iStack[--context.isp & 63];
+        context.iStack[context.isp++] = a <= b ? 1 : 0;
+      }
+    });
     extend("+", new Runnable() {
       public void run() {
         long b = context.iStack[--context.isp & 63];
@@ -497,20 +532,6 @@ public class FICL {
             context.jumpBy = (int) context.currentWord.integer;
           }
         });
-      }
-    });
-    immediate("?leave", new Runnable() {
-      public void run() {
-        context.loopStack[context.lsp++ & 31] = context.cp;
-        context.compiling[context.cp++ & 63] =
-            createNewWord("?leave", TYPE_RUNNABLE, 0,
-            new Runnable() {
-              public void run() {
-                long a = context.iStack[--context.isp & 63];
-                if (a == 0)
-                  context.jumpBy = (int) context.currentWord.integer;
-              }
-            });
       }
     });
     immediate("again", new Runnable() {
