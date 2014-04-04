@@ -15,13 +15,13 @@ java = gwt.java out: 'gen/classes', main: 'ficl'
 java.compile 'java'
 repl = gwt.repl java.run_command(), (failed) -&gt;
   process.exit failed
-#2. Recognise pass and fail conditions in console output
-gwt.monitor_output =
-  pass: /^Errors: 0$/m
-  fail: /^Errors: [1-9]\d*$/m
-#3. Load instrumentation scripts by file extension
+#2. Load instrumentation scripts by file extension
 gwt.file_processor.ficl = (name, next) -&gt;
-  gwt.add -&gt; repl.process.send_file name, '\n_end_\n', -&gt;
+  gwt.add -&gt;
+    gwt.monitor_output =
+      pass: /^Errors: 0$/
+      fail: /^Errors: [1-9]\d*$/
+    repl.process.send_file name, '\n_end_\n', -&gt;
   next()</textarea></p>
 
 <h2>Arithmetic (+ - / * inc dec)</h2>
@@ -55,7 +55,7 @@ gwt.file_processor.ficl = (name, next) -&gt;
 
 <div class="metadata Ref" style="display: block;">Ref: <span class="Bridge"><a href="javascript:usdlc.bridge_editor()">Bridge</a></span><span class="Play"><a href="javascript:usdlc.play()">Play</a></span><span class="ficl"><a href="javascript:usdlc.edit_source({value:'ficl.java',path:'../FICL/java/ficl.java',category:'java'})">ficl.java</a></span></div>
 
-<h2>Boolean (and or not =)</h2>
+<h2>Boolean (and or not = &gt; &gt;= &lt; &lt;=)</h2>
 
 <pre title="ficl" type="ficl">
 0 0 and    0 expected
