@@ -1,4 +1,4 @@
-/* Copyright (C) 2013 paul@marrington.net, see /GPL license */
+/* Copyright (C) 2013,14 paul@marrington.net, see /GPL license */
 package usdlc;
 
 import java.io.PrintWriter;
