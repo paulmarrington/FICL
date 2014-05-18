@@ -12,7 +12,7 @@ public class ficl {
       ficl.extend("_exit_", new Runnable() {
         public void run() {
           System.out.println("FICL repl exiting");
-          System.exit(ficl.popInt());
+          System.exit((int) ficl.popInt());
         }
       });
       // Used by uSDLC2 to end an instrumentation session

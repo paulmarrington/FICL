@@ -110,7 +110,7 @@ public class FICL {
     context.abort = true;
   }
 
-  synchronized public Object get(String name) {
+  public Object get(String name) {
     CompiledWord word = (CompiledWord) getStore(name);
     if (word == null) return null;
     switch (word.type) {
@@ -119,17 +119,17 @@ public class FICL {
       default: return null;
     }
   }
-  synchronized public long getInt(String name) {
+  public long getInt(String name) {
     CompiledWord word = (CompiledWord) getStore(name);
     if (word != null && word.type == TYPE_INT) return word.integer;
     return nan;
   }
-  synchronized public void put(String name, Object value) {
+  public void put(String name, Object value) {
     Object old = get(name);
     if (value == null || !value.equals(old))
       storeWord(name, TYPE_DATA, 0, value);
   }
-  synchronized public void putInt(String name, long value) {
+  public void putInt(String name, long value) {
     if (getInt(name) != value)
       storeWord( name, TYPE_INT, value, null);
   }
@@ -858,9 +858,10 @@ public class FICL {
   }
 
   private void error(Throwable throwable) {
-    StringWriter sw = new StringWriter();
-    throwable.printStackTrace(new PrintWriter(sw));
-    error(sw.toString());
+//    StringWriter sw = new StringWriter();
+//    throwable.printStackTrace(new PrintWriter(sw));
+//    error(sw.toString());
+    error(throwable.getMessage());
   }
   private void error(String msg) {
     context.errors.append("\n========\n");
