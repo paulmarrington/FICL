@@ -45,7 +45,7 @@ public class FICL {
     } catch (Throwable throwable) {
       error(throwable);
       resetContext();
-      throw new RuntimeException(throwable);
+      throw new FICLRuntimeException(throwable);
     } finally {
       output(context.errors);
     }
