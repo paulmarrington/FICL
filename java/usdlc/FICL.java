@@ -1,8 +1,6 @@
 /* Copyright (C) 2013 paul@marrington.net, see /GPL license */
 package usdlc;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
